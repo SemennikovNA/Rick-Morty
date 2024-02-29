@@ -9,6 +9,10 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     
+    //MARK: - Properties
+    
+    static let id = "reuseCell"
+    
     //MARK: - User interface elements
     
     private lazy var contentViewCell: UIView = {
@@ -20,7 +24,7 @@ class CollectionViewCell: UICollectionViewCell {
     
     private lazy var characterImage: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFill
+        image.contentMode = .scaleToFill
         image.layer.masksToBounds = true
         return image
     }()
@@ -40,6 +44,7 @@ class CollectionViewCell: UICollectionViewCell {
         
         // Call method's
         setupCellUI()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -50,11 +55,15 @@ class CollectionViewCell: UICollectionViewCell {
         self.layer.cornerRadius = self.frame.size.height / 5
     }
     
+    override func layoutIfNeeded() {
+        layer.cornerRadius = frame.size.height / 5
+        characterImage.layer.cornerRadius = characterImage.frame.size.height / 5
+    }
     //MARK: - Method
     
     func setupDataForCell(with model: Item) {
-        let image = model.personImage
-        characterNameTitle.text = model.name
+        let image = model.characterImage
+        characterNameTitle.text = model.characterName
         characterImage.image = UIImage(named: image)
     }
     
@@ -62,7 +71,8 @@ class CollectionViewCell: UICollectionViewCell {
     
     private func setupCellUI() {
         contentView.clipsToBounds = true
-        contentView.addSubviews(contentViewCell, characterImage, characterNameTitle)
+        contentView.addSubviews(contentViewCell)
+        contentViewCell.addSubviews(characterImage, characterNameTitle)
     }
 }
 
@@ -85,16 +95,15 @@ private extension CollectionViewCell {
             contentViewCell.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             // Character image
-            characterImage.topAnchor.constraint(equalTo: contentViewCell.topAnchor, constant: 5),
-            characterImage.leadingAnchor.constraint(equalTo: contentViewCell.leadingAnchor, constant: 5),
-            characterImage.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor, constant: -5),
-            characterImage.bottomAnchor.constraint(equalTo: contentViewCell.bottomAnchor, constant: -30),
-            
+            characterImage.topAnchor.constraint(equalTo: contentViewCell.topAnchor, constant: 10),
+            characterImage.leadingAnchor.constraint(equalTo: contentViewCell.leadingAnchor, constant: 10),
+            characterImage.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor, constant: -10),
+            characterImage.bottomAnchor.constraint(equalTo: contentViewCell.bottomAnchor, constant: -40),
+        
             // Character name title
-            characterNameTitle.topAnchor.constraint(equalTo: characterImage.bottomAnchor, constant: 10),
-            characterNameTitle.leadingAnchor.constraint(equalTo: characterImage.leadingAnchor, constant: 10),
-            characterNameTitle.trailingAnchor.constraint(equalTo: characterImage.trailingAnchor, constant: -10),
-            characterNameTitle.bottomAnchor.constraint(equalTo: characterImage.bottomAnchor, constant: -10)
+            characterNameTitle.leadingAnchor.constraint(equalTo: contentViewCell.leadingAnchor, constant: 10),
+            characterNameTitle.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor, constant: -10),
+            characterNameTitle.bottomAnchor.constraint(equalTo: contentViewCell.bottomAnchor, constant: -10)
         ])
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 
 struct Item: Hashable {
     
-    var personImage: String
-    var name: String
+    var characterImage: String
+    var characterName: String
     
 }

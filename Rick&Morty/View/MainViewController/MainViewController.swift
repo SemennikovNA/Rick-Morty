@@ -10,35 +10,49 @@ import UIKit
 class MainViewController: UIViewController {
 
     //MARK: - User interface elements
-    
+
     private var collectionView: UICollectionView!
-    
+
     //MARK: - Properties
-    
+
     private var dataSource: UICollectionViewDiffableDataSource<MainViewSection, Item>?
-    
-    private var characters = [Item(personImage: "test", name: "Test Test")]
-    
+
+    private var characters = [
+        Item(characterImage: "test", characterName: "Rick"),
+        Item(characterImage: "test", characterName: "Morty"),
+        Item(characterImage: "test", characterName: "Ainur"),
+        Item(characterImage: "test", characterName: "Nikita"),
+        Item(characterImage: "test", characterName: "Nikit"),
+        Item(characterImage: "test", characterName: "Niki"),
+        Item(characterImage: "test", characterName: "Nik"),
+        Item(characterImage: "test", characterName: "Ni"),
+        Item(characterImage: "test", characterName: "N")
+    ]
+
     //MARK: - Life cycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Call method's
         setupView()
         setupCollectionView()
+        configureDataSource()
     }
 
+    override func viewWillLayoutSubviews() {
+        collectionView.layoutIfNeeded()
+    }
     //MARK: - Private method
     /// Setup view
     private func setupView() {
         // Setup view
         view.backgroundColor = .backBlue
-        
+
         // Call method's
         setupNavigationBar()
     }
-    
+
     /// Setup navigation bar
     private func setupNavigationBar() {
         // Setup navigation bar
@@ -51,14 +65,14 @@ class MainViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
     }
-    
+
     /// Setup collection view
     private func setupCollectionView() {
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createViewLayout())
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCompositionalLayout())
+        collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.id)
         collectionView.backgroundColor = .clear
-        collectionView.delegate = self
-        view.addSubview(collectionView)
-        
+        view.addSubviews(collectionView)
+
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -66,38 +80,42 @@ class MainViewController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-    
-    /// Create collection view layout
-    private func createViewLayout() -> UICollectionViewLayout {
-        UICollectionViewCompositionalLayout { sectionIndex, _ -> NSCollectionLayoutSection? in
-            guard let sectionKind = MainViewSection(rawValue: sectionIndex) else { return nil }
-            let section: NSCollectionLayoutSection
-            
-            switch sectionKind {
-            case .section:
-                let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(156), heightDimension: .absolute(202))
-                let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-                
-                let  groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(105))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                section = NSCollectionLayoutSection(group: group)
-                section.orthogonalScrollingBehavior = .groupPagingCentered
-                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0)
-                return section
-            }
-        }
-    }
-    
-    /// Data source for collection view
-    private func collectionViewDataSource() {
+
+    /// Setup compositional layout
+    private func createCompositionalLayout() -> UICollectionViewLayout {
+        let spacing: CGFloat = 10
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.515),
+            heightDimension: .absolute(210))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 2)
+        group.interItemSpacing = .fixed(spacing)
+        let section = NSCollectionLayoutSection(group: group)
+           section.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+           section.interGroupSpacing = spacing
+        section.contentInsetsReference = .automatic
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return  layout
+    }
+        
+    private func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<MainViewSection, Item>(collectionView: collectionView) {
+            (collectionView: UICollectionView, indexPath: IndexPath, item: Item) -> UICollectionViewCell? in
+
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.id, for: indexPath) as! CollectionViewCell
+            cell.setupDataForCell(with: item)
+            return cell
+        }
+
+        var snapshot = NSDiffableDataSourceSnapshot<MainViewSection, Item>()
+        snapshot.appendSections([.section])
+        snapshot.appendItems(characters)
+        dataSource?.apply(snapshot, animatingDifferences: false)
     }
 }
 
-
-//MARK: - Extension
-
-extension MainViewController: UICollectionViewDelegate {
-    
-}
