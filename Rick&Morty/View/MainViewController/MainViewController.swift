@@ -73,6 +73,7 @@ class MainViewController: UIViewController {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCompositionalLayout())
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.id)
         collectionView.backgroundColor = .clear
+        collectionView.delegate = self
         view.addSubviews(collectionView)
 
         NSLayoutConstraint.activate([
@@ -119,5 +120,16 @@ class MainViewController: UIViewController {
         snapshot.appendSections([.section])
         snapshot.appendItems(characters)
         dataSource?.apply(snapshot, animatingDifferences: false)
+    }
+}
+
+
+//MARK: - Extension
+
+extension MainViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailVC = DetailViewController()
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }

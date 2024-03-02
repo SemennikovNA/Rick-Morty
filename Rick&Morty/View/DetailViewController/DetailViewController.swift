@@ -64,15 +64,27 @@ class DetailViewController: UIViewController {
         // Setup charecter stack view
         characterStackView.addArrangedSubviews(characterNameLabel, characterStatusLabel)
         
+        // Setup navigation bar
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backButtonClick))
+        backButton.tintColor = .white
+        navigationItem.leftBarButtonItems = [backButton]
+    }
+    
+    //MARK: - Objective - C method
+    
+    @objc func backButtonClick() {
+        navigationController?.popViewController(animated: true)
     }
 }
+
+//MARK: - Private extension
 
 private extension DetailViewController {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
             // Character image
-            characterImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            characterImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -20),
             characterImage.heightAnchor.constraint(equalToConstant: 148),
             characterImage.widthAnchor.constraint(equalToConstant: 148),
             characterImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
