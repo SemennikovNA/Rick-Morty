@@ -23,6 +23,7 @@
 		1EFEBDD92B936CE30067FCF7 /* UIStackView - Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDD82B936CE30067FCF7 /* UIStackView - Extension.swift */; };
 		1EFEBDDB2B9385F60067FCF7 /* UILabel - Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDDA2B9385F60067FCF7 /* UILabel - Extension.swift */; };
 		1EFEBDDD2B9388E10067FCF7 /* DetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDDC2B9388E10067FCF7 /* DetailInfoView.swift */; };
+		1EFEBDDF2B9396740067FCF7 /* DetailOriginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDDE2B9396740067FCF7 /* DetailOriginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		1EFEBDD82B936CE30067FCF7 /* UIStackView - Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView - Extension.swift"; sourceTree = "<group>"; };
 		1EFEBDDA2B9385F60067FCF7 /* UILabel - Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel - Extension.swift"; sourceTree = "<group>"; };
 		1EFEBDDC2B9388E10067FCF7 /* DetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoView.swift; sourceTree = "<group>"; };
+		1EFEBDDE2B9396740067FCF7 /* DetailOriginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOriginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 			children = (
 				1EFEBDD62B936B550067FCF7 /* DetailViewController.swift */,
 				1EFEBDDC2B9388E10067FCF7 /* DetailInfoView.swift */,
+				1EFEBDDE2B9396740067FCF7 /* DetailOriginView.swift */,
 			);
 			path = DetailViewController;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				1EFEBDCC2B90AB700067FCF7 /* UIView - Extension.swift in Sources */,
 				1E77146E2B90652F00ADC5E8 /* SceneDelegate.swift in Sources */,
 				1EFEBDD92B936CE30067FCF7 /* UIStackView - Extension.swift in Sources */,
+				1EFEBDDF2B9396740067FCF7 /* DetailOriginView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

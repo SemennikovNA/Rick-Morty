@@ -14,9 +14,10 @@ class DetailInfoView: UIView {
     private let speciesLabel = UILabel(text: "Species:", font: UIFont(name: "gilroy-black", size: 16), textAlignment: .left, textColor: .lightGray)
     private let typeLabel = UILabel(text: "Type:", font: UIFont(name: "gilroy-black", size: 16), textAlignment: .left, textColor: .lightGray)
     private let genderLabel = UILabel(text: "Gender:", font: UIFont(name: "gilroy-black", size: 16), textAlignment: .left, textColor: .lightGray)
+    private var speciesValueLabel = UILabel(text: "Human", font: UIFont(name: "gilroy-black", size: 16), textAlignment: .right, textColor: .white)
+    private var typeValueLabel = UILabel(text: "None", font: UIFont(name: "gilroy-black", size: 16), textAlignment: .right, textColor: .white)
+    private var genderValueLabel = UILabel(text: "Male", font: UIFont(name: "gilroy-black", size: 16), textAlignment: .right, textColor: .white)
     
-    
-
     //MARK: - Initialize
     
     override init(frame: CGRect) {
@@ -41,7 +42,13 @@ class DetailInfoView: UIView {
     private func setupView() {
         // Setup view
         self.backgroundColor = .viewBackGray
-        self.addSubviews(speciesLabel, typeLabel, genderLabel)
+        self.addSubviews(speciesLabel, typeLabel, genderLabel, speciesValueLabel, typeValueLabel, genderValueLabel)
+    }
+    
+    private func setupDataForView(with model: String) {
+//        speciesValueLabel.text = ""
+//        typeValueLabel.text = ""
+//        genderValueLabel.text = ""
     }
     
     private func setupConstraints() {
@@ -60,6 +67,21 @@ class DetailInfoView: UIView {
             genderLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
             genderLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             genderLabel.heightAnchor.constraint(equalToConstant: 30),
+            
+            // Species value label
+            speciesValueLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+            speciesValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            speciesValueLabel.heightAnchor.constraint(equalToConstant: 30),
+            
+            // Type value label
+            typeValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            typeValueLabel.heightAnchor.constraint(equalToConstant: 30),
+            typeValueLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            
+            // Gender value label
+            genderValueLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+            genderValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            genderValueLabel.heightAnchor.constraint(equalToConstant: 30),
         ])
     }
 }
