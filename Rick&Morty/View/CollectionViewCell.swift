@@ -18,11 +18,10 @@ class CollectionViewCell: UICollectionViewCell {
     private lazy var contentViewCell: UIView = {
         let view = UIView()
         view.backgroundColor = .cellBackBlue
-        view.clipsToBounds = true
         return view
     }()
     
-    private lazy var characterImage: UIImageView = {
+    lazy var characterImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleToFill
         image.layer.masksToBounds = true
@@ -34,6 +33,7 @@ class CollectionViewCell: UICollectionViewCell {
         label.textColor = .white
         label.textAlignment = .center
         label.font = .boldSystemFont(ofSize: 20)
+        label.font = UIFont(name: "gilroy-black", size: 20)
         return label
     }()
     
@@ -51,14 +51,13 @@ class CollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        self.layer.cornerRadius = self.frame.size.height / 5
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+        self.layer.cornerRadius = self.frame.size.width / 10
+        self.clipsToBounds = true
+        characterImage.layer.cornerRadius = characterImage.frame.size.width / 10
     }
     
-    override func layoutIfNeeded() {
-        layer.cornerRadius = frame.size.height / 5
-        characterImage.layer.cornerRadius = characterImage.frame.size.height / 5
-    }
     //MARK: - Method
     
     func setupDataForCell(with model: Item) {
@@ -70,7 +69,6 @@ class CollectionViewCell: UICollectionViewCell {
     //MARK: - Private method
     
     private func setupCellUI() {
-        contentView.clipsToBounds = true
         contentView.addSubviews(contentViewCell)
         contentViewCell.addSubviews(characterImage, characterNameTitle)
     }
@@ -79,6 +77,7 @@ class CollectionViewCell: UICollectionViewCell {
 //MARK: - Private extension
 
 private extension CollectionViewCell {
+    
     /// Setup constraints for collection view cell
     func setupConstraints() {
         NSLayoutConstraint.activate([
@@ -95,9 +94,9 @@ private extension CollectionViewCell {
             contentViewCell.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             // Character image
-            characterImage.topAnchor.constraint(equalTo: contentViewCell.topAnchor, constant: 10),
-            characterImage.leadingAnchor.constraint(equalTo: contentViewCell.leadingAnchor, constant: 10),
-            characterImage.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor, constant: -10),
+            characterImage.topAnchor.constraint(equalTo: contentViewCell.topAnchor, constant: 5),
+            characterImage.leadingAnchor.constraint(equalTo: contentViewCell.leadingAnchor, constant: 5),
+            characterImage.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor, constant: -5),
             characterImage.bottomAnchor.constraint(equalTo: contentViewCell.bottomAnchor, constant: -40),
         
             // Character name title

@@ -16,6 +16,13 @@
 		1EFEBDC72B90A7A40067FCF7 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDC62B90A7A40067FCF7 /* Item.swift */; };
 		1EFEBDC92B90A91D0067FCF7 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDC82B90A91D0067FCF7 /* CollectionViewCell.swift */; };
 		1EFEBDCC2B90AB700067FCF7 /* UIView - Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDCB2B90AB700067FCF7 /* UIView - Extension.swift */; };
+		1EFEBDCF2B9355DA0067FCF7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDCE2B9355DA0067FCF7 /* NetworkManager.swift */; };
+		1EFEBDD12B935F9E0067FCF7 /* BaseApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDD02B935F9E0067FCF7 /* BaseApiResponse.swift */; };
+		1EFEBDD42B9367560067FCF7 /* gilroy-black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1EFEBDD32B9367560067FCF7 /* gilroy-black.ttf */; };
+		1EFEBDD72B936B550067FCF7 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDD62B936B550067FCF7 /* DetailViewController.swift */; };
+		1EFEBDD92B936CE30067FCF7 /* UIStackView - Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDD82B936CE30067FCF7 /* UIStackView - Extension.swift */; };
+		1EFEBDDB2B9385F60067FCF7 /* UILabel - Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDDA2B9385F60067FCF7 /* UILabel - Extension.swift */; };
+		1EFEBDDD2B9388E10067FCF7 /* DetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDDC2B9388E10067FCF7 /* DetailInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +37,13 @@
 		1EFEBDC62B90A7A40067FCF7 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		1EFEBDC82B90A91D0067FCF7 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		1EFEBDCB2B90AB700067FCF7 /* UIView - Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView - Extension.swift"; sourceTree = "<group>"; };
+		1EFEBDCE2B9355DA0067FCF7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		1EFEBDD02B935F9E0067FCF7 /* BaseApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseApiResponse.swift; sourceTree = "<group>"; };
+		1EFEBDD32B9367560067FCF7 /* gilroy-black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "gilroy-black.ttf"; path = "../../../../Downloads/gilroy-black.ttf"; sourceTree = "<group>"; };
+		1EFEBDD62B936B550067FCF7 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		1EFEBDD82B936CE30067FCF7 /* UIStackView - Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView - Extension.swift"; sourceTree = "<group>"; };
+		1EFEBDDA2B9385F60067FCF7 /* UILabel - Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel - Extension.swift"; sourceTree = "<group>"; };
+		1EFEBDDC2B9388E10067FCF7 /* DetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +76,8 @@
 		1E77146A2B90652F00ADC5E8 /* Rick&Morty */ = {
 			isa = PBXGroup;
 			children = (
+				1EFEBDD22B9367400067FCF7 /* Font */,
+				1EFEBDCD2B9355B60067FCF7 /* Manager */,
 				1E77147F2B90660200ADC5E8 /* Application */,
 				1EFEBDCA2B90AB620067FCF7 /* Extension  */,
 				1EFEBDC52B90A6D60067FCF7 /* Model */,
@@ -93,6 +109,7 @@
 		1EFEBDC02B9078AD0067FCF7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1EFEBDD52B936B2E0067FCF7 /* DetailViewController */,
 				1EFEBDC22B9078C10067FCF7 /* MainViewSection */,
 				1EFEBDC12B9078B30067FCF7 /* MainViewController */,
 				1EFEBDC82B90A91D0067FCF7 /* CollectionViewCell.swift */,
@@ -120,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				1EFEBDC62B90A7A40067FCF7 /* Item.swift */,
+				1EFEBDD02B935F9E0067FCF7 /* BaseApiResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -128,8 +146,35 @@
 			isa = PBXGroup;
 			children = (
 				1EFEBDCB2B90AB700067FCF7 /* UIView - Extension.swift */,
+				1EFEBDD82B936CE30067FCF7 /* UIStackView - Extension.swift */,
+				1EFEBDDA2B9385F60067FCF7 /* UILabel - Extension.swift */,
 			);
 			path = "Extension ";
+			sourceTree = "<group>";
+		};
+		1EFEBDCD2B9355B60067FCF7 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				1EFEBDCE2B9355DA0067FCF7 /* NetworkManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		1EFEBDD22B9367400067FCF7 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				1EFEBDD32B9367560067FCF7 /* gilroy-black.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		1EFEBDD52B936B2E0067FCF7 /* DetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1EFEBDD62B936B550067FCF7 /* DetailViewController.swift */,
+				1EFEBDDC2B9388E10067FCF7 /* DetailInfoView.swift */,
+			);
+			path = DetailViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,6 +237,7 @@
 			files = (
 				1E7714782B90653200ADC5E8 /* LaunchScreen.storyboard in Resources */,
 				1E7714752B90653200ADC5E8 /* Assets.xcassets in Resources */,
+				1EFEBDD42B9367560067FCF7 /* gilroy-black.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,9 +252,15 @@
 				1E7714702B90652F00ADC5E8 /* MainViewController.swift in Sources */,
 				1EFEBDC92B90A91D0067FCF7 /* CollectionViewCell.swift in Sources */,
 				1EFEBDC42B907A4F0067FCF7 /* MainViewSection.swift in Sources */,
+				1EFEBDCF2B9355DA0067FCF7 /* NetworkManager.swift in Sources */,
+				1EFEBDD12B935F9E0067FCF7 /* BaseApiResponse.swift in Sources */,
 				1E77146C2B90652F00ADC5E8 /* AppDelegate.swift in Sources */,
+				1EFEBDD72B936B550067FCF7 /* DetailViewController.swift in Sources */,
+				1EFEBDDB2B9385F60067FCF7 /* UILabel - Extension.swift in Sources */,
+				1EFEBDDD2B9388E10067FCF7 /* DetailInfoView.swift in Sources */,
 				1EFEBDCC2B90AB700067FCF7 /* UIView - Extension.swift in Sources */,
 				1E77146E2B90652F00ADC5E8 /* SceneDelegate.swift in Sources */,
+				1EFEBDD92B936CE30067FCF7 /* UIStackView - Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

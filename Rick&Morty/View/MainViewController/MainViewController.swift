@@ -16,7 +16,6 @@ class MainViewController: UIViewController {
     //MARK: - Properties
 
     private var dataSource: UICollectionViewDiffableDataSource<MainViewSection, Item>?
-
     private var characters = [
         Item(characterImage: "test", characterName: "Rick"),
         Item(characterImage: "test", characterName: "Morty"),
@@ -26,23 +25,25 @@ class MainViewController: UIViewController {
         Item(characterImage: "test", characterName: "Niki"),
         Item(characterImage: "test", characterName: "Nik"),
         Item(characterImage: "test", characterName: "Ni"),
-        Item(characterImage: "test", characterName: "N")
+        Item(characterImage: "test", characterName: "N"),
+        Item(characterImage: "test", characterName: "Nk"),
     ]
-
+    private let networkManager = NetworkManager.shared
+    
     //MARK: - Life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Call method's
         setupView()
         setupCollectionView()
         configureDataSource()
+        networkManager.fetchData { result in
+            print(result)
+        }
     }
-
-    override func viewWillLayoutSubviews() {
-        collectionView.layoutIfNeeded()
-    }
+    
     //MARK: - Private method
     /// Setup view
     private func setupView() {
@@ -58,7 +59,8 @@ class MainViewController: UIViewController {
         // Setup navigation bar
         navigationItem.title = "Characters"
         let titleAttributed: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.white
+            .foregroundColor: UIColor.white,
+            .font: UIFont(name: "gilroy-black", size: 29) ?? .boldSystemFont(ofSize: 29)
         ]
         navigationController?.navigationBar.largeTitleTextAttributes = titleAttributed
         navigationController?.navigationBar.titleTextAttributes = titleAttributed
@@ -108,6 +110,7 @@ class MainViewController: UIViewController {
             (collectionView: UICollectionView, indexPath: IndexPath, item: Item) -> UICollectionViewCell? in
 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.id, for: indexPath) as! CollectionViewCell
+            cell.layoutIfNeeded()
             cell.setupDataForCell(with: item)
             return cell
         }
@@ -118,4 +121,3 @@ class MainViewController: UIViewController {
         dataSource?.apply(snapshot, animatingDifferences: false)
     }
 }
-
