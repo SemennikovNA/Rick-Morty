@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
+class CharactersCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Properties
     
@@ -76,7 +76,7 @@ class CollectionViewCell: UICollectionViewCell {
 
 //MARK: - Private extension
 
-private extension CollectionViewCell {
+private extension CharactersCollectionViewCell {
     
     /// Setup constraints for collection view cell
     func setupConstraints() {

@@ -17,16 +17,16 @@ class MainViewController: UIViewController {
 
     private var dataSource: UICollectionViewDiffableDataSource<MainViewSection, Item>?
     private var characters = [
-        Item(characterImage: "test", characterName: "Rick"),
-        Item(characterImage: "test", characterName: "Morty"),
-        Item(characterImage: "test", characterName: "Ainur"),
-        Item(characterImage: "test", characterName: "Nikita"),
-        Item(characterImage: "test", characterName: "Nikit"),
-        Item(characterImage: "test", characterName: "Niki"),
-        Item(characterImage: "test", characterName: "Nik"),
-        Item(characterImage: "test", characterName: "Ni"),
-        Item(characterImage: "test", characterName: "N"),
-        Item(characterImage: "test", characterName: "Nk"),
+        Item(characterImage: "rick", characterName: "Rick Sanchez"),
+        Item(characterImage: "rick", characterName: "Morty"),
+        Item(characterImage: "rick", characterName: "Nikita"),
+        Item(characterImage: "rick", characterName: "Dima"),
+        Item(characterImage: "rick", characterName: "Roma"),
+        Item(characterImage: "rick", characterName: "Din"),
+        Item(characterImage: "rick", characterName: "Sam"),
+        Item(characterImage: "rick", characterName: "Nick"),
+        Item(characterImage: "rick", characterName: "Bob"),
+        Item(characterImage: "rick", characterName: "Gilroy"),
     ]
     private let networkManager = NetworkManager.shared
     
@@ -36,12 +36,13 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         // Call method's
+        setupNavigationBar()
         setupView()
         setupCollectionView()
         configureDataSource()
-        networkManager.fetchData { result in
-            print(result)
-        }
+//        networkManager.fetchData { result in
+//            print(result)
+//        }
     }
     
     //MARK: - Private method
@@ -49,29 +50,32 @@ class MainViewController: UIViewController {
     private func setupView() {
         // Setup view
         view.backgroundColor = .backBlue
-
-        // Call method's
-        setupNavigationBar()
     }
 
     /// Setup navigation bar
     private func setupNavigationBar() {
-        // Setup navigation bar
+        // Setup navigation item title
         navigationItem.title = "Characters"
-        let titleAttributed: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.white,
-            .font: UIFont(name: "gilroy-black", size: 29) ?? .boldSystemFont(ofSize: 29)
-        ]
-        navigationController?.navigationBar.largeTitleTextAttributes = titleAttributed
-        navigationController?.navigationBar.titleTextAttributes = titleAttributed
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
+        let titleAttributed: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "gilroy-black", size: 29) as Any,
+            .foregroundColor: UIColor.white
+        ]
+        
+        // Setup navigation bar appearance
+        let appearance = UINavigationBarAppearance()
+        appearance.titleTextAttributes = titleAttributed
+        appearance.largeTitleTextAttributes = titleAttributed
+        appearance.backgroundColor = .backBlue
+        navigationController?.navigationBar.standardAppearance = appearance
     }
+
 
     /// Setup collection view
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCompositionalLayout())
-        collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.id)
+        collectionView.register(CharactersCollectionViewCell.self, forCellWithReuseIdentifier: CharactersCollectionViewCell.id)
         collectionView.backgroundColor = .clear
         collectionView.delegate = self
         view.addSubviews(collectionView)
@@ -110,7 +114,7 @@ class MainViewController: UIViewController {
         dataSource = UICollectionViewDiffableDataSource<MainViewSection, Item>(collectionView: collectionView) {
             (collectionView: UICollectionView, indexPath: IndexPath, item: Item) -> UICollectionViewCell? in
 
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.id, for: indexPath) as! CollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.id, for: indexPath) as! CharactersCollectionViewCell
             cell.layoutIfNeeded()
             cell.setupDataForCell(with: item)
             return cell

@@ -10,7 +10,14 @@ import UIKit
 class DetailViewController: UIViewController {
     
     //MARK: - User interface element
-    
+    private var episodesCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collection.backgroundColor = .clear
+        return collection
+    }()
+    private var dataSource: UICollectionViewDiffableDataSource<MainViewSection, EpisodesModel>?
     private let detailInfoView = DetailInfoView()
     private let detailOriginView = DetailOriginView()
     private let characterStackView: UIStackView = {
@@ -37,6 +44,10 @@ class DetailViewController: UIViewController {
     private var characterNameLabel = UILabel(text: "Rick Sanchez", font: UIFont(name: "gilroy-black", size: 22), textAlignment: .center, textColor: .white)
     private var characterStatusLabel = UILabel(text: "Alive", font: UIFont(name: "gilroy-black", size: 18), textAlignment: .center, textColor: .textGreen)
     
+    //MARK: - Propertie
+    let episodeList: [EpisodesModel] = [
+        EpisodesModel(episodesName: "Pilot", episodesSeasonNumber: "Episode: 1, Season: 1", episodesDate: "December 2, 2013")
+    ]
     //MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -59,7 +70,7 @@ class DetailViewController: UIViewController {
     private func setupView() {
         // Setup view
         view.backgroundColor = .backBlue
-        view.addSubviews(characterImage, characterStackView, infoLabel, detailInfoView, originLabel, detailOriginView, episodesLabel)
+        view.addSubviews(characterImage, characterStackView, infoLabel, detailInfoView, originLabel, detailOriginView, episodesLabel, episodesCollectionView)
         
         // Setup charecter stack view
         characterStackView.addArrangedSubviews(characterNameLabel, characterStatusLabel)
@@ -74,6 +85,49 @@ class DetailViewController: UIViewController {
     
     @objc func backButtonClick() {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+//MARK: - UICollectionViewCompositionalLayout
+
+extension DetailViewController {
+    
+    // Setup collection view
+    private func setupCollectionView() {
+        episodesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: setupEpisodesCompositionalLayout())
+        episodesCollectionView.register(EpisodesCollectionViewCell.self, forCellWithReuseIdentifier: EpisodesCollectionViewCell.id)
+    }
+    
+    // Create compositional laoput
+    private func setupEpisodesCompositionalLayout() -> UICollectionViewLayout {
+        
+        let spacing: CGFloat = 10
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(327), heightDimension: .absolute(86))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, repeatingSubitem: item, count: 1)
+        group.interItemSpacing = .fixed(spacing)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+        section.interGroupSpacing = spacing
+        section.contentInsetsReference = .automatic
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
+    
+    // Setup datasource for episodes collection view
+    private func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<MainViewSection, EpisodesModel>.init(collectionView: episodesCollectionView, cellProvider: { (collectionView: UICollectionView, indexPath: IndexPath, item: EpisodesModel) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodesCollectionViewCell.id, for: indexPath) as! EpisodesCollectionViewCell
+            cell.layoutIfNeeded()
+            let dataForCell = self.episodeList[indexPath.row]
+            cell.setupDataForEpisodesCell(with: dataForCell)
+            return cell
+
+        })
     }
 }
 
@@ -124,6 +178,12 @@ private extension DetailViewController {
             episodesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             episodesLabel.widthAnchor.constraint(equalToConstant: 100),
             episodesLabel.heightAnchor.constraint(equalToConstant: 30),
+            
+            // Episodes collection view
+            episodesCollectionView.topAnchor.constraint(equalTo: episodesLabel.bottomAnchor, constant: 10),
+            episodesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            episodesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            episodesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
 }
