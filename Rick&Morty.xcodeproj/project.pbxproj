@@ -116,7 +116,6 @@
 			isa = PBXGroup;
 			children = (
 				1EFEBDD52B936B2E0067FCF7 /* DetailViewController */,
-				1EFEBDC22B9078C10067FCF7 /* MainViewSection */,
 				1EFEBDC12B9078B30067FCF7 /* MainViewController */,
 				1EFEBDC82B90A91D0067FCF7 /* CharactersCollectionViewCell.swift */,
 				1E8BB0362B94650400091EDF /* EpisodesCollectionViewCell.swift */,
@@ -132,17 +131,10 @@
 			path = MainViewController;
 			sourceTree = "<group>";
 		};
-		1EFEBDC22B9078C10067FCF7 /* MainViewSection */ = {
-			isa = PBXGroup;
-			children = (
-				1EFEBDC32B907A4F0067FCF7 /* MainViewSection.swift */,
-			);
-			path = MainViewSection;
-			sourceTree = "<group>";
-		};
 		1EFEBDC52B90A6D60067FCF7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1EFEBDC32B907A4F0067FCF7 /* MainViewSection.swift */,
 				1EFEBDC62B90A7A40067FCF7 /* Item.swift */,
 				1EFEBDD02B935F9E0067FCF7 /* BaseApiResponse.swift */,
 				1E8BB0382B946C6500091EDF /* EpisodesModel.swift */,

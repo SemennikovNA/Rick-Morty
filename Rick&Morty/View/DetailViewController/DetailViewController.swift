@@ -10,13 +10,8 @@ import UIKit
 class DetailViewController: UIViewController {
     
     //MARK: - User interface element
-    private var episodesCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.backgroundColor = .clear
-        return collection
-    }()
+
+    private var episodesCollectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<MainViewSection, EpisodesModel>?
     private let detailInfoView = DetailInfoView()
     private let detailOriginView = DetailOriginView()
@@ -45,9 +40,13 @@ class DetailViewController: UIViewController {
     private var characterStatusLabel = UILabel(text: "Alive", font: UIFont(name: "gilroy-black", size: 18), textAlignment: .center, textColor: .textGreen)
     
     //MARK: - Propertie
+    
     let episodeList: [EpisodesModel] = [
-        EpisodesModel(episodesName: "Pilot", episodesSeasonNumber: "Episode: 1, Season: 1", episodesDate: "December 2, 2013")
+        EpisodesModel(episodesName: "Pilot", episodesSeasonNumber: "Episode: 1, Season: 1", episodesDate: "December 2, 2013"),
+        EpisodesModel(episodesName: "Lawnmower Dog", episodesSeasonNumber: "Episode: 2, Season: 1", episodesDate: "December 9, 2013"),
+        EpisodesModel(episodesName: "Anatomy Park", episodesSeasonNumber: "Episode: 3, Season: 1", episodesDate: "December 16, 2013")
     ]
+    
     //MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -56,12 +55,14 @@ class DetailViewController: UIViewController {
         // Call method's
         setupView()
         setupConstraints()
+        configureDataSource()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         detailInfoView.layoutIfNeeded()
         detailOriginView.layoutIfNeeded()
+        episodesCollectionView.layoutIfNeeded()
         characterImage.layer.cornerRadius = characterImage.frame.size.width / 9
     }
     
@@ -70,7 +71,7 @@ class DetailViewController: UIViewController {
     private func setupView() {
         // Setup view
         view.backgroundColor = .backBlue
-        view.addSubviews(characterImage, characterStackView, infoLabel, detailInfoView, originLabel, detailOriginView, episodesLabel, episodesCollectionView)
+        view.addSubviews(characterImage, characterStackView, infoLabel, detailInfoView, originLabel, detailOriginView, episodesLabel)
         
         // Setup charecter stack view
         characterStackView.addArrangedSubviews(characterNameLabel, characterStatusLabel)
@@ -79,6 +80,9 @@ class DetailViewController: UIViewController {
         let backButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backButtonClick))
         backButton.tintColor = .white
         navigationItem.leftBarButtonItems = [backButton]
+        
+        // Call method's
+        setupCollectionView()
     }
     
     //MARK: - Objective - C method
@@ -94,40 +98,51 @@ extension DetailViewController {
     
     // Setup collection view
     private func setupCollectionView() {
+        // Setup collection view
         episodesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: setupEpisodesCompositionalLayout())
         episodesCollectionView.register(EpisodesCollectionViewCell.self, forCellWithReuseIdentifier: EpisodesCollectionViewCell.id)
+        episodesCollectionView.backgroundColor = .clear
+        view.addSubviews(episodesCollectionView)
     }
     
-    // Create compositional laoput
+    // Create compositional layout
     private func setupEpisodesCompositionalLayout() -> UICollectionViewLayout {
-        
         let spacing: CGFloat = 10
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(327), heightDimension: .absolute(86))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, repeatingSubitem: item, count: 1)
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(327),
+            heightDimension: .absolute(86))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 1)
         group.interItemSpacing = .fixed(spacing)
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
-        section.interGroupSpacing = spacing
-        section.contentInsetsReference = .automatic
+        section.contentInsets = .init(top: spacing, leading: 18, bottom: spacing, trailing: spacing)
+        section.interGroupSpacing = 5
+        section.contentInsetsReference = .layoutMargins
         
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
+
     
     // Setup datasource for episodes collection view
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<MainViewSection, EpisodesModel>.init(collectionView: episodesCollectionView, cellProvider: { (collectionView: UICollectionView, indexPath: IndexPath, item: EpisodesModel) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<MainViewSection, EpisodesModel>(collectionView: episodesCollectionView) { (collectionView: UICollectionView, indexPath: IndexPath, item: EpisodesModel) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodesCollectionViewCell.id, for: indexPath) as! EpisodesCollectionViewCell
             cell.layoutIfNeeded()
             let dataForCell = self.episodeList[indexPath.row]
             cell.setupDataForEpisodesCell(with: dataForCell)
             return cell
-
-        })
+        }
+        var snapShot = NSDiffableDataSourceSnapshot<MainViewSection, EpisodesModel>()
+        snapShot.appendSections([.section])
+        snapShot.appendItems(episodeList)
+        dataSource?.apply(snapShot, animatingDifferences: false)
+        
     }
 }
 
@@ -138,7 +153,7 @@ private extension DetailViewController {
     func setupConstraints() {
         NSLayoutConstraint.activate([
             // Character image
-            characterImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -20),
+            characterImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             characterImage.heightAnchor.constraint(equalToConstant: 148),
             characterImage.widthAnchor.constraint(equalToConstant: 148),
             characterImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -150,40 +165,40 @@ private extension DetailViewController {
             characterStackView.heightAnchor.constraint(equalToConstant: 50),
             
             // Info label
-            infoLabel.topAnchor.constraint(equalTo: characterStackView.bottomAnchor, constant: 20),
+            infoLabel.topAnchor.constraint(equalTo: characterStackView.bottomAnchor, constant: 10),
             infoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             infoLabel.widthAnchor.constraint(equalToConstant: 50),
             infoLabel.heightAnchor.constraint(equalToConstant: 30),
             
             // Detail info view
-            detailInfoView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 10),
+            detailInfoView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 5),
             detailInfoView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             detailInfoView.heightAnchor.constraint(equalToConstant: 125),
             detailInfoView.widthAnchor.constraint(equalToConstant: 330),
             
             // Origin label
-            originLabel.topAnchor.constraint(equalTo: detailInfoView.bottomAnchor, constant: 20),
+            originLabel.topAnchor.constraint(equalTo: detailInfoView.bottomAnchor, constant: 5),
             originLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             originLabel.widthAnchor.constraint(equalToConstant: 50),
             originLabel.heightAnchor.constraint(equalToConstant: 30),
             
             // Detail origin view
-            detailOriginView.topAnchor.constraint(equalTo: originLabel.bottomAnchor, constant: 10),
+            detailOriginView.topAnchor.constraint(equalTo: originLabel.bottomAnchor, constant: 5),
             detailOriginView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             detailOriginView.heightAnchor.constraint(equalToConstant: 80),
             detailOriginView.widthAnchor.constraint(equalToConstant: 330),
             
             // Episodes label
-            episodesLabel.topAnchor.constraint(equalTo: detailOriginView.bottomAnchor, constant: 20),
+            episodesLabel.topAnchor.constraint(equalTo: detailOriginView.bottomAnchor, constant: 5),
             episodesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             episodesLabel.widthAnchor.constraint(equalToConstant: 100),
             episodesLabel.heightAnchor.constraint(equalToConstant: 30),
             
             // Episodes collection view
-            episodesCollectionView.topAnchor.constraint(equalTo: episodesLabel.bottomAnchor, constant: 10),
-            episodesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            episodesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            episodesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            episodesCollectionView.topAnchor.constraint(equalTo: episodesLabel.bottomAnchor),
+            episodesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
+            episodesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
+            episodesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),
         ])
     }
 }

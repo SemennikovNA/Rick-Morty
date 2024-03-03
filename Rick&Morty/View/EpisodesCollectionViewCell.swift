@@ -22,7 +22,7 @@ class EpisodesCollectionViewCell: UICollectionViewCell {
     }()
     private var episodeName = UILabel(font: UIFont(name: "gilroy-black", size: 17), textAlignment: .left, textColor: .white)
     private var episodeNumber = UILabel(font: UIFont(name: "gilroy-black", size: 13), textAlignment: .left, textColor: .textGreen)
-    private var episodeDate = UILabel(font: UIFont(name: "gilroy-black", size: 12), textAlignment: .right, textColor: .darkGray)
+    private var episodeDate = UILabel(font: UIFont(name: "gilroy-black", size: 12), textAlignment: .right, textColor: .lightGray)
     
     //MARK: - Initialize
     
@@ -41,6 +41,7 @@ class EpisodesCollectionViewCell: UICollectionViewCell {
     override func layoutIfNeeded() {
         super.layoutIfNeeded()
         self.layer.cornerRadius = self.frame.size.width / 20
+        self.clipsToBounds = true
     }
     
     //MARK: - Method
@@ -55,7 +56,7 @@ class EpisodesCollectionViewCell: UICollectionViewCell {
     
     private func setupCellUI() {
         self.addSubviews(contentCellView)
-        contentCellView.addSubviews(episodeName)
+        contentCellView.addSubviews(episodeName, episodeNumber, episodeDate)
     }
 }
 
@@ -72,9 +73,19 @@ private extension EpisodesCollectionViewCell {
             contentCellView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
             // Episode name
-            episodeName.topAnchor.constraint(equalTo: contentCellView.topAnchor, constant: 10),
             episodeName.leadingAnchor.constraint(equalTo: contentCellView.leadingAnchor, constant: 10),
+            episodeName.topAnchor.constraint(equalTo: contentCellView.topAnchor, constant: 10),
             episodeName.heightAnchor.constraint(equalToConstant: 30),
+            
+            // Episode nubmer
+            episodeNumber.leadingAnchor.constraint(equalTo: contentCellView.leadingAnchor, constant: 10),
+            episodeNumber.bottomAnchor.constraint(equalTo: contentCellView.bottomAnchor, constant: -10),
+            episodeNumber.heightAnchor.constraint(equalToConstant: 30),
+            
+            // Episode date
+            episodeDate.trailingAnchor.constraint(equalTo: contentCellView.trailingAnchor, constant: -10),
+            episodeDate.bottomAnchor.constraint(equalTo: contentCellView.bottomAnchor, constant: -10),
+            episodeDate.heightAnchor.constraint(equalToConstant: 30),
         ])
     }
 }
