@@ -12,7 +12,7 @@ class DetailViewController: UIViewController {
     //MARK: - User interface element
 
     private var episodesCollectionView: UICollectionView!
-    private var dataSource: UICollectionViewDiffableDataSource<MainViewSection, EpisodesModel>?
+    private var dataSource: UICollectionViewDiffableDataSource<DetailViewSection, EpisodesModel>?
     private let detailInfoView = DetailInfoView()
     private let detailOriginView = DetailOriginView()
     private let characterStackView: UIStackView = {
@@ -96,6 +96,25 @@ class DetailViewController: UIViewController {
 
 extension DetailViewController {
     
+    // Methods for register cell's
+    private func infoRegisterCells() -> UICollectionView.CellRegistration<InfoCollectionViewCell, Info> {
+        return UICollectionView.CellRegistration<InfoCollectionViewCell, Info> { (cell, indexPath, item) in
+            cell.setupDataForCell(with: item)
+        }
+    }
+    
+    private func originRegisterCells() -> UICollectionView.CellRegistration<OriginCollectionViewCell, OriginModel> {
+        return UICollectionView.CellRegistration { (cell, indexPath, item) in
+            cell.setupDataForCell(with: item)
+        }
+    }
+    
+    private func episodesRegisterCell() -> UICollectionView.CellRegistration<EpisodesCollectionViewCell, EpisodesModel> {
+        return UICollectionView.CellRegistration { (cell, indexPath, item) in
+            cell.setupDataForEpisodesCell(with: item)
+        }
+    }
+    
     // Setup collection view
     private func setupCollectionView() {
         // Setup collection view
@@ -131,15 +150,15 @@ extension DetailViewController {
     
     // Setup datasource for episodes collection view
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<MainViewSection, EpisodesModel>(collectionView: episodesCollectionView) { (collectionView: UICollectionView, indexPath: IndexPath, item: EpisodesModel) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<DetailViewSection, EpisodesModel>(collectionView: episodesCollectionView) { (collectionView: UICollectionView, indexPath: IndexPath, item: EpisodesModel) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodesCollectionViewCell.id, for: indexPath) as! EpisodesCollectionViewCell
             cell.layoutIfNeeded()
             let dataForCell = self.episodeList[indexPath.row]
             cell.setupDataForEpisodesCell(with: dataForCell)
             return cell
         }
-        var snapShot = NSDiffableDataSourceSnapshot<MainViewSection, EpisodesModel>()
-        snapShot.appendSections([.section])
+        var snapShot = NSDiffableDataSourceSnapshot<DetailViewSection, EpisodesModel>()
+        snapShot.appendSections([.episodes])
         snapShot.appendItems(episodeList)
         dataSource?.apply(snapShot, animatingDifferences: false)
         
