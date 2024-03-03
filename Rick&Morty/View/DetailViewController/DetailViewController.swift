@@ -150,6 +150,9 @@ extension DetailViewController {
     
     // Setup datasource for episodes collection view
     private func configureDataSource() {
+        let infoCell = infoRegisterCells()
+        let originCell = originRegisterCells()
+        let episodesCell = episodesRegisterCell()
         dataSource = UICollectionViewDiffableDataSource<DetailViewSection, EpisodesModel>(collectionView: episodesCollectionView) { (collectionView: UICollectionView, indexPath: IndexPath, item: EpisodesModel) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodesCollectionViewCell.id, for: indexPath) as! EpisodesCollectionViewCell
             cell.layoutIfNeeded()
