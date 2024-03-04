@@ -32,7 +32,7 @@ class DetailViewController: UIViewController {
         return image
     }()
     private var characterNameLabel = UILabel(text: "Rick Sanchez", font: UIFont(name: "gilroy-black", size: 22), textAlignment: .center, textColor: .white)
-    private var characterStatusLabel = UILabel(text: "Alive", font: UIFont(name: "gilroy-black", size: 18), textAlignment: .center, textColor: .textGreen)
+    private var characterStatusLabel = UILabel(text: "Alive", font: UIFont(name: "gilroy-regular", size: 18), textAlignment: .center, textColor: .textGreen)
     
     //MARK: - Propertie
     
@@ -101,6 +101,7 @@ extension DetailViewController {
         // Setup collection view
         episodesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: setupCompositionalLayout())
         episodesCollectionView.backgroundColor = .clear
+        episodesCollectionView.showsVerticalScrollIndicator = false
         configureDataSource()
         view.addSubviews(episodesCollectionView)
     }
@@ -171,7 +172,7 @@ extension DetailViewController {
                 section.interGroupSpacing = 5
                 section.contentInsetsReference = .layoutMargins
                 
-                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50))
+                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(20))
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
                 header.pinToVisibleBounds = false
                 header.zIndex = 2
@@ -191,7 +192,7 @@ extension DetailViewController {
                 section.interGroupSpacing = 5
                 section.contentInsetsReference = .layoutMargins
                 
-                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50))
+                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(30))
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
                 header.pinToVisibleBounds = false
                 header.zIndex = 2
@@ -213,7 +214,7 @@ extension DetailViewController {
                 section.interGroupSpacing = 5
                 section.contentInsetsReference = .layoutMargins
                 
-                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50))
+                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(30))
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
                 header.pinToVisibleBounds = false
                 header.zIndex = 2

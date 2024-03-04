@@ -21,8 +21,8 @@ class EpisodesCollectionViewCell: UICollectionViewCell {
         return view
     }()
     private var episodeName = UILabel(font: UIFont(name: "gilroy-black", size: 17), textAlignment: .left, textColor: .white)
-    private var episodeNumber = UILabel(font: UIFont(name: "gilroy-black", size: 13), textAlignment: .left, textColor: .textGreen)
-    private var episodeDate = UILabel(font: UIFont(name: "gilroy-black", size: 12), textAlignment: .right, textColor: .lightGray)
+    private var episodeNumber = UILabel(font: UIFont(name: "gilroy-regular", size: 13), textAlignment: .left, textColor: .textGreen)
+    private var episodeDate = UILabel(font: UIFont(name: "gilroy-regular", size: 12), textAlignment: .right, textColor: .lightGray)
     
     //MARK: - Initialize
     

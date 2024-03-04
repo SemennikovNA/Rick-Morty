@@ -9,7 +9,12 @@ import UIKit
 
 final class Builder {
     
+    //MARK: - Initialize
+    
     private init() { }
+    
+
+    //MARK: - Static method
     
     static func createDetailView() -> UIViewController {
         let view = DetailViewController()

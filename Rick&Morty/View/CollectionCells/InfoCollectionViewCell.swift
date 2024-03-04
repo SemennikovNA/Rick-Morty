@@ -11,9 +11,9 @@ class InfoCollectionViewCell: UICollectionViewCell {
     
     //MARK: - User interface element
     private let contentCellView = UIView()
-    private let speciesLabel = UILabel(text: "Species:", font: UIFont(name: "gilroy-black", size: 16), textAlignment: .left, textColor: .lightGray)
-    private let typeLabel = UILabel(text: "Type:", font: UIFont(name: "gilroy-black", size: 16), textAlignment: .left, textColor: .lightGray)
-    private let genderLabel = UILabel(text: "Gender:", font: UIFont(name: "gilroy-black", size: 16), textAlignment: .left, textColor: .lightGray)
+    private let speciesLabel = UILabel(text: "Species:", font: UIFont(name: "gilroy-regular", size: 16), textAlignment: .left, textColor: .lightGray)
+    private let typeLabel = UILabel(text: "Type:", font: UIFont(name: "gilroy-regular", size: 16), textAlignment: .left, textColor: .lightGray)
+    private let genderLabel = UILabel(text: "Gender:", font: UIFont(name: "gilroy-regular", size: 16), textAlignment: .left, textColor: .lightGray)
     private var speciesValueLabel = UILabel(text: "Human", font: UIFont(name: "gilroy-black", size: 16), textAlignment: .right, textColor: .white)
     private var typeValueLabel = UILabel(text: "None", font: UIFont(name: "gilroy-black", size: 16), textAlignment: .right, textColor: .white)
     private var genderValueLabel = UILabel(text: "Male", font: UIFont(name: "gilroy-black", size: 16), textAlignment: .right, textColor: .white)

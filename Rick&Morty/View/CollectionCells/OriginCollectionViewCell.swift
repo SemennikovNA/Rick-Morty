@@ -23,10 +23,9 @@ class OriginCollectionViewCell: UICollectionViewCell {
         image.backgroundColor = .backBlue
         image.image = UIImage(named: "planet")
         image.contentMode = .center
-        image.clipsToBounds = true
         return image
     }()
-    private let planetTitleLabel = UILabel(text: "Planet", font: UIFont(name: "gilroy-black", size: 13), textAlignment: .left, textColor: .textGreen)
+    private let planetTitleLabel = UILabel(text: "Planet", font: UIFont(name: "gilroy-regular", size: 13), textAlignment: .left, textColor: .textGreen)
     private var planetNameLabel = UILabel(text: "Earth", font: UIFont(name: "gilroy-black", size: 17), textAlignment: .left, textColor: .white)
     
     //MARK: - Initialize
@@ -46,7 +45,8 @@ class OriginCollectionViewCell: UICollectionViewCell {
     override func layoutIfNeeded() {
         self.layer.cornerRadius = self.frame.size.width / 20
         self.clipsToBounds = true
-        planetImageView.layer.cornerRadius = planetImageView.frame.size.width / 6
+        planetImageView.layer.cornerRadius = 10
+        planetImageView.clipsToBounds = true
     }
     
     //MARK: - Method
