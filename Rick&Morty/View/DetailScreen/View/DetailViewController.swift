@@ -274,6 +274,7 @@ extension DetailViewController {
         
         let infoData = presenter.info.map({ Items(info: $0)})
         snapShot.appendItems(infoData, toSection: .info)
+
         
         let originData = presenter.origin.map({Items(origin: $0)})
         snapShot.appendItems(originData, toSection: .origin)
@@ -286,7 +287,7 @@ extension DetailViewController {
 }
 
 //MARK: - Private extension
-
+//MARK: Constraints
 private extension DetailViewController {
     
     func setupConstraints() {

@@ -16,6 +16,13 @@ final class Builder {
 
     //MARK: - Static method
     
+    static func createMainView() -> UIViewController {
+        let view = MainViewController()
+        let presenter = MainPresenter(view: view)
+        view.presenter = presenter
+        return view
+    }
+    
     static func createDetailView() -> UIViewController {
         let view = DetailViewController()
         let presenter = DetailPresenter(view: view)

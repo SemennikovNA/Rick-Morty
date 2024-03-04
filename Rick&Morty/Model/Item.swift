@@ -9,7 +9,6 @@ import Foundation
 
 struct Item: Hashable {
     
-    var characterImage: String
-    var characterName: String
+    var character: Characters?
     
 }

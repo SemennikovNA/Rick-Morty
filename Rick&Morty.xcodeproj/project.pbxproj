@@ -25,7 +25,9 @@
 		1E8BB0512B95D43A00091EDF /* MainViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8BB0502B95D43A00091EDF /* MainViewProtocol.swift */; };
 		1E8BB0552B95EF5500091EDF /* gilroy-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E8BB0532B95EF5500091EDF /* gilroy-regular.ttf */; };
 		1E8BB0562B95EF5500091EDF /* gilroy-black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E8BB0542B95EF5500091EDF /* gilroy-black.ttf */; };
-		1EFEBDC42B907A4F0067FCF7 /* CollectionSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDC32B907A4F0067FCF7 /* CollectionSections.swift */; };
+		1E8BB0582B95F76D00091EDF /* Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8BB0572B95F76D00091EDF /* Characters.swift */; };
+		1E8BB05B2B96047700091EDF /* MainViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8BB05A2B96047700091EDF /* MainViewSection.swift */; };
+		1EFEBDC42B907A4F0067FCF7 /* DetailViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDC32B907A4F0067FCF7 /* DetailViewSection.swift */; };
 		1EFEBDC72B90A7A40067FCF7 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDC62B90A7A40067FCF7 /* Item.swift */; };
 		1EFEBDC92B90A91D0067FCF7 /* CharactersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDC82B90A91D0067FCF7 /* CharactersCollectionViewCell.swift */; };
 		1EFEBDCC2B90AB700067FCF7 /* UIView - Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDCB2B90AB700067FCF7 /* UIView - Extension.swift */; };
@@ -57,7 +59,9 @@
 		1E8BB0502B95D43A00091EDF /* MainViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewProtocol.swift; sourceTree = "<group>"; };
 		1E8BB0532B95EF5500091EDF /* gilroy-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "gilroy-regular.ttf"; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/MacBook/Development/Fonts/gilroy-regular.ttf"; sourceTree = "<group>"; };
 		1E8BB0542B95EF5500091EDF /* gilroy-black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "gilroy-black.ttf"; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/MacBook/Development/Fonts/gilroy-black.ttf"; sourceTree = "<group>"; };
-		1EFEBDC32B907A4F0067FCF7 /* CollectionSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSections.swift; sourceTree = "<group>"; };
+		1E8BB0572B95F76D00091EDF /* Characters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Characters.swift; sourceTree = "<group>"; };
+		1E8BB05A2B96047700091EDF /* MainViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewSection.swift; sourceTree = "<group>"; };
+		1EFEBDC32B907A4F0067FCF7 /* DetailViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewSection.swift; sourceTree = "<group>"; };
 		1EFEBDC62B90A7A40067FCF7 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		1EFEBDC82B90A91D0067FCF7 /* CharactersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersCollectionViewCell.swift; sourceTree = "<group>"; };
 		1EFEBDCB2B90AB700067FCF7 /* UIView - Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView - Extension.swift"; sourceTree = "<group>"; };
@@ -152,7 +156,7 @@
 		1E8BB0482B95C5DC00091EDF /* Sections */ = {
 			isa = PBXGroup;
 			children = (
-				1EFEBDC32B907A4F0067FCF7 /* CollectionSections.swift */,
+				1EFEBDC32B907A4F0067FCF7 /* DetailViewSection.swift */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -189,6 +193,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		1E8BB0592B96045F00091EDF /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				1E8BB05A2B96047700091EDF /* MainViewSection.swift */,
+			);
+			path = Sections;
+			sourceTree = "<group>";
+		};
 		1EFEBDC02B9078AD0067FCF7 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +214,7 @@
 		1EFEBDC12B9078B30067FCF7 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				1E8BB0592B96045F00091EDF /* Sections */,
 				1E8BB04F2B95D42A00091EDF /* Presenter */,
 				1E8BB0522B95D44F00091EDF /* View */,
 			);
@@ -217,6 +230,7 @@
 				1E8BB03F2B94C2BE00091EDF /* InfoModel.swift */,
 				1E8BB0412B94C37E00091EDF /* OriginModel.swift */,
 				1E8BB0452B95AA6D00091EDF /* Items.swift */,
+				1E8BB0572B95F76D00091EDF /* Characters.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -337,7 +351,7 @@
 				1EFEBDC92B90A91D0067FCF7 /* CharactersCollectionViewCell.swift in Sources */,
 				1E8BB03B2B94BC4B00091EDF /* InfoCollectionViewCell.swift in Sources */,
 				1E8BB0442B95993D00091EDF /* HeaderForSection.swift in Sources */,
-				1EFEBDC42B907A4F0067FCF7 /* CollectionSections.swift in Sources */,
+				1EFEBDC42B907A4F0067FCF7 /* DetailViewSection.swift in Sources */,
 				1EFEBDCF2B9355DA0067FCF7 /* NetworkManager.swift in Sources */,
 				1EFEBDD12B935F9E0067FCF7 /* BaseApiResponse.swift in Sources */,
 				1E77146C2B90652F00ADC5E8 /* AppDelegate.swift in Sources */,
@@ -349,6 +363,8 @@
 				1E77146E2B90652F00ADC5E8 /* SceneDelegate.swift in Sources */,
 				1E8BB0462B95AA6D00091EDF /* Items.swift in Sources */,
 				1EFEBDD92B936CE30067FCF7 /* UIStackView - Extension.swift in Sources */,
+				1E8BB0582B95F76D00091EDF /* Characters.swift in Sources */,
+				1E8BB05B2B96047700091EDF /* MainViewSection.swift in Sources */,
 				1E8BB0402B94C2BE00091EDF /* InfoModel.swift in Sources */,
 				1E8BB03D2B94BDAB00091EDF /* OriginCollectionViewCell.swift in Sources */,
 				1E8BB0512B95D43A00091EDF /* MainViewProtocol.swift in Sources */,
