@@ -133,7 +133,7 @@ class MainViewController: UIViewController {
 extension MainViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailVC = DetailViewController()
+        let detailVC = Builder.createDetailView()
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }

@@ -40,10 +40,10 @@ class InfoCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Method
     
-    func setupDataForCell(with model: Info) {
-//        speciesValueLabel.text = ""
-//        typeValueLabel.text = ""
-//        genderValueLabel.text = ""
+    func setupDataForCell(with model: InfoModel) {
+        speciesValueLabel.text = model.species
+        typeValueLabel.text = model.type
+        genderValueLabel.text = model.gender
     }
     
     //MARK: - Private method

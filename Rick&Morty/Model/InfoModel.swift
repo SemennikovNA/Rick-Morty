@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Info: Hashable {
+struct InfoModel: Hashable {
     
     let species: String
     let type: String
