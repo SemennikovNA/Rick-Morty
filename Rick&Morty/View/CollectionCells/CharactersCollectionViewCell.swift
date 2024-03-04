@@ -60,10 +60,10 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Method
     
-    func setupDataForCell(with model: Characters) {
-        characterNameTitle.text = model.characterName
-        guard let image = model.characterImage else { return }
-        characterImage.image = UIImage(named: image)
+    func setupDataForCell(with model: Results) {
+        characterNameTitle.text = model.name
+//        guard let image = model.characterImage else { return }
+//        characterImage.image = UIImage(named: image)
     }
     
     //MARK: - Private method

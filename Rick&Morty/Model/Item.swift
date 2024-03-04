@@ -9,6 +9,6 @@ import Foundation
 
 struct Item: Hashable {
     
-    var character: Characters?
+    var character: Charac?
     
 }

@@ -27,6 +27,7 @@
 		1E8BB0562B95EF5500091EDF /* gilroy-black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E8BB0542B95EF5500091EDF /* gilroy-black.ttf */; };
 		1E8BB0582B95F76D00091EDF /* Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8BB0572B95F76D00091EDF /* Characters.swift */; };
 		1E8BB05B2B96047700091EDF /* MainViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8BB05A2B96047700091EDF /* MainViewSection.swift */; };
+		1E8BB05D2B96465700091EDF /* AllModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8BB05C2B96465700091EDF /* AllModel.swift */; };
 		1EFEBDC42B907A4F0067FCF7 /* DetailViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDC32B907A4F0067FCF7 /* DetailViewSection.swift */; };
 		1EFEBDC72B90A7A40067FCF7 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDC62B90A7A40067FCF7 /* Item.swift */; };
 		1EFEBDC92B90A91D0067FCF7 /* CharactersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDC82B90A91D0067FCF7 /* CharactersCollectionViewCell.swift */; };
@@ -61,6 +62,7 @@
 		1E8BB0542B95EF5500091EDF /* gilroy-black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "gilroy-black.ttf"; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/MacBook/Development/Fonts/gilroy-black.ttf"; sourceTree = "<group>"; };
 		1E8BB0572B95F76D00091EDF /* Characters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Characters.swift; sourceTree = "<group>"; };
 		1E8BB05A2B96047700091EDF /* MainViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewSection.swift; sourceTree = "<group>"; };
+		1E8BB05C2B96465700091EDF /* AllModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllModel.swift; sourceTree = "<group>"; };
 		1EFEBDC32B907A4F0067FCF7 /* DetailViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewSection.swift; sourceTree = "<group>"; };
 		1EFEBDC62B90A7A40067FCF7 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		1EFEBDC82B90A91D0067FCF7 /* CharactersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				1E8BB0412B94C37E00091EDF /* OriginModel.swift */,
 				1E8BB0452B95AA6D00091EDF /* Items.swift */,
 				1E8BB0572B95F76D00091EDF /* Characters.swift */,
+				1E8BB05C2B96465700091EDF /* AllModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				1EFEBDC92B90A91D0067FCF7 /* CharactersCollectionViewCell.swift in Sources */,
 				1E8BB03B2B94BC4B00091EDF /* InfoCollectionViewCell.swift in Sources */,
 				1E8BB0442B95993D00091EDF /* HeaderForSection.swift in Sources */,
+				1E8BB05D2B96465700091EDF /* AllModel.swift in Sources */,
 				1EFEBDC42B907A4F0067FCF7 /* DetailViewSection.swift in Sources */,
 				1EFEBDCF2B9355DA0067FCF7 /* NetworkManager.swift in Sources */,
 				1EFEBDD12B935F9E0067FCF7 /* BaseApiResponse.swift in Sources */,

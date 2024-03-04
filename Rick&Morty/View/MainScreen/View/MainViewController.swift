@@ -29,6 +29,14 @@ class MainViewController: UIViewController {
         setupView()
         setupConstraints()
         applySnapshot()
+        networkManager.fetchData { [self] result in
+            switch result {
+            case .success(let data):
+                presenter.characters.append(data)
+            case .failure(let failure):
+                print(failure.localizedDescription)
+            }
+        }
     }
     
     //MARK: - Private method
@@ -87,10 +95,11 @@ extension MainViewController: UICollectionViewDelegate {
     }
     
     // Method for register cell's
-    private func charactersRegisterCells() -> UICollectionView.CellRegistration<CharactersCollectionViewCell, Characters> {
-        return UICollectionView.CellRegistration<CharactersCollectionViewCell, Characters> { (cell, indexPath, item) in
+    private func charactersRegisterCells() -> UICollectionView.CellRegistration<CharactersCollectionViewCell, Charac> {
+        return UICollectionView.CellRegistration<CharactersCollectionViewCell, Charac> { [self] (cell, indexPath, item) in
             cell.layoutIfNeeded()
-            cell.setupDataForCell(with: item)
+            let dataForCell = presenter.characters[indexPath.item].results[indexPath.item]
+            cell.setupDataForCell(with: dataForCell)
         }
     }
     

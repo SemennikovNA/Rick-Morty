@@ -22,17 +22,17 @@ class NetworkManager {
     let decoder = JSONDecoder()
     
     //MARK: - Method
-    // https://rickandmortyapi.com/api
     
     func createURL() -> URL? {
         let tunnel = "https://"
         let mainUrl = "rickandmortyapi.com/"
         let api = "api"
-        let url = tunnel + mainUrl + api
+        let getKey = "/character"
+        let url = tunnel + mainUrl + api + getKey
         return  URL(string: url)
     }
     
-    func fetchData(completion: @escaping(Result<BaseApiResponse, Error>) -> ()) {
+    func fetchData(completion: @escaping(Result<Charac, Error>) -> ()) {
         guard let url = createURL() else {
             completion(.failure(NetworkError.badUrl))
             return
@@ -47,8 +47,7 @@ class NetworkManager {
             }
             
             do {
-                let baseData = try self.decoder.decode(BaseApiResponse.self, from: data)
-                print(baseData.characters, baseData.episodes, baseData.locations)
+                let baseData = try self.decoder.decode(Charac.self, from: data)
             } catch {
                 completion(.failure(error))
             }
