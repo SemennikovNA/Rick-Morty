@@ -49,7 +49,6 @@ class NetworkManager {
                 guard let baseData = try self?.decoder.decode(Charac.self, from: data) else { return }
                 var characters: [Charac] = []
                 characters.append(baseData)
-                print(characters)
                 self?.delegate?.transitData(self!, data: characters)
             } catch {
                 print(String(describing: error.localizedDescription))

@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
     //MARK: - Properties
 
     private let networkManager = NetworkManager.shared
-    private var dataSource: UICollectionViewDiffableDataSource<MainViewSection, Charac>?
+    private var dataSource: UICollectionViewDiffableDataSource<MainViewSection, Results>?
     var presenter: MainPresenter!
     
     //MARK: - Life cycle
@@ -29,7 +29,6 @@ class MainViewController: UIViewController {
         setupView()
         setupConstraints()
         presenter.fetchData()
-        presenter.updateData()
     }
     
     //MARK: - Private method
@@ -44,21 +43,21 @@ class MainViewController: UIViewController {
 
     /// Setup navigation bar
     private func setupNavigationBar() {
-        // Setup navigation item title
-        navigationItem.title = "Characters"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .always
-        let titleAttributed: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "gilroy-black", size: 29) as Any,
-            .foregroundColor: UIColor.white
-        ]
-        
-        // Setup navigation bar appearance
-        let appearance = UINavigationBarAppearance()
-        appearance.titleTextAttributes = titleAttributed
-        appearance.largeTitleTextAttributes = titleAttributed
-        appearance.backgroundColor = .backBlue
-        navigationController?.navigationBar.standardAppearance = appearance
+            // Setup navigation item title
+            self.navigationItem.title = "Characters"
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+            self.navigationItem.largeTitleDisplayMode = .always
+            let titleAttributed: [NSAttributedString.Key: Any] = [
+                .font: UIFont(name: "gilroy-black", size: 29) as Any,
+                .foregroundColor: UIColor.white
+            ]
+            
+            // Setup navigation bar appearance
+            let appearance = UINavigationBarAppearance()
+            appearance.titleTextAttributes = titleAttributed
+            appearance.largeTitleTextAttributes = titleAttributed
+            appearance.backgroundColor = .backBlue
+            self.navigationController?.navigationBar.standardAppearance = appearance
     }
 }
 
@@ -72,7 +71,6 @@ extension MainViewController: MainViewProtocol {
     func updateData() {
         DispatchQueue.main.async {
             self.applySnapshot()
-            self.collectionView.reloadData()
         }
     }
 }
@@ -90,15 +88,17 @@ extension MainViewController: UICollectionViewDelegate {
         view.addSubviews(collectionView)
     }
     
+    
+    
     // Method for register cell's
-    private func charactersRegisterCells() -> UICollectionView.CellRegistration<CharactersCollectionViewCell, Charac> {
-        return UICollectionView.CellRegistration<CharactersCollectionViewCell, Charac> { [self] (cell, indexPath, item) in
+    private func charactersRegisterCells() -> UICollectionView.CellRegistration<CharactersCollectionViewCell, Results> {
+        return UICollectionView.CellRegistration<CharactersCollectionViewCell, Results> { (cell, indexPath, result) in
             cell.layoutIfNeeded()
-            let data = presenter.characters[indexPath.item]
-            let dataForCell = data.results[indexPath.item]
-            cell.setupDataForCell(with: dataForCell)
+            let name = result.name
+            cell.setupDataForCell(name: name)
         }
     }
+
     
     // Create compositional layout
     private func setupCompositionalLayout() -> UICollectionViewLayout {
@@ -133,7 +133,7 @@ extension MainViewController: UICollectionViewDelegate {
         // Cell
         let characterCell = charactersRegisterCells()
         
-        dataSource = UICollectionViewDiffableDataSource<MainViewSection, Charac>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<MainViewSection, Results>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
             
             switch MainViewSection(rawValue: indexPath.section)! {
             case .section:
@@ -142,16 +142,19 @@ extension MainViewController: UICollectionViewDelegate {
         }
     }
 
-    
+
     // Snapshot for collection
     private func applySnapshot() {
-        var snapshot = NSDiffableDataSourceSnapshot<MainViewSection, Charac>()
+        var snapshot = NSDiffableDataSourceSnapshot<MainViewSection, Results>()
         snapshot.appendSections([.section])
 
-        let characterData = presenter.characters
+        let characterData = presenter.characters.map({ $0.results }).flatMap({ $0 })
         snapshot.appendItems(characterData, toSection: .section)
+        
         DispatchQueue.main.async {
             self.dataSource?.apply(snapshot)
+            self.presenter.updateData()
+            self.collectionView.reloadData()
         }
     }
     

@@ -32,6 +32,8 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.3
         label.font = .boldSystemFont(ofSize: 20)
         label.font = UIFont(name: "gilroy-black", size: 20)
         return label
@@ -60,8 +62,8 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Method
     
-    func setupDataForCell(with model: Results) {
-        characterNameTitle.text = model.name
+    func setupDataForCell(name: String) {
+        characterNameTitle.text = name
 //        guard let image = model.characterImage else { return }
         characterImage.image = UIImage(named: "rick")
     }

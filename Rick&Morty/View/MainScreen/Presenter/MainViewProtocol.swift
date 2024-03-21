@@ -42,8 +42,8 @@ extension MainPresenter: LoadedInformation {
     
     func transitData(_ networkManager: NetworkManager, data: [Charac]) {
         DispatchQueue.main.async { [weak self] in
-             self?.characters = data
-             self?.updateData()
+                self?.characters = data
+                self?.updateData()
          }
     }
 }
