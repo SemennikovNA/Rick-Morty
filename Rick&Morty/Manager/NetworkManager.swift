@@ -34,13 +34,14 @@ class NetworkManager {
     
     func fetchData() {
         guard let url = createURL() else {
+            print(NetworkError.badUrl)
             return
         }
         
         session.dataTask(with: url) { [weak self] data, response, error in
             guard let data else {
                 if error != nil {
-                    print(String(describing: error?.localizedDescription))
+                    print(NetworkError.badRequst)
                 }
                 return
             }
@@ -51,7 +52,7 @@ class NetworkManager {
                 characters.append(baseData)
                 self?.delegate?.transitData(self!, data: characters)
             } catch {
-                print(String(describing: error.localizedDescription))
+                print(NetworkError.badResponse)
             }
         }.resume()
     }
