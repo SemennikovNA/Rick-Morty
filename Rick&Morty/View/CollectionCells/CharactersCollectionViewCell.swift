@@ -63,7 +63,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     func setupDataForCell(with model: Results) {
         characterNameTitle.text = model.name
 //        guard let image = model.characterImage else { return }
-//        characterImage.image = UIImage(named: image)
+        characterImage.image = UIImage(named: "rick")
     }
     
     //MARK: - Private method

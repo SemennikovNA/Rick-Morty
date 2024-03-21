@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
     //MARK: - Properties
 
     private let networkManager = NetworkManager.shared
-    private var dataSource: UICollectionViewDiffableDataSource<MainViewSection, Item>?
+    private var dataSource: UICollectionViewDiffableDataSource<MainViewSection, Charac>?
     var presenter: MainPresenter!
     
     //MARK: - Life cycle
@@ -28,15 +28,8 @@ class MainViewController: UIViewController {
         setupNavigationBar()
         setupView()
         setupConstraints()
-        applySnapshot()
-        networkManager.fetchData { [self] result in
-            switch result {
-            case .success(let data):
-                presenter.characters.append(data)
-            case .failure(let failure):
-                print(failure.localizedDescription)
-            }
-        }
+        presenter.fetchData()
+        presenter.updateData()
     }
     
     //MARK: - Private method
@@ -77,7 +70,10 @@ class MainViewController: UIViewController {
 extension MainViewController: MainViewProtocol {
     
     func updateData() {
-        applySnapshot()
+        DispatchQueue.main.async {
+            self.applySnapshot()
+            self.collectionView.reloadData()
+        }
     }
 }
 
@@ -98,7 +94,8 @@ extension MainViewController: UICollectionViewDelegate {
     private func charactersRegisterCells() -> UICollectionView.CellRegistration<CharactersCollectionViewCell, Charac> {
         return UICollectionView.CellRegistration<CharactersCollectionViewCell, Charac> { [self] (cell, indexPath, item) in
             cell.layoutIfNeeded()
-            let dataForCell = presenter.characters[indexPath.item].results[indexPath.item]
+            let data = presenter.characters[indexPath.item]
+            let dataForCell = data.results[indexPath.item]
             cell.setupDataForCell(with: dataForCell)
         }
     }
@@ -136,23 +133,26 @@ extension MainViewController: UICollectionViewDelegate {
         // Cell
         let characterCell = charactersRegisterCells()
         
-        dataSource = UICollectionViewDiffableDataSource<MainViewSection, Item>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<MainViewSection, Charac>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
             
             switch MainViewSection(rawValue: indexPath.section)! {
             case .section:
-                return collectionView.dequeueConfiguredReusableCell(using: characterCell, for: indexPath, item: item.character)
+                return collectionView.dequeueConfiguredReusableCell(using: characterCell, for: indexPath, item: item)
             }
         }
     }
+
     
     // Snapshot for collection
     private func applySnapshot() {
-        var snapshot = NSDiffableDataSourceSnapshot<MainViewSection, Item>()
+        var snapshot = NSDiffableDataSourceSnapshot<MainViewSection, Charac>()
         snapshot.appendSections([.section])
 
-        let characterData = presenter.characters.map({ Item(character: $0)})
+        let characterData = presenter.characters
         snapshot.appendItems(characterData, toSection: .section)
-        dataSource?.apply(snapshot)
+        DispatchQueue.main.async {
+            self.dataSource?.apply(snapshot)
+        }
     }
     
     // Setup did select item at

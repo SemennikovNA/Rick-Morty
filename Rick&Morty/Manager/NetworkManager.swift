@@ -7,10 +7,9 @@
 
 import Foundation
 
-enum NetworkError: Error {
-    case badUrl
-    case badRequst
-    case badResponse
+protocol LoadedInformation {
+    
+    func transitData(_ networkManager: NetworkManager, data: [Charac])
 }
 
 class NetworkManager {
@@ -20,6 +19,7 @@ class NetworkManager {
     static let shared = NetworkManager()
     let session = URLSession(configuration: .default)
     let decoder = JSONDecoder()
+    var delegate: LoadedInformation?
     
     //MARK: - Method
     
@@ -32,25 +32,34 @@ class NetworkManager {
         return  URL(string: url)
     }
     
-    func fetchData(completion: @escaping(Result<Charac, Error>) -> ()) {
+    func fetchData() {
         guard let url = createURL() else {
-            completion(.failure(NetworkError.badUrl))
             return
         }
         
-        session.dataTask(with: url) { data, response, error in
+        session.dataTask(with: url) { [weak self] data, response, error in
             guard let data else {
                 if error != nil {
-                    completion(.failure(NetworkError.badResponse))
+                    print(String(describing: error?.localizedDescription))
                 }
                 return
             }
             
             do {
-                let baseData = try self.decoder.decode(Charac.self, from: data)
+                guard let baseData = try self?.decoder.decode(Charac.self, from: data) else { return }
+                var characters: [Charac] = []
+                characters.append(baseData)
+                print(characters)
+                self?.delegate?.transitData(self!, data: characters)
             } catch {
-                completion(.failure(error))
+                print(String(describing: error.localizedDescription))
             }
         }.resume()
     }
+}
+
+enum NetworkError: Error {
+    case badUrl
+    case badRequst
+    case badResponse
 }

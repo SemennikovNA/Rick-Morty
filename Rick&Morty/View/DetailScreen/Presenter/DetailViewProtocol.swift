@@ -15,7 +15,7 @@ protocol DetailViewProtocol: AnyObject {
 protocol DetailPresenterProtocol: AnyObject {
     
     init(view: DetailViewProtocol)
-    var info: [InfoModel] { get set }
+    var info: [Gender] { get set }
     var origin: [OriginModel] { get set }
     var episodes: [EpisodesModel] { get set }
     func updateData()
@@ -28,8 +28,8 @@ final class DetailPresenter: DetailPresenterProtocol {
     weak var view: DetailViewProtocol!
     let networkManager = NetworkManager()
     
-    var info: [InfoModel] = [
-        InfoModel(species: "Human", type: "None", gender: "Male")
+    var info: [Gender] = [
+
     ]
     var origin: [OriginModel] = [
         OriginModel(planetName: "Earth", imageName: "")

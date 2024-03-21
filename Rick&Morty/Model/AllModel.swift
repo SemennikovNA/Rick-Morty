@@ -9,16 +9,7 @@ import Foundation
 
 struct Charac: Codable, Hashable {
     
-    let info: Info
     let results: [Results]
-}
-
-// MARK: - Info
-
-struct Info: Codable, Hashable {
-    
-    let count, pages: Int
-    let next: String
 }
 
 // MARK: - Result

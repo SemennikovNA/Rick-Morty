@@ -25,7 +25,7 @@ final class Builder {
     
     static func createDetailView() -> UIViewController {
         let view = DetailViewController()
-        let presenter = DetailPresenter(view: view)
+        let presenter = DetailPresenter(view: view as! DetailViewProtocol)
         view.presenter = presenter
         return view
     }

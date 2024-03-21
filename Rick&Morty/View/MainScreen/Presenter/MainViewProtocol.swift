@@ -8,34 +8,42 @@
 import Foundation
 
 protocol MainViewProtocol: AnyObject {
-    
     func updateData()
 }
 
 protocol MainPresenterProtocol: AnyObject {
-    
     init(view: MainViewProtocol)
     var characters: [Charac] { get set }
+    func fetchData()
     func updateData()
 }
 
 final class MainPresenter: MainPresenterProtocol {
     
-    //MARK: - Propertie
-    
-    weak var view: MainViewProtocol!
+    weak var view: MainViewProtocol?
     let networkManager = NetworkManager()
     var characters: [Charac] = []
- 
-    //MARK: - Initialize
-    
+
     init(view: MainViewProtocol) {
         self.view = view
     }
     
-    //MARK: - Method
-    
+    func fetchData() {
+        self.networkManager.delegate = self
+        networkManager.fetchData()
+    }
+
     func updateData() {
-        self.view.updateData()
+        self.view?.updateData()
+    }
+}
+
+extension MainPresenter: LoadedInformation {
+    
+    func transitData(_ networkManager: NetworkManager, data: [Charac]) {
+        DispatchQueue.main.async { [weak self] in
+             self?.characters = data
+             self?.updateData()
+         }
     }
 }
