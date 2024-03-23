@@ -14,8 +14,9 @@ protocol DetailViewProtocol: AnyObject {
 
 protocol DetailPresenterProtocol: AnyObject {
     
-    init(view: DetailViewProtocol)
-    var info: [Gender] { get set }
+    init(view: DetailViewProtocol, data: Results)
+    var data: Results { get set }
+    var info: [InfoModel] { get set }
     var origin: [OriginModel] { get set }
     var episodes: [EpisodesModel] { get set }
     func updateData()
@@ -27,24 +28,17 @@ final class DetailPresenter: DetailPresenterProtocol {
     
     weak var view: DetailViewProtocol!
     let networkManager = NetworkManager()
-    
-    var info: [Gender] = [
-
-    ]
-    var origin: [OriginModel] = [
-        OriginModel(planetName: "Earth", imageName: "")
-    ]
-    var episodes: [EpisodesModel] = [
-        EpisodesModel(episodesName: "Pilot", episodesSeasonNumber: "Episode: 1, Season: 1", episodesDate: "December 2, 2013"),
-        EpisodesModel(episodesName: "Lawnmower Dog", episodesSeasonNumber: "Episode: 2, Season: 1", episodesDate: "December 9, 2013"),
-        EpisodesModel(episodesName: "Anatomy Park", episodesSeasonNumber: "Episode: 3, Season: 1", episodesDate: "December 16, 2013")
-    ]
+    var data: Results
+    var info: [InfoModel] = []
+    var origin: [OriginModel] = []
+    var episodes: [EpisodesModel] = []
     
     
     //MARK: - Initialize
     
-    init(view: DetailViewProtocol) {
+    init(view: DetailViewProtocol, data: Results) {
         self.view = view
+        self.data = data
     }
     
     //MARK: - Method

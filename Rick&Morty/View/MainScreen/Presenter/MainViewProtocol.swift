@@ -41,9 +41,9 @@ final class MainPresenter: MainPresenterProtocol {
 extension MainPresenter: LoadedInformation {
     
     func transitData(_ networkManager: NetworkManager, data: [Charac]) {
-        DispatchQueue.main.async { [weak self] in
-                self?.characters = data
-                self?.updateData()
+        DispatchQueue.main.async {
+                self.characters = data
+                self.updateData()
          }
     }
 }

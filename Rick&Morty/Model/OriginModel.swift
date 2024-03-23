@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct OriginModel: Hashable {
+struct OriginMode: Hashable {
     
     let planetName: String
     let imageName: String

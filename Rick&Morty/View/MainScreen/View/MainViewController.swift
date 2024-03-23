@@ -8,19 +8,19 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+    
     //MARK: - User interface elements
-
+    
     private var collectionView: UICollectionView!
-
+    
     //MARK: - Properties
-
+    
     private let networkManager = NetworkManager.shared
     private var dataSource: UICollectionViewDiffableDataSource<MainViewSection, Results>?
     var presenter: MainPresenter!
     
     //MARK: - Life cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,24 +40,24 @@ class MainViewController: UIViewController {
         // Call method's
         setupCollectionView()
     }
-
+    
     /// Setup navigation bar
     private func setupNavigationBar() {
-            // Setup navigation item title
-            self.navigationItem.title = "Characters"
-            self.navigationController?.navigationBar.prefersLargeTitles = true
-            self.navigationItem.largeTitleDisplayMode = .always
-            let titleAttributed: [NSAttributedString.Key: Any] = [
-                .font: UIFont(name: "gilroy-black", size: 29) as Any,
-                .foregroundColor: UIColor.white
-            ]
-            
-            // Setup navigation bar appearance
-            let appearance = UINavigationBarAppearance()
-            appearance.titleTextAttributes = titleAttributed
-            appearance.largeTitleTextAttributes = titleAttributed
-            appearance.backgroundColor = .backBlue
-            self.navigationController?.navigationBar.standardAppearance = appearance
+        // Setup navigation item title
+        self.navigationItem.title = "Characters"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.largeTitleDisplayMode = .always
+        let titleAttributed: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "gilroy-black", size: 29) as Any,
+            .foregroundColor: UIColor.white
+        ]
+        
+        // Setup navigation bar appearance
+        let appearance = UINavigationBarAppearance()
+        appearance.titleTextAttributes = titleAttributed
+        appearance.largeTitleTextAttributes = titleAttributed
+        appearance.backgroundColor = .backBlue
+        self.navigationController?.navigationBar.standardAppearance = appearance
     }
 }
 
@@ -88,8 +88,6 @@ extension MainViewController: UICollectionViewDelegate {
         view.addSubviews(collectionView)
     }
     
-    
-    
     // Method for register cell's
     private func charactersRegisterCells() -> UICollectionView.CellRegistration<CharactersCollectionViewCell, Results> {
         return UICollectionView.CellRegistration<CharactersCollectionViewCell, Results> { (cell, indexPath, result) in
@@ -98,7 +96,6 @@ extension MainViewController: UICollectionViewDelegate {
             cell.setupDataForCell(name: name)
         }
     }
-
     
     // Create compositional layout
     private func setupCompositionalLayout() -> UICollectionViewLayout {
@@ -141,27 +138,28 @@ extension MainViewController: UICollectionViewDelegate {
             }
         }
     }
-
-
+    
     // Snapshot for collection
     private func applySnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<MainViewSection, Results>()
         snapshot.appendSections([.section])
-
+        
         let characterData = presenter.characters.map({ $0.results }).flatMap({ $0 })
         snapshot.appendItems(characterData, toSection: .section)
         
         DispatchQueue.main.async {
             self.dataSource?.apply(snapshot)
             self.presenter.updateData()
-            self.collectionView.reloadData()
         }
     }
     
     // Setup did select item at
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailVC = Builder.createDetailView()
-        navigationController?.pushViewController(detailVC, animated: true)
+        if let selectedItem = self.dataSource?.itemIdentifier(for: indexPath) {
+            // let detailView = Builder.createDetailView(data: selectedItem)
+            // navigationController?.pushViewController(detailView, animated: true)
+            print(selectedItem)
+        }
     }
 }
 

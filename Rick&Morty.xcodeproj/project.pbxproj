@@ -23,9 +23,9 @@
 		1E8BB0512B95D43A00091EDF /* MainViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8BB0502B95D43A00091EDF /* MainViewProtocol.swift */; };
 		1E8BB0552B95EF5500091EDF /* gilroy-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E8BB0532B95EF5500091EDF /* gilroy-regular.ttf */; };
 		1E8BB0562B95EF5500091EDF /* gilroy-black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E8BB0542B95EF5500091EDF /* gilroy-black.ttf */; };
-		1E8BB0582B95F76D00091EDF /* Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8BB0572B95F76D00091EDF /* Characters.swift */; };
 		1E8BB05B2B96047700091EDF /* DetailViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8BB05A2B96047700091EDF /* DetailViewSection.swift */; };
 		1E8BB05D2B96465700091EDF /* AllModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8BB05C2B96465700091EDF /* AllModel.swift */; };
+		1E9CE0892BAD52DD008C0F8D /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9CE0882BAD52DD008C0F8D /* Items.swift */; };
 		1EFEBDC42B907A4F0067FCF7 /* MainViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDC32B907A4F0067FCF7 /* MainViewSection.swift */; };
 		1EFEBDC92B90A91D0067FCF7 /* CharactersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDC82B90A91D0067FCF7 /* CharactersCollectionViewCell.swift */; };
 		1EFEBDCC2B90AB700067FCF7 /* UIView - Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDCB2B90AB700067FCF7 /* UIView - Extension.swift */; };
@@ -55,9 +55,9 @@
 		1E8BB0502B95D43A00091EDF /* MainViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewProtocol.swift; sourceTree = "<group>"; };
 		1E8BB0532B95EF5500091EDF /* gilroy-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "gilroy-regular.ttf"; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/MacBook/Development/Fonts/gilroy-regular.ttf"; sourceTree = "<group>"; };
 		1E8BB0542B95EF5500091EDF /* gilroy-black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "gilroy-black.ttf"; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/MacBook/Development/Fonts/gilroy-black.ttf"; sourceTree = "<group>"; };
-		1E8BB0572B95F76D00091EDF /* Characters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Characters.swift; sourceTree = "<group>"; };
 		1E8BB05A2B96047700091EDF /* DetailViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailViewSection.swift; path = ../../MainScreen/Sections/DetailViewSection.swift; sourceTree = "<group>"; };
 		1E8BB05C2B96465700091EDF /* AllModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllModel.swift; sourceTree = "<group>"; };
+		1E9CE0882BAD52DD008C0F8D /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
 		1EFEBDC32B907A4F0067FCF7 /* MainViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainViewSection.swift; path = ../../DetailScreen/Sections/MainViewSection.swift; sourceTree = "<group>"; };
 		1EFEBDC82B90A91D0067FCF7 /* CharactersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersCollectionViewCell.swift; sourceTree = "<group>"; };
 		1EFEBDCB2B90AB700067FCF7 /* UIView - Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView - Extension.swift"; sourceTree = "<group>"; };
@@ -223,8 +223,8 @@
 				1EFEBDD02B935F9E0067FCF7 /* BaseApiResponse.swift */,
 				1E8BB0382B946C6500091EDF /* EpisodesModel.swift */,
 				1E8BB0412B94C37E00091EDF /* OriginModel.swift */,
-				1E8BB0572B95F76D00091EDF /* Characters.swift */,
 				1E8BB05C2B96465700091EDF /* AllModel.swift */,
+				1E9CE0882BAD52DD008C0F8D /* Items.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -356,7 +356,7 @@
 				1E8BB0392B946C6500091EDF /* EpisodesModel.swift in Sources */,
 				1E77146E2B90652F00ADC5E8 /* SceneDelegate.swift in Sources */,
 				1EFEBDD92B936CE30067FCF7 /* UIStackView - Extension.swift in Sources */,
-				1E8BB0582B95F76D00091EDF /* Characters.swift in Sources */,
+				1E9CE0892BAD52DD008C0F8D /* Items.swift in Sources */,
 				1E8BB05B2B96047700091EDF /* DetailViewSection.swift in Sources */,
 				1E8BB03D2B94BDAB00091EDF /* OriginCollectionViewCell.swift in Sources */,
 				1E8BB0512B95D43A00091EDF /* MainViewProtocol.swift in Sources */,
