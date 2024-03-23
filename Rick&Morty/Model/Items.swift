@@ -17,9 +17,9 @@ struct Items: Hashable {
 
 struct InfoModel: Hashable {
     
-    var species: Results
-    var type: Results
-    var gender: Results
+    var species: String
+    var type: String
+    var gender: String
 }
 
 struct OriginModel: Hashable {

@@ -23,6 +23,8 @@ protocol DetailPresenterProtocol: AnyObject {
 }
 
 final class DetailPresenter: DetailPresenterProtocol {
+
+    
     
     //MARK: - Propertie
     
@@ -34,16 +36,25 @@ final class DetailPresenter: DetailPresenterProtocol {
     var episodes: [EpisodesModel] = []
     
     
+    
     //MARK: - Initialize
     
     init(view: DetailViewProtocol, data: Results) {
         self.view = view
         self.data = data
+//        self.info = InfoModel(species: "", type: "", gender: "")
+//        self.origin = OriginModel(planetName: "", imageName: "")
+//        self.episodes = EpisodesModel(episodesName: "", episodesSeasonNumber: "", episodesDate: "")
     }
     
     //MARK: - Method
     
     func updateData() {
+//        let species = data.species.rawValue
+//        let type = data.type
+//        let gender = data.gender.rawValue
+//        self.info = InfoModel(species: species, type: type, gender: gender)
+//        let origin = data.origin
         self.view.updateData()
     }
 }

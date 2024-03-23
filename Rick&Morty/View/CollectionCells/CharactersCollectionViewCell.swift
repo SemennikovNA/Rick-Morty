@@ -15,6 +15,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     
     //MARK: - User interface elements
     
+    private let imageManager = SDWebImageManager.shared
     private lazy var contentViewCell: UIView = {
         let view = UIView()
         view.backgroundColor = .cellBackBlue
@@ -62,10 +63,10 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Method
     
-    func setupDataForCell(name: String) {
+    func setupDataForCell(name: String, image: String) {
+        let urlForImage = URL(string: image)!
         characterNameTitle.text = name
-//        guard let image = model.characterImage else { return }
-        characterImage.image = UIImage(named: "rick")
+        imageManager.setImageFromUrl(image: characterImage, url: urlForImage)
     }
     
     //MARK: - Private method

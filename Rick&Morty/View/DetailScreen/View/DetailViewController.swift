@@ -88,11 +88,6 @@ class DetailViewController: UIViewController {
 
 extension DetailViewController: DetailViewProtocol {
     
-    
-    func didSelectCharacter(_ character: Charac) {
-        
-    }
-    
     func updateData() {
         DispatchQueue.main.async {
             self.applySnapshot()

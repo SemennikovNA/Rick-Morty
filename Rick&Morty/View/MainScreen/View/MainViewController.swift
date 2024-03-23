@@ -93,7 +93,8 @@ extension MainViewController: UICollectionViewDelegate {
         return UICollectionView.CellRegistration<CharactersCollectionViewCell, Results> { (cell, indexPath, result) in
             cell.layoutIfNeeded()
             let name = result.name
-            cell.setupDataForCell(name: name)
+            let imageUrl = result.image
+            cell.setupDataForCell(name: name, image: imageUrl)
         }
     }
     
@@ -156,8 +157,8 @@ extension MainViewController: UICollectionViewDelegate {
     // Setup did select item at
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let selectedItem = self.dataSource?.itemIdentifier(for: indexPath) {
-            // let detailView = Builder.createDetailView(data: selectedItem)
-            // navigationController?.pushViewController(detailView, animated: true)
+             let detailView = Builder.createDetailView(data: selectedItem)
+             navigationController?.pushViewController(detailView, animated: true)
             print(selectedItem)
         }
     }
