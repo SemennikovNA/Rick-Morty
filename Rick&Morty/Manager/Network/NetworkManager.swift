@@ -23,38 +23,31 @@ class NetworkManager {
     
     //MARK: - Method
     
-    func createURL() -> URL? {
-        let tunnel = "https://"
-        let mainUrl = "rickandmortyapi.com/"
-        let api = "api"
-        let getKey = "/character"
-        let url = tunnel + mainUrl + api + getKey
-        return  URL(string: url)
-    }
-    
-    func fetchData() {
-        guard let url = createURL() else {
-            print(NetworkError.badUrl)
+    func fetchData(url: URLRequest, isPage: Bool = false, pageNumber: Int = 0) {
+        guard isPage else {
+            session.dataTask(with: url) { [weak self] data, response, error in
+                guard let data else {
+                    if error != nil {
+                        print(NetworkError.badRequst)
+                    }
+                    return
+                }
+                
+                do {
+                    guard let baseData = try self?.decoder.decode(Charac.self, from: data) else { return }
+                    var characters: [Charac] = []
+                    characters.append(baseData)
+                    self?.delegate?.transitData(self!, data: characters)
+                } catch {
+                    print(NetworkError.badResponse)
+                }
+            }.resume()
             return
         }
         
-        session.dataTask(with: url) { [weak self] data, response, error in
-            guard let data else {
-                if error != nil {
-                    print(NetworkError.badRequst)
-                }
-                return
-            }
-            
-            do {
-                guard let baseData = try self?.decoder.decode(Charac.self, from: data) else { return }
-                var characters: [Charac] = []
-                characters.append(baseData)
-                self?.delegate?.transitData(self!, data: characters)
-            } catch {
-                print(NetworkError.badResponse)
-            }
-        }.resume()
+        let pageUrl = "\(url)\(pageNumber)"
+        print(pageUrl)
+        
     }
 }
 

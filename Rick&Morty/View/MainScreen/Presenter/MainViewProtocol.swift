@@ -26,11 +26,12 @@ final class MainPresenter: MainPresenterProtocol {
 
     init(view: MainViewProtocol) {
         self.view = view
+        
+        self.networkManager.delegate = self
     }
     
     func fetchData() {
-        self.networkManager.delegate = self
-        networkManager.fetchData()
+        networkManager.fetchData(url: URLBuilder.baseRequest.request)
     }
 
     func updateData() {
@@ -42,7 +43,7 @@ extension MainPresenter: LoadedInformation {
     
     func transitData(_ networkManager: NetworkManager, data: [Charac]) {
         DispatchQueue.main.async {
-                self.characters = data
+            self.characters.append(contentsOf: data)
                 self.updateData()
          }
     }

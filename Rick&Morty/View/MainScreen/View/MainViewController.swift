@@ -157,9 +157,23 @@ extension MainViewController: UICollectionViewDelegate {
     // Setup did select item at
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let selectedItem = self.dataSource?.itemIdentifier(for: indexPath) {
-             let detailView = Builder.createDetailView(data: selectedItem)
-             navigationController?.pushViewController(detailView, animated: true)
-            print(selectedItem)
+            // Проверяем, что selectedItem содержит данные
+            let type = selectedItem.type
+            let species = selectedItem.species.rawValue
+            let gender = selectedItem.gender.rawValue
+            let info = InfoModel(species: species, type: type, gender: gender)
+            
+            let originName = selectedItem.origin.name
+            let originUrl = selectedItem.origin.url
+            let origin = OriginModel(planetName: originName, imageName: originUrl)
+            
+            let episodes = selectedItem.episode
+
+            // Создаем DetailView, передавая необходимые данные
+            let detailView = Builder.createDetailView(info: info, origin: origin, episodes: episodes)
+            navigationController?.pushViewController(detailView, animated: true)
+        } else {
+            print("Ошибка: данные для selectedItem отсутствуют")
         }
     }
 }
