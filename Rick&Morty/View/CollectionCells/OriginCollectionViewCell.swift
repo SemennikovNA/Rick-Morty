@@ -52,7 +52,7 @@ class OriginCollectionViewCell: UICollectionViewCell {
     //MARK: - Method
     
     func setupDataForCell(with model: OriginModel) {
-        planetNameLabel.text = ""
+        planetNameLabel.text = model.planetName
     }
     
     //MARK: - Private method

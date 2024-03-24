@@ -24,8 +24,8 @@ struct InfoModel: Hashable {
 
 struct OriginModel: Hashable {
     
-    var planetName: Location
-    var imageName: Location
+    var planetName: String
+    var imageName: String
 }
 
 struct EpidsodesModel: Hashable {

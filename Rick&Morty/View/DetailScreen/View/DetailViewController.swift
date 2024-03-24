@@ -46,9 +46,7 @@ class DetailViewController: UIViewController {
         // Call method's
         setupView()
         setupConstraints()
-        DispatchQueue.main.async {
-            self.applySnapshot()
-        }
+        presenter.updateData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -276,15 +274,9 @@ extension DetailViewController {
         var snapShot = NSDiffableDataSourceSnapshot<DetailViewSection, Items>()
         snapShot.appendSections([.info, .origin, .episodes])
         
-        let infoData = presenter.info.map({ Items(info: $0) })
-        snapShot.appendItems(infoData, toSection: .info)
-
-        
-        let originData = presenter.origin.map({Items(origin: $0)})
-        snapShot.appendItems(originData, toSection: .origin)
-        
-        let episodesData = presenter.episodes.map({Items(episodes: $0)})
-        snapShot.appendItems(episodesData, toSection: .episodes)
+        snapShot.appendItems(presenter.info.map { Items(info: $0) }, toSection: .info)
+        snapShot.appendItems(presenter.origin.map { Items(origin: $0) }, toSection: .origin)
+        snapShot.appendItems(presenter.episodes.map { Items(episodes: $0) }, toSection: .episodes)
         
         dataSource?.apply(snapShot)
     }

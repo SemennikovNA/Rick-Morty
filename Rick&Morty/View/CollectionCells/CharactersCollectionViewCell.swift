@@ -64,9 +64,9 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     //MARK: - Method
     
     func setupDataForCell(name: String, image: String) {
-        let urlForImage = URL(string: image)!
         characterNameTitle.text = name
-        imageManager.setImageFromUrl(image: characterImage, url: urlForImage)
+        characterImage.image = UIImage(named: "rick")
+//        imageManager.setImageFromUrl(image: characterImage, url: urlForImage)
     }
     
     //MARK: - Private method

@@ -23,38 +23,48 @@ protocol DetailPresenterProtocol: AnyObject {
 }
 
 final class DetailPresenter: DetailPresenterProtocol {
-
     
     
-    //MARK: - Propertie
+    //MARK: - Properties
     
-    weak var view: DetailViewProtocol!
+    weak var view: DetailViewProtocol?
     let networkManager = NetworkManager()
     var data: Results
     var info: [InfoModel] = []
     var origin: [OriginModel] = []
     var episodes: [EpisodesModel] = []
     
-    
-    
-    //MARK: - Initialize
+    //MARK: - Initialization
     
     init(view: DetailViewProtocol, data: Results) {
         self.view = view
         self.data = data
-//        self.info = InfoModel(species: "", type: "", gender: "")
-//        self.origin = OriginModel(planetName: "", imageName: "")
-//        self.episodes = EpisodesModel(episodesName: "", episodesSeasonNumber: "", episodesDate: "")
+        
+        let species = data.species.rawValue
+        let type = data.type
+        let gender = data.gender.rawValue
+        let originName = data.origin.name
+        let originURL = data.origin.url
+        let infoModel = InfoModel(species: species, type: type, gender: gender)
+        
+        self.info.removeAll()
+        self.info = [infoModel]
+        
+        // TODO: - Здесь установить инфу в массив origin, сначала нужно очистить массив
+//      Присваиваем значение data.origin свойству origin
+        self.origin.removeAll()
+        self.origin = [OriginModel(planetName: originName, imageName: originURL)]
+        
+        // TODO: - Здесь установить инфу в массив episodes, сначала нужно очистить массив
+//        let episodeName = data
+//        self.episodes.removeAll()
     }
     
-    //MARK: - Method
+    //MARK: - Methods
     
     func updateData() {
-//        let species = data.species.rawValue
-//        let type = data.type
-//        let gender = data.gender.rawValue
-//        self.info = InfoModel(species: species, type: type, gender: gender)
-//        let origin = data.origin
-        self.view.updateData()
+
+        self.view?.updateData()
     }
 }
+

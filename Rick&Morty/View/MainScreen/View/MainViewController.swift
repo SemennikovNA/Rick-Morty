@@ -94,7 +94,7 @@ extension MainViewController: UICollectionViewDelegate {
             cell.layoutIfNeeded()
             let name = result.name
             let imageUrl = result.image
-            cell.setupDataForCell(name: name, image: imageUrl)
+            cell.setupDataForCell(name: name, image: "")
         }
     }
     
