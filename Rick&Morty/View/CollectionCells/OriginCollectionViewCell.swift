@@ -26,7 +26,7 @@ class OriginCollectionViewCell: UICollectionViewCell {
         return image
     }()
     private let planetTitleLabel = UILabel(text: "Planet", font: UIFont(name: "gilroy-regular", size: 13), textAlignment: .left, textColor: .textGreen)
-    private var planetNameLabel = UILabel(text: "Earth", font: UIFont(name: "gilroy-black", size: 17), textAlignment: .left, textColor: .white)
+    private var planetNameLabel = UILabel(font: UIFont(name: "gilroy-black", size: 15), textAlignment: .left, textColor: .white)
     
     //MARK: - Initialize
     
@@ -62,6 +62,11 @@ class OriginCollectionViewCell: UICollectionViewCell {
         self.addSubviews(contentCellView)
         contentCellView.addSubviews(planetImageView, planetNameLabel, planetTitleLabel)
         planetImageView.addSubviews(planetImage)
+        
+        // Setup planet name label
+        planetNameLabel.adjustsFontSizeToFitWidth = true
+        planetNameLabel.adjustsFontForContentSizeCategory = true
+        planetNameLabel.minimumScaleFactor = 0.7
     }
     
     private func setupConstraints() {

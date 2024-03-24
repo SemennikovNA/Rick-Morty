@@ -14,9 +14,9 @@ class InfoCollectionViewCell: UICollectionViewCell {
     private let speciesLabel = UILabel(text: "Species:", font: UIFont(name: "gilroy-regular", size: 16), textAlignment: .left, textColor: .lightGray)
     private let typeLabel = UILabel(text: "Type:", font: UIFont(name: "gilroy-regular", size: 16), textAlignment: .left, textColor: .lightGray)
     private let genderLabel = UILabel(text: "Gender:", font: UIFont(name: "gilroy-regular", size: 16), textAlignment: .left, textColor: .lightGray)
-    private var speciesValueLabel = UILabel(text: "Human", font: UIFont(name: "gilroy-black", size: 16), textAlignment: .right, textColor: .white)
-    private var typeValueLabel = UILabel(text: "None", font: UIFont(name: "gilroy-black", size: 16), textAlignment: .right, textColor: .white)
-    private var genderValueLabel = UILabel(text: "Male", font: UIFont(name: "gilroy-black", size: 16), textAlignment: .right, textColor: .white)
+    private var speciesValueLabel = UILabel(font: UIFont(name: "gilroy-black", size: 16), textAlignment: .right, textColor: .white)
+    private var typeValueLabel = UILabel(font: UIFont(name: "gilroy-black", size: 16), textAlignment: .right, textColor: .white)
+    private var genderValueLabel = UILabel(font: UIFont(name: "gilroy-black", size: 16), textAlignment: .right, textColor: .white)
     
     //MARK: - Initialize
     
@@ -53,6 +53,10 @@ class InfoCollectionViewCell: UICollectionViewCell {
         self.backgroundColor = .viewBackGray
         self.addSubviews(contentCellView)
         contentCellView.addSubviews(speciesLabel, typeLabel, genderLabel, speciesValueLabel, typeValueLabel, genderValueLabel)
+        
+        // Setup label
+        typeValueLabel.adjustsFontSizeToFitWidth = true
+        typeValueLabel.minimumScaleFactor = 0.5
     }
     
     private func setupConstraints() {
@@ -85,6 +89,7 @@ class InfoCollectionViewCell: UICollectionViewCell {
             
             // Type value label
             typeValueLabel.trailingAnchor.constraint(equalTo: contentCellView.trailingAnchor, constant: -10),
+            typeValueLabel.leadingAnchor.constraint(equalTo: typeLabel.trailingAnchor, constant: 5),
             typeValueLabel.heightAnchor.constraint(equalToConstant: 30),
             typeValueLabel.centerYAnchor.constraint(equalTo: contentCellView.centerYAnchor),
             
