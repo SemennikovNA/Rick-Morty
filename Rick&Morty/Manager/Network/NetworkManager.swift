@@ -9,7 +9,7 @@ import Foundation
 
 protocol LoadedInformation {
     
-    func transitData(_ networkManager: NetworkManager, data: [Charac])
+    func transitData(_ networkManager: NetworkManager, data: [Characters])
 }
 
 class NetworkManager {
@@ -34,8 +34,8 @@ class NetworkManager {
                 }
                 
                 do {
-                    guard let baseData = try self?.decoder.decode(Charac.self, from: data) else { return }
-                    var characters: [Charac] = []
+                    guard let baseData = try self?.decoder.decode(Characters.self, from: data) else { return }
+                    var characters: [Characters] = []
                     characters.append(baseData)
                     self?.delegate?.transitData(self!, data: characters)
                 } catch {
@@ -48,6 +48,43 @@ class NetworkManager {
         let pageUrl = "\(url)\(pageNumber)"
         print(pageUrl)
         
+    }
+    
+    
+    func loadEpisodesData(episodes: [String], completion: @escaping ([Episodes]) -> Void) {
+        let dispatchGroup = DispatchGroup()
+        var episodesArray = [Episodes]()
+        
+        episodes.forEach { item in
+            guard let episodeUrl = URL(string: item) else { return }
+            
+            dispatchGroup.enter()
+            
+            session.dataTask(with: episodeUrl) { data, response, error in
+                
+                defer {
+                    dispatchGroup.leave()
+                }
+                
+                guard let data else {
+                    if error != nil {
+                        print(NetworkError.badRequst)
+                    }
+                    return
+                }
+                
+                do {
+                    let episodesData = try self.decoder.decode(Episodes.self, from: data)
+                    episodesArray.append(episodesData)
+                } catch {
+                    print(NetworkError.badResponse)
+                }
+            }.resume()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            completion(episodesArray)
+        }
     }
 }
 

@@ -11,7 +11,7 @@ struct Items: Hashable {
     
     var info: InfoModel?
     var origin: OriginModel?
-    var episodes: EpisodesModel?
+    var episodes: Episodes?
 }
 
 
@@ -28,7 +28,7 @@ struct OriginModel: Hashable {
     var imageName: String
 }
 
-struct EpidsodesModel: Hashable {
+struct EpisodesModel: Hashable {
     
     var episodesName: String
     var episodesSeasonNumber: String

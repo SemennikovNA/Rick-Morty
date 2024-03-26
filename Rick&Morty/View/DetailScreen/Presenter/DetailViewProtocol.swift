@@ -18,12 +18,12 @@ protocol DetailPresenterProtocol: AnyObject {
     var character: Results { get set }
     var info: [InfoModel] { get set }
     var origin: [OriginModel] { get set }
-    var episodes: [EpisodesModel] { get set }
+    var episodes: [Episodes] { get set }
     func updateData()
+    func fetchEpisodesData()
 }
 
 final class DetailPresenter: DetailPresenterProtocol {
-    
     
     //MARK: - Properties
     
@@ -32,7 +32,7 @@ final class DetailPresenter: DetailPresenterProtocol {
     var character: Results
     var info: [InfoModel] = []
     var origin: [OriginModel] = []
-    var episodes: [EpisodesModel] = []
+    var episodes: [Episodes] = []
     
     //MARK: - Initialization
     
@@ -44,12 +44,17 @@ final class DetailPresenter: DetailPresenterProtocol {
         self.info = [info]
         self.origin = [origin]
         self.character = character
-        // TODO: - Здесь установить инфу в массив episodes, сначала нужно очистить массив
-//        let episodeName = data
-//        self.episodes.removeAll()
+        self.episodes.removeAll()
+        
+        networkManager.loadEpisodesData(episodes: episodes) { episodes in
+            self.episodes = episodes
+        }
     }
     
     //MARK: - Methods
+    
+    func fetchEpisodesData() {
+    }
     
     func updateData() {
 

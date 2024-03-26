@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - Characters
 
-struct Charac: Codable, Hashable {
+struct Characters: Codable, Hashable {
     
     let results: [Results]
 }
@@ -33,7 +33,7 @@ struct Results: Codable, Hashable {
 
 // MARK: - Episodes
 
-struct EpisodesModel: Codable, Hashable {
+struct Episodes: Codable, Hashable {
     
     let name: String
     let air_date: String
