@@ -69,9 +69,7 @@ class MainViewController: UIViewController {
 extension MainViewController: MainViewProtocol {
     
     func updateData() {
-        DispatchQueue.main.async {
-            self.applySnapshot()
-        }
+        applySnapshot()
     }
 }
 
@@ -92,9 +90,8 @@ extension MainViewController: UICollectionViewDelegate {
     private func charactersRegisterCells() -> UICollectionView.CellRegistration<CharactersCollectionViewCell, Results> {
         return UICollectionView.CellRegistration<CharactersCollectionViewCell, Results> { (cell, indexPath, result) in
             cell.layoutIfNeeded()
-            let name = result.name
-            let imageUrl = result.image
-            cell.setupDataForCell(name: name, image: "")
+            let dataForCell = result
+            cell.setupDataForCell(with: dataForCell)
         }
     }
     
@@ -150,14 +147,12 @@ extension MainViewController: UICollectionViewDelegate {
         
         DispatchQueue.main.async {
             self.dataSource?.apply(snapshot)
-            self.presenter.updateData()
         }
     }
     
     // Setup did select item at
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let selectedItem = self.dataSource?.itemIdentifier(for: indexPath) {
-            // Проверяем, что selectedItem содержит данные
             let type = selectedItem.type
             let species = selectedItem.species.rawValue
             let gender = selectedItem.gender.rawValue
@@ -168,8 +163,7 @@ extension MainViewController: UICollectionViewDelegate {
             let origin = OriginModel(planetName: originName, imageName: originUrl)
             
             let episodes = selectedItem.episode
-
-            // Создаем DetailView, передавая необходимые данные
+            
             let detailView = Builder.createDetailView(info: info, origin: origin, episodes: episodes)
             navigationController?.pushViewController(detailView, animated: true)
         } else {

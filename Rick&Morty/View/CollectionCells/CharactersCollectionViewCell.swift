@@ -63,10 +63,10 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Method
     
-    func setupDataForCell(name: String, image: String) {
-        characterNameTitle.text = name
-        characterImage.image = UIImage(named: "rick")
-//        imageManager.setImageFromUrl(image: characterImage, url: urlForImage)
+    func setupDataForCell(with model: Results) {
+        characterNameTitle.text = model.name
+        let image = URL(string: model.image)!
+        imageManager.setImageFromUrl(image: characterImage, url: image)
     }
     
     //MARK: - Private method
