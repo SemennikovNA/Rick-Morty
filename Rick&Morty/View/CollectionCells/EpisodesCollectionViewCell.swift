@@ -47,9 +47,9 @@ class EpisodesCollectionViewCell: UICollectionViewCell {
     //MARK: - Method
     
     func setupDataForEpisodesCell(with model: EpisodesModel) {
-        episodeName.text = model.episodesName
-        episodeNumber.text = model.episodesSeasonNumber
-        episodeDate.text = model.episodesDate
+        episodeName.text = model.name
+        episodeNumber.text = model.episode
+        episodeDate.text = model.air_date
     }
     
     //MARK: - Private method

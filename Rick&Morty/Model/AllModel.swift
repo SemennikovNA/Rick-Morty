@@ -1,7 +1,10 @@
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse the JSON, add this file to your project and do:
 //
-//   let characters = try? JSONDecoder().decode(Characters.self, from: jsonData)
+//  AllModel.swift
+//  Rick&Morty
+//
+//  Created by Nikita on 22.03.2024.
+//
+
 
 import Foundation
 
@@ -28,19 +31,13 @@ struct Results: Codable, Hashable {
     let url: String
 }
 
+// MARK: - Episodes
 
-struct Episodes: Codable, Hashable {
+struct EpisodesModel: Codable, Hashable {
     
     let name: String
     let air_date: String
     let episode: String
-}
-
-enum Gender: String, Codable, Hashable {
-    
-    case female = "Female"
-    case male = "Male"
-    case unknown = "unknown"
 }
 
 // MARK: - Location
@@ -51,11 +48,24 @@ struct Location: Codable, Hashable {
     let url: String
 }
 
+// MARK: - Gender
+
+enum Gender: String, Codable, Hashable {
+    
+    case female = "Female"
+    case male = "Male"
+    case unknown = "unknown"
+}
+
+// MARK: - Species
+
 enum Species: String, Codable, Hashable {
     
     case alien = "Alien"
     case human = "Human"
 }
+
+// MARK: - Status
 
 enum Status: String, Codable, Hashable {
     
