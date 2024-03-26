@@ -13,6 +13,7 @@ class DetailViewController: UIViewController {
     
     private var episodesCollectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<DetailViewSection, Items>?
+    private let imageManager = SDWebImageManager.shared
     private let characterStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -31,8 +32,8 @@ class DetailViewController: UIViewController {
         image.image = UIImage(named: "rick")
         return image
     }()
-    private var characterNameLabel = UILabel(text: "Rick Sanchez", font: UIFont(name: "gilroy-black", size: 22), textAlignment: .center, textColor: .white)
-    private var characterStatusLabel = UILabel(text: "Alive", font: UIFont(name: "gilroy-regular", size: 18), textAlignment: .center, textColor: .textGreen)
+    private var characterNameLabel = UILabel(font: UIFont(name: "gilroy-black", size: 22), textAlignment: .center, textColor: .white)
+    private var characterStatusLabel = UILabel(font: UIFont(name: "gilroy-regular", size: 18), textAlignment: .center, textColor: .textGreen)
     
     //MARK: - Propertie
     
@@ -72,6 +73,17 @@ class DetailViewController: UIViewController {
        
         // Call method's
         setupCollectionView()
+        setupLabels()
+    }
+    
+    private func setupLabels() {
+        characterNameLabel.adjustsFontSizeToFitWidth = true
+        characterNameLabel.minimumScaleFactor = 0.5
+        
+        characterNameLabel.text = presenter.character.name
+        characterStatusLabel.text = presenter.character.status.rawValue
+        let image = URL(string: presenter.character.image)!
+        imageManager.setImageFromUrl(image: characterImage, url: image)
     }
     
     //MARK: - Objective - C method
@@ -92,7 +104,6 @@ extension DetailViewController: DetailViewProtocol {
         }
     }
 }
-
 
 //MARK: UICollectionViewCompositionalLayout
 

@@ -164,7 +164,7 @@ extension MainViewController: UICollectionViewDelegate {
             
             let episodes = selectedItem.episode
             
-            let detailView = Builder.createDetailView(info: info, origin: origin, episodes: episodes)
+            let detailView = Builder.createDetailView(character: selectedItem, info: info, origin: origin, episodes: episodes)
             navigationController?.pushViewController(detailView, animated: true)
         } else {
             print("Ошибка: данные для selectedItem отсутствуют")
