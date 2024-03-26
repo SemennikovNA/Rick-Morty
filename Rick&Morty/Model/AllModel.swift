@@ -28,6 +28,14 @@ struct Results: Codable, Hashable {
     let url: String
 }
 
+
+struct Episodes: Codable, Hashable {
+    
+    let name: String
+    let air_date: String
+    let episode: String
+}
+
 enum Gender: String, Codable, Hashable {
     
     case female = "Female"
@@ -55,3 +63,4 @@ enum Status: String, Codable, Hashable {
     case dead = "Dead"
     case unknown = "unknown"
 }
+

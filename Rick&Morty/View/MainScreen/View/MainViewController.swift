@@ -153,6 +153,7 @@ extension MainViewController: UICollectionViewDelegate {
     // Setup did select item at
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let selectedItem = self.dataSource?.itemIdentifier(for: indexPath) {
+            print(selectedItem)
             let type = selectedItem.type
             let species = selectedItem.species.rawValue
             let gender = selectedItem.gender.rawValue

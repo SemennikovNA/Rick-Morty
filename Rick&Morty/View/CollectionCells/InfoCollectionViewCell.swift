@@ -42,8 +42,13 @@ class InfoCollectionViewCell: UICollectionViewCell {
     
     func setupDataForCell(with model: InfoModel) {
         speciesValueLabel.text = model.species
-        typeValueLabel.text = model.type
         genderValueLabel.text = model.gender
+        let typeText = model.type
+        guard typeText == "" else {
+            typeValueLabel.text = typeText
+            return
+        }
+        typeValueLabel.text = "—"
     }
     
     //MARK: - Private method
