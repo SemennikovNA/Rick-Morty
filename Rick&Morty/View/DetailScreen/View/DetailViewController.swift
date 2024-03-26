@@ -1,9 +1,9 @@
-////
-////  DetailViewController.swift
-////  Rick&Morty
-////
-////  Created by Nikita on 02.03.2024.
-////
+//
+//  DetailViewController.swift
+//  Rick&Morty
+//
+//  Created by Nikita on 02.03.2024.
+//
 //
 import UIKit
 
@@ -81,9 +81,21 @@ class DetailViewController: UIViewController {
         characterNameLabel.minimumScaleFactor = 0.5
         
         characterNameLabel.text = presenter.character.name
-        characterStatusLabel.text = presenter.character.status.rawValue
         let image = URL(string: presenter.character.image)!
         imageManager.setImageFromUrl(image: characterImage, url: image)
+        
+        let statusValue = presenter.character.status
+        switch statusValue {
+        case .alive:
+            characterStatusLabel.textColor = .green
+            characterStatusLabel.text = statusValue.rawValue
+        case .dead:
+            characterStatusLabel.textColor = .red
+            characterStatusLabel.text = statusValue.rawValue
+        case .unknown:
+            characterStatusLabel.textColor = .yellow
+            characterStatusLabel.text = statusValue.rawValue
+        }
     }
     
     //MARK: - Objective - C method
