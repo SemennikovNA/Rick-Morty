@@ -41,6 +41,12 @@ class DetailViewController: UIViewController {
     
     //MARK: - Life cycle
     
+    override func loadView() {
+        super.loadView()
+        
+        presenter.fetchEpisodesData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -113,6 +119,7 @@ extension DetailViewController: DetailViewProtocol {
     func updateData() {
         DispatchQueue.main.async {
             self.applySnapshot()
+            self.presenter.updateData()
         }
     }
 }

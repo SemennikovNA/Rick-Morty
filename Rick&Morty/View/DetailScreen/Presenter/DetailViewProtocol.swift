@@ -19,8 +19,8 @@ protocol DetailPresenterProtocol: AnyObject {
     var info: [InfoModel] { get set }
     var origin: [OriginModel] { get set }
     var episodes: [Episodes] { get set }
-    func updateData()
     func fetchEpisodesData()
+    func updateData()
 }
 
 final class DetailPresenter: DetailPresenterProtocol {
@@ -33,6 +33,7 @@ final class DetailPresenter: DetailPresenterProtocol {
     var info: [InfoModel] = []
     var origin: [OriginModel] = []
     var episodes: [Episodes] = []
+    var urlForEpisodes: [String]
     
     //MARK: - Initialization
     
@@ -45,19 +46,18 @@ final class DetailPresenter: DetailPresenterProtocol {
         self.origin = [origin]
         self.character = character
         self.episodes.removeAll()
-        
-        networkManager.loadEpisodesData(episodes: episodes) { episodes in
-            self.episodes = episodes
-        }
+        self.urlForEpisodes = episodes
     }
     
     //MARK: - Methods
     
     func fetchEpisodesData() {
+        networkManager.loadEpisodesData(episodes: self.urlForEpisodes) { episodes in
+            self.episodes = episodes
+        }
     }
     
     func updateData() {
-
         self.view?.updateData()
     }
 }
