@@ -331,7 +331,7 @@ private extension DetailViewController {
             characterStackView.heightAnchor.constraint(equalToConstant: 50),
             
             // Episodes collection view
-            episodesCollectionView.topAnchor.constraint(equalTo: characterStackView.bottomAnchor, constant: 10),
+            episodesCollectionView.topAnchor.constraint(equalTo: characterStackView.bottomAnchor, constant: 15),
             episodesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
             episodesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
             episodesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),

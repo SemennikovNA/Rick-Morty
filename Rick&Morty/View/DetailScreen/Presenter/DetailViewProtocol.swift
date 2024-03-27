@@ -40,13 +40,12 @@ final class DetailPresenter: DetailPresenterProtocol {
     init(view: DetailViewProtocol, character: Results, info: InfoModel, origin: OriginModel, episodes: [String]) {
         self.view = view
         
-        self.info.removeAll()
-        self.origin.removeAll()
         self.info = [info]
         self.origin = [origin]
         self.character = character
         self.urlForEpisodes = episodes
     }
+
     
     //MARK: - Methods
     

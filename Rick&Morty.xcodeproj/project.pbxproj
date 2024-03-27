@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E4A7BC42BB43403005B11C6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A7BC32BB43403005B11C6 /* TabBarController.swift */; };
+		1E4A7BC62BB43578005B11C6 /* TabBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A7BC52BB43578005B11C6 /* TabBarItems.swift */; };
+		1E4A7BCB2BB44CC8005B11C6 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A7BCA2BB44CC8005B11C6 /* SearchViewController.swift */; };
+		1E4A7BCD2BB44CF9005B11C6 /* SearchViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A7BCC2BB44CF9005B11C6 /* SearchViewProtocol.swift */; };
+		1E4A7BCF2BB4534A005B11C6 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A7BCE2BB4534A005B11C6 /* TabBar.swift */; };
 		1E77146C2B90652F00ADC5E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E77146B2B90652F00ADC5E8 /* AppDelegate.swift */; };
 		1E77146E2B90652F00ADC5E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E77146D2B90652F00ADC5E8 /* SceneDelegate.swift */; };
 		1E7714702B90652F00ADC5E8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E77146F2B90652F00ADC5E8 /* MainViewController.swift */; };
@@ -38,6 +43,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E4A7BC32BB43403005B11C6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		1E4A7BC52BB43578005B11C6 /* TabBarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItems.swift; sourceTree = "<group>"; };
+		1E4A7BCA2BB44CC8005B11C6 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		1E4A7BCC2BB44CF9005B11C6 /* SearchViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewProtocol.swift; sourceTree = "<group>"; };
+		1E4A7BCE2BB4534A005B11C6 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		1E7714682B90652F00ADC5E8 /* Rick&Morty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rick&Morty.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E77146B2B90652F00ADC5E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E77146D2B90652F00ADC5E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +91,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E4A7BC22BB433DD005B11C6 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				1E4A7BC32BB43403005B11C6 /* TabBarController.swift */,
+				1E4A7BC52BB43578005B11C6 /* TabBarItems.swift */,
+				1E4A7BCE2BB4534A005B11C6 /* TabBar.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		1E4A7BC72BB44C81005B11C6 /* SearchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				1E4A7BC92BB44CBA005B11C6 /* View */,
+				1E4A7BC82BB44CB0005B11C6 /* Presenter */,
+			);
+			path = SearchScreen;
+			sourceTree = "<group>";
+		};
+		1E4A7BC82BB44CB0005B11C6 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				1E4A7BCC2BB44CF9005B11C6 /* SearchViewProtocol.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		1E4A7BC92BB44CBA005B11C6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1E4A7BCA2BB44CC8005B11C6 /* SearchViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		1E77145F2B90652F00ADC5E8 = {
 			isa = PBXGroup;
 			children = (
@@ -100,12 +145,12 @@
 		1E77146A2B90652F00ADC5E8 /* Rick&Morty */ = {
 			isa = PBXGroup;
 			children = (
+				1E77147F2B90660200ADC5E8 /* Application */,
 				1E8BB04C2B95D25F00091EDF /* Builder */,
 				1EFEBDD22B9367400067FCF7 /* Font */,
 				1EFEBDCD2B9355B60067FCF7 /* Manager */,
-				1E77147F2B90660200ADC5E8 /* Application */,
-				1EFEBDCA2B90AB620067FCF7 /* Extension  */,
 				1EFEBDC52B90A6D60067FCF7 /* Model */,
+				1E4A7BC22BB433DD005B11C6 /* Navigation */,
 				1E7714802B90661100ADC5E8 /* Support */,
 				1EFEBDC02B9078AD0067FCF7 /* View */,
 			);
@@ -124,6 +169,7 @@
 		1E7714802B90661100ADC5E8 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				1EFEBDCA2B90AB620067FCF7 /* Extension  */,
 				1E7714792B90653300ADC5E8 /* Info.plist */,
 				1E7714762B90653200ADC5E8 /* LaunchScreen.storyboard */,
 				1E7714742B90653200ADC5E8 /* Assets.xcassets */,
@@ -219,6 +265,7 @@
 		1EFEBDC02B9078AD0067FCF7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1E4A7BC72BB44C81005B11C6 /* SearchScreen */,
 				1E8BB03E2B94C15500091EDF /* CollectionCells */,
 				1EFEBDD52B936B2E0067FCF7 /* DetailScreen */,
 				1EFEBDC12B9078B30067FCF7 /* MainScreen */,
@@ -362,11 +409,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E4A7BCF2BB4534A005B11C6 /* TabBar.swift in Sources */,
 				1E8BB04B2B95CB2E00091EDF /* DetailViewProtocol.swift in Sources */,
 				1E7714702B90652F00ADC5E8 /* MainViewController.swift in Sources */,
+				1E4A7BCD2BB44CF9005B11C6 /* SearchViewProtocol.swift in Sources */,
+				1E4A7BC62BB43578005B11C6 /* TabBarItems.swift in Sources */,
 				1E8BB04E2B95D26D00091EDF /* Builder.swift in Sources */,
 				1EFEBDC92B90A91D0067FCF7 /* CharactersCollectionViewCell.swift in Sources */,
 				1E8BB03B2B94BC4B00091EDF /* InfoCollectionViewCell.swift in Sources */,
+				1E4A7BC42BB43403005B11C6 /* TabBarController.swift in Sources */,
 				1E8BB0442B95993D00091EDF /* HeaderForSection.swift in Sources */,
 				1E8BB05D2B96465700091EDF /* AllModel.swift in Sources */,
 				1EFEBDC42B907A4F0067FCF7 /* MainViewSection.swift in Sources */,
@@ -375,6 +426,7 @@
 				1EFEBDD72B936B550067FCF7 /* DetailViewController.swift in Sources */,
 				1E9CE08D2BAF14CC008C0F8D /* SDWebImageManager.swift in Sources */,
 				1EFEBDDB2B9385F60067FCF7 /* UILabel - Extension.swift in Sources */,
+				1E4A7BCB2BB44CC8005B11C6 /* SearchViewController.swift in Sources */,
 				1EFEBDCC2B90AB700067FCF7 /* UIView - Extension.swift in Sources */,
 				1E77146E2B90652F00ADC5E8 /* SceneDelegate.swift in Sources */,
 				1EFEBDD92B936CE30067FCF7 /* UIStackView - Extension.swift in Sources */,
