@@ -57,6 +57,10 @@ class EpisodesCollectionViewCell: UICollectionViewCell {
     private func setupCellUI() {
         self.addSubviews(contentCellView)
         contentCellView.addSubviews(episodeName, episodeNumber, episodeDate)
+        
+        // Setup label's
+        episodeName.adjustsFontSizeToFitWidth = true
+        episodeName.minimumScaleFactor = 0.7
     }
 }
 
@@ -73,8 +77,9 @@ private extension EpisodesCollectionViewCell {
             contentCellView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
             // Episode name
-            episodeName.leadingAnchor.constraint(equalTo: contentCellView.leadingAnchor, constant: 10),
             episodeName.topAnchor.constraint(equalTo: contentCellView.topAnchor, constant: 10),
+            episodeName.leadingAnchor.constraint(equalTo: contentCellView.leadingAnchor, constant: 10),
+            episodeName.trailingAnchor.constraint(equalTo: contentCellView.trailingAnchor, constant: -10),
             episodeName.heightAnchor.constraint(equalToConstant: 30),
             
             // Episode nubmer

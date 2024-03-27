@@ -45,7 +45,6 @@ final class DetailPresenter: DetailPresenterProtocol {
         self.info = [info]
         self.origin = [origin]
         self.character = character
-        self.episodes.removeAll()
         self.urlForEpisodes = episodes
     }
     
@@ -53,6 +52,7 @@ final class DetailPresenter: DetailPresenterProtocol {
     
     func fetchEpisodesData() {
         networkManager.loadEpisodesData(episodes: self.urlForEpisodes) { episodes in
+            self.episodes.removeAll()
             self.episodes = episodes
         }
     }

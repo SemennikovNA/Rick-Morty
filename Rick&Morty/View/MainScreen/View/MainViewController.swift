@@ -152,24 +152,39 @@ extension MainViewController: UICollectionViewDelegate {
     
     // Setup did select item at
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let selectedItem = self.dataSource?.itemIdentifier(for: indexPath) {
-            print(selectedItem)
-            let type = selectedItem.type
-            let species = selectedItem.species.rawValue
-            let gender = selectedItem.gender.rawValue
-            let info = InfoModel(species: species, type: type, gender: gender)
-            
-            let originName = selectedItem.origin.name
-            let originUrl = selectedItem.origin.url
-            let origin = OriginModel(planetName: originName, imageName: originUrl)
-            
-            let episodes = selectedItem.episode
-            
-            let detailView = Builder.createDetailView(character: selectedItem, info: info, origin: origin, episodes: episodes)
-            navigationController?.pushViewController(detailView, animated: true)
-        } else {
+        guard let selectedItem = self.dataSource?.itemIdentifier(for: indexPath) else {
             print("Ошибка: данные для selectedItem отсутствуют")
+            return
         }
+        let type = selectedItem.type
+        let species = selectedItem.species.rawValue
+        let gender = selectedItem.gender.rawValue
+        let info = InfoModel(species: species, type: type, gender: gender)
+        let originName = selectedItem.origin.name
+        let originUrl = selectedItem.origin.url
+        let origin = OriginModel(planetName: originName, imageName: originUrl)
+        let episodes = selectedItem.episode
+        
+        let detailView = Builder.createDetailView(character: selectedItem, info: info, origin: origin, episodes: episodes)
+        navigationController?.pushViewController(detailView, animated: true)
+        
+//        if let selectedItem = self.dataSource?.itemIdentifier(for: indexPath) {
+//            let type = selectedItem.type
+//            let species = selectedItem.species.rawValue
+//            let gender = selectedItem.gender.rawValue
+//            let info = InfoModel(species: species, type: type, gender: gender)
+//            
+//            let originName = selectedItem.origin.name
+//            let originUrl = selectedItem.origin.url
+//            let origin = OriginModel(planetName: originName, imageName: originUrl)
+//            
+//            let episodes = selectedItem.episode
+//            
+//            let detailView = Builder.createDetailView(character: selectedItem, info: info, origin: origin, episodes: episodes)
+//            navigationController?.pushViewController(detailView, animated: true)
+//        } else {
+//            print("Ошибка: данные для selectedItem отсутствуют")
+//        }
     }
 }
 
