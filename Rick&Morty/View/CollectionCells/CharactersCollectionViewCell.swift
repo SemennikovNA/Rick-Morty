@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CharactersCollectionViewCell: UICollectionViewCell {
+class CharactersCollectionViewCell: ParentCollectionCell {
     
     //MARK: - Properties
     
@@ -44,11 +44,8 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        // Call method's
-        setupCellUI()
-        setupConstraints()
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -69,20 +66,18 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         imageManager.setImageFromUrl(image: characterImage, url: image)
     }
     
-    //MARK: - Private method
+    //MARK: - Method
     
-    private func setupCellUI() {
+    override func setupCellUI() {
+        super.setupCellUI()
         contentView.addSubviews(contentViewCell)
         contentViewCell.addSubviews(characterImage, characterNameTitle)
     }
-}
 
-//MARK: - Private extension
-
-private extension CharactersCollectionViewCell {
-    
     /// Setup constraints for collection view cell
-    func setupConstraints() {
+    override func setupConstraints() {
+        super.setupConstraints()
+        
         NSLayoutConstraint.activate([
             // Content view
             contentView.topAnchor.constraint(equalTo: self.topAnchor),

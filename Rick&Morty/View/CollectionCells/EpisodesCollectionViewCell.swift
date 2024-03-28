@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EpisodesCollectionViewCell: UICollectionViewCell {
+class EpisodesCollectionViewCell: ParentCollectionCell {
     
     //MARK: - Propertie
     
@@ -28,10 +28,6 @@ class EpisodesCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        // Call method's
-        setupCellUI()
-        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -52,9 +48,10 @@ class EpisodesCollectionViewCell: UICollectionViewCell {
         episodeDate.text = model.air_date
     }
     
-    //MARK: - Private method
+    //MARK: - Method
     
-    private func setupCellUI() {
+    override func setupCellUI() {
+        super.setupCellUI()
         self.addSubviews(contentCellView)
         contentCellView.addSubviews(episodeName, episodeNumber, episodeDate)
         
@@ -62,13 +59,10 @@ class EpisodesCollectionViewCell: UICollectionViewCell {
         episodeName.adjustsFontSizeToFitWidth = true
         episodeName.minimumScaleFactor = 0.7
     }
-}
 
-//MARK: - Private extension
-
-private extension EpisodesCollectionViewCell {
-    
-    func setupConstraints() {
+    override func setupConstraints() {
+        super.setupConstraints()
+        
         NSLayoutConstraint.activate([
             // Content cell view
             contentCellView.topAnchor.constraint(equalTo: self.topAnchor),

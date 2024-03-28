@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OriginCollectionViewCell: UICollectionViewCell {
+class OriginCollectionViewCell: ParentCollectionCell {
     
     //MARK: - User interface element
     
@@ -32,10 +32,6 @@ class OriginCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        // Call method's
-        setupView()
-        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -55,9 +51,11 @@ class OriginCollectionViewCell: UICollectionViewCell {
         planetNameLabel.text = model.planetName
     }
     
-    //MARK: - Private method
+    //MARK: - Method
     
-    private func setupView() {
+    override func setupCellUI() {
+        super.setupCellUI()
+        
         self.backgroundColor = .viewBackGray
         self.addSubviews(contentCellView)
         contentCellView.addSubviews(planetImageView, planetNameLabel, planetTitleLabel)
@@ -69,7 +67,7 @@ class OriginCollectionViewCell: UICollectionViewCell {
         planetNameLabel.minimumScaleFactor = 0.7
     }
     
-    private func setupConstraints() {
+    override func setupConstraints() {
         NSLayoutConstraint.activate([
             // Content cell view
             contentCellView.topAnchor.constraint(equalTo: self.topAnchor),

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InfoCollectionViewCell: UICollectionViewCell {
+class InfoCollectionViewCell: ParentCollectionCell {
     
     //MARK: - User interface element
     private let contentCellView = UIView()
@@ -22,10 +22,6 @@ class InfoCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        // Call method's
-        setupView()
-        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -51,9 +47,11 @@ class InfoCollectionViewCell: UICollectionViewCell {
         typeValueLabel.text = "—"
     }
     
-    //MARK: - Private method
+    //MARK: - Method
     
-    private func setupView() {
+    override func setupCellUI() {
+        super.setupCellUI()
+        
         // Setup view
         self.backgroundColor = .viewBackGray
         self.addSubviews(contentCellView)
@@ -64,7 +62,9 @@ class InfoCollectionViewCell: UICollectionViewCell {
         typeValueLabel.minimumScaleFactor = 0.5
     }
     
-    private func setupConstraints() {
+    override func setupConstraints() {
+        super.setupConstraints()
+        
         NSLayoutConstraint.activate([
             // Content cell view
             contentCellView.topAnchor.constraint(equalTo: self.topAnchor),

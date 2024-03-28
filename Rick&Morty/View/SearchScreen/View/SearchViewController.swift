@@ -37,12 +37,14 @@ class SearchViewController: ParentViewController {
         // Screen settings
         view.backgroundColor = .backBlue
         view.addSubviews(searchTextField)
+        
+        searchTextField.delegate = self
     }
     
     override func signatureDelegates() {
         super.signatureDelegates()
         
-        searchTextField.searchTextField.delegate = self
+
     }
     
     override func setupNavigationBar() {
@@ -79,8 +81,9 @@ class SearchViewController: ParentViewController {
 //MARK: - UITextFieldDelegate
 
 extension SearchViewController: UITextFieldDelegate {
-     
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
         return true
     }
 }
