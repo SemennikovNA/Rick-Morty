@@ -1,32 +1,47 @@
 //
-//  TabBar.swift
+//  CustomTabBar.swift
 //  Rick&Morty
 //
-//  Created by Nikita on 27.03.2024.
+//  Created by Nikita on 28.03.2024.
 //
 
 import UIKit
 
-class TabBar: UITabBar {
+class CustomTabBar: UITabBar {
     
-    //MARK: - Properties
+    // MARK: - Properties
     
     private var shapeLayer: CAShapeLayer?
-
-    //MARK: - Draw methods
     
+    //MARK: - Initialize
+
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         self.addShape()
     }
 
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        var sizeThatFits = super.sizeThatFits(size)
+        sizeThatFits.height += UIView.safeAreaInset.bottom
+        return sizeThatFits
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layoutIfNeeded()
+    }
+    
+    //MARK: - Private method
+    
     private func addShape() {
+        self.unselectedItemTintColor = .lightGray
+        self.tintColor = .white
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = createPath()
         shapeLayer.fillColor = UIColor.backBlue.cgColor
         shapeLayer.shadowColor = UIColor.white.cgColor
         shapeLayer.shadowOffset = CGSize(width: 0, height: 0)
-        shapeLayer.shadowOpacity = 0.3
+        shapeLayer.shadowOpacity = 0.5
         shapeLayer.shadowRadius = 10
 
         if let oldShapeLayer = self.shapeLayer {
@@ -51,11 +66,5 @@ class TabBar: UITabBar {
         let roundedRectPath = UIBezierPath(roundedRect: rectBounds, cornerRadius: radius)
 
         return roundedRectPath.cgPath
-    }
-
-    override func sizeThatFits(_ size: CGSize) -> CGSize {
-        var sizeThatFits = super.sizeThatFits(size)
-        sizeThatFits.height += UIView.safeAreaInset.bottom
-        return sizeThatFits
     }
 }

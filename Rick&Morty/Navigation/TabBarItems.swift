@@ -23,14 +23,14 @@ enum TabBarItems {
     
     var image: UIImage? {
         switch self {
-        case .characters: return UIImage(systemName: "person.3.sequence.fill")
+        case .characters: return UIImage(systemName: "person.3.sequence")
         case .search: return UIImage(systemName: "magnifyingglass.circle")
         }
     }
     
     var selectedImage: UIImage? {
         switch self {
-        case .characters: return UIImage(systemName: "person.3.sequence")
+        case .characters: return UIImage(systemName: "person.3.sequence.fill")
         case .search: return UIImage(systemName: "magnifyingglass.circle.fill")
         }
     }

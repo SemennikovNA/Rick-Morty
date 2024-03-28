@@ -12,17 +12,12 @@ extension UIView {
     //MARK: - Properties
     
     static var safeAreaInset: UIEdgeInsets {
-        if #available(iOS 13.0, *) {
-            if let windowScene = UIApplication.shared.connectedScenes
-                .compactMap({ $0 as? UIWindowScene })
-                .first(where: { $0.activationState == .foregroundActive }),
-                let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
-                return keyWindow.safeAreaInsets
-            }
-        } else if let keyWindow = UIApplication.shared.keyWindow {
+        if #available(iOS 11.0, *), let keyWindow = UIApplication.shared.keyWindow {
             return keyWindow.safeAreaInsets
+        } else {
+            // Возвращаем UIEdgeInsets.zero для устройств с iOS ниже 11.0
+            return UIEdgeInsets.zero
         }
-        return UIEdgeInsets.zero
     }
 
 

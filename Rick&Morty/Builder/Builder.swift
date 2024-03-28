@@ -16,6 +16,13 @@ final class Builder {
 
     //MARK: - Static method
     
+    static func createTabBarController() -> UITabBarController {
+        let tabBar = CustomTabBar()
+        let view = CustomTabBarController(tabBar: tabBar)
+        view.setupViewControllers()
+        return view
+    }
+    
     static func createMainView() -> UIViewController {
         let view = MainViewController()
         let presenter = MainPresenter(view: view)
