@@ -137,9 +137,10 @@
 		1E4A7BDA2BB5FCA6005B11C6 /* CustomUserElements */ = {
 			isa = PBXGroup;
 			children = (
-				1E4A7BD42BB5E4FA005B11C6 /* ParentViewController.swift */,
 				1E4A7BD62BB5ED86005B11C6 /* CustomTextField.swift */,
+				1E4A7BDB2BB5FD21005B11C6 /* ParentCollectionCell.swift */,
 				1E4A7BD82BB5EE9C005B11C6 /* ParentView.swift */,
+				1E4A7BD42BB5E4FA005B11C6 /* ParentViewController.swift */,
 			);
 			path = CustomUserElements;
 			sourceTree = "<group>";
@@ -288,7 +289,6 @@
 				1EFEBDD52B936B2E0067FCF7 /* DetailScreen */,
 				1EFEBDC12B9078B30067FCF7 /* MainScreen */,
 				1E4A7BC72BB44C81005B11C6 /* SearchScreen */,
-				1E4A7BDB2BB5FD21005B11C6 /* ParentCollectionCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

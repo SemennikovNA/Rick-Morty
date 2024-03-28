@@ -9,6 +9,15 @@ import UIKit
 
 class CustomTextField: UITextField {
     
+    let popOverButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Character", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .clear
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        return button
+    }()
+    
     //MARK: - Initialize
     
     override init(frame: CGRect) {
@@ -44,7 +53,15 @@ class CustomTextField: UITextField {
     
     func setupLeftView() {
         leftViewMode = .always
-        leftView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 50))
-        leftView!.backgroundColor = .red
+        leftView = UIView(frame: CGRect(x: 0, y: 0, width: 120, height: 50))
+        leftView?.addSubviews(popOverButton)
+        leftView!.backgroundColor = .clear
+        
+        NSLayoutConstraint.activate([
+            popOverButton.topAnchor.constraint(equalTo: self.leftView!.topAnchor, constant: 5),
+            popOverButton.leadingAnchor.constraint(equalTo: self.leftView!.leadingAnchor, constant: 10),
+            popOverButton.trailingAnchor.constraint(equalTo: self.leftView!.trailingAnchor, constant: -10),
+            popOverButton.bottomAnchor.constraint(equalTo: self.leftView!.bottomAnchor, constant: -5)
+        ])
     }
 }
