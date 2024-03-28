@@ -44,11 +44,14 @@ class DetailViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
+        // Call method's
         presenter.fetchEpisodesData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tabBarController?.tabBar.isHidden = true
         
         // Call method's
         setupView()

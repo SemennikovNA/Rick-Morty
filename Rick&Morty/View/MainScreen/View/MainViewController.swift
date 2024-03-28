@@ -31,6 +31,11 @@ class MainViewController: UIViewController {
         presenter.fetchData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     //MARK: - Private method
     /// Setup view
     private func setupView() {

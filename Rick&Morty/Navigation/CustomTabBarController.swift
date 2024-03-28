@@ -28,12 +28,17 @@ class CustomTabBarController: UITabBarController {
     
     //MARK: - Methods
     
-    func setupViewControllers() {
-        self.viewControllers = [
-            setupViewControllersForTabBarItem(viewController: Builder.createMainView(), tabBarItems: TabBarItems.characters),
-            setupViewControllersForTabBarItem(viewController: Builder.createSearchView(), tabBarItems: TabBarItems.search)
-        ]
-    }
+        func setupViewControllers() {
+            let mainNavController = UINavigationController(rootViewController: Builder.createMainView())
+            mainNavController.navigationBar.prefersLargeTitles = true
+            mainNavController.tabBarItem = UITabBarItem(title: TabBarItems.characters.title, image: TabBarItems.characters.image, selectedImage: TabBarItems.characters.selectedImage)
+
+            let searchNavController = UINavigationController(rootViewController: Builder.createSearchView())
+            searchNavController.navigationBar.prefersLargeTitles = true
+            searchNavController.tabBarItem = UITabBarItem(title: TabBarItems.search.title, image: TabBarItems.search.image, selectedImage: TabBarItems.search.selectedImage)
+
+            self.viewControllers = [mainNavController, searchNavController]
+        }
     
     //MARK: - Private method
     
