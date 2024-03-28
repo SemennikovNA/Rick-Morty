@@ -5,6 +5,7 @@
 //  Created by Nikita on 02.03.2024.
 //
 //
+
 import UIKit
 
 class DetailViewController: UIViewController {
