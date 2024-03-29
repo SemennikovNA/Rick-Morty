@@ -16,6 +16,9 @@
 		1E4A7BD72BB5ED86005B11C6 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A7BD62BB5ED86005B11C6 /* CustomTextField.swift */; };
 		1E4A7BD92BB5EE9C005B11C6 /* ParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A7BD82BB5EE9C005B11C6 /* ParentView.swift */; };
 		1E4A7BDC2BB5FD21005B11C6 /* ParentCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A7BDB2BB5FD21005B11C6 /* ParentCollectionCell.swift */; };
+		1E4A7BDF2BB687C2005B11C6 /* PopOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A7BDE2BB687C2005B11C6 /* PopOverViewController.swift */; };
+		1E4A7BE12BB68899005B11C6 /* PopOverTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A7BE02BB68899005B11C6 /* PopOverTableView.swift */; };
+		1E4A7BE32BB68B72005B11C6 /* PopOverTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A7BE22BB68B72005B11C6 /* PopOverTableCell.swift */; };
 		1E77146C2B90652F00ADC5E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E77146B2B90652F00ADC5E8 /* AppDelegate.swift */; };
 		1E77146E2B90652F00ADC5E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E77146D2B90652F00ADC5E8 /* SceneDelegate.swift */; };
 		1E7714702B90652F00ADC5E8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E77146F2B90652F00ADC5E8 /* MainViewController.swift */; };
@@ -56,6 +59,9 @@
 		1E4A7BD62BB5ED86005B11C6 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		1E4A7BD82BB5EE9C005B11C6 /* ParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentView.swift; sourceTree = "<group>"; };
 		1E4A7BDB2BB5FD21005B11C6 /* ParentCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentCollectionCell.swift; sourceTree = "<group>"; };
+		1E4A7BDE2BB687C2005B11C6 /* PopOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverViewController.swift; sourceTree = "<group>"; };
+		1E4A7BE02BB68899005B11C6 /* PopOverTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverTableView.swift; sourceTree = "<group>"; };
+		1E4A7BE22BB68B72005B11C6 /* PopOverTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverTableCell.swift; sourceTree = "<group>"; };
 		1E7714682B90652F00ADC5E8 /* Rick&Morty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rick&Morty.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E77146B2B90652F00ADC5E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E77146D2B90652F00ADC5E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +149,16 @@
 				1E4A7BD42BB5E4FA005B11C6 /* ParentViewController.swift */,
 			);
 			path = CustomUserElements;
+			sourceTree = "<group>";
+		};
+		1E4A7BDD2BB687A0005B11C6 /* PopOverViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1E4A7BDE2BB687C2005B11C6 /* PopOverViewController.swift */,
+				1E4A7BE02BB68899005B11C6 /* PopOverTableView.swift */,
+				1E4A7BE22BB68B72005B11C6 /* PopOverTableCell.swift */,
+			);
+			path = PopOverViewController;
 			sourceTree = "<group>";
 		};
 		1E77145F2B90652F00ADC5E8 = {
@@ -284,6 +300,7 @@
 		1EFEBDC02B9078AD0067FCF7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1E4A7BDD2BB687A0005B11C6 /* PopOverViewController */,
 				1E4A7BDA2BB5FCA6005B11C6 /* CustomUserElements */,
 				1E8BB03E2B94C15500091EDF /* CollectionCells */,
 				1EFEBDD52B936B2E0067FCF7 /* DetailScreen */,
@@ -429,10 +446,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E4A7BDF2BB687C2005B11C6 /* PopOverViewController.swift in Sources */,
 				1E8BB04B2B95CB2E00091EDF /* DetailViewProtocol.swift in Sources */,
 				1E7714702B90652F00ADC5E8 /* MainViewController.swift in Sources */,
 				1E4A7BCD2BB44CF9005B11C6 /* SearchViewProtocol.swift in Sources */,
+				1E4A7BE12BB68899005B11C6 /* PopOverTableView.swift in Sources */,
 				1E4A7BC62BB43578005B11C6 /* TabBarItems.swift in Sources */,
+				1E4A7BE32BB68B72005B11C6 /* PopOverTableCell.swift in Sources */,
 				1E4A7BD92BB5EE9C005B11C6 /* ParentView.swift in Sources */,
 				1E8BB04E2B95D26D00091EDF /* Builder.swift in Sources */,
 				1E4A7BD72BB5ED86005B11C6 /* CustomTextField.swift in Sources */,

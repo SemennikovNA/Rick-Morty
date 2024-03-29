@@ -26,7 +26,5 @@ class ParentViewController: UIViewController {
     
     func setupNavigationBar() {}
     
-    func signatureDelegates () {}
-    
     func setupConstraints() {}
 }

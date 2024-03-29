@@ -40,13 +40,7 @@ class SearchViewController: ParentViewController {
         
         searchTextField.delegate = self
     }
-    
-    override func signatureDelegates() {
-        super.signatureDelegates()
-        
 
-    }
-    
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
