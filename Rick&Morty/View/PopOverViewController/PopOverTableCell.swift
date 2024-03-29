@@ -17,7 +17,7 @@ class PopOverTableCell: UITableViewCell {
     
     let iconImage: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .center
         image.tintColor = .white
         return image
     }()

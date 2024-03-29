@@ -7,21 +7,30 @@
 
 import UIKit
 
-class PopOverViewController: UIViewController {
+class PopOverViewController: ParentViewController {
+    
+    //MARK: - Properties
+    
+    let imageForRow = ["person.fill", "film", "globe"]
+    let textForRow = ["Characters", "Episodes", "Origins"]
     
     //MARK: - User interface elements
     
     let popOverTableView = PopOverTableView()
     
     //MARK: - Life cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Call method's
-        setupView()
         signatureDelegates()
-        setupConstraints()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        popOverTableView.layoutIfNeeded()
     }
     
     //MARK: - Method
@@ -31,24 +40,28 @@ class PopOverViewController: UIViewController {
         popOverTableView.dataSource = self
     }
     
-    func setupView() {
+    override func setupView() {
+        super.setupView()
         view.addSubviews(popOverTableView)
         
         // Setup table
         popOverTableView.register(PopOverTableCell.self, forCellReuseIdentifier: PopOverTableCell.reuseID)
-        popOverTableView.separatorColor = .white
-        popOverTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        popOverTableView.showsVerticalScrollIndicator = false
+        popOverTableView.isScrollEnabled = false
+        popOverTableView.separatorColor = .lightGray
+        popOverTableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         popOverTableView.backgroundColor = .viewBackGray
     }
     
-    func setupConstraints() {
+    override func setupConstraints() {
+        super.setupConstraints()
         
         NSLayoutConstraint.activate([
             // Pop over table
             popOverTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200),
-            popOverTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            popOverTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
-            popOverTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200)
+            popOverTableView.widthAnchor.constraint(equalToConstant: 200),
+            popOverTableView.heightAnchor.constraint(equalToConstant: 110),
+            popOverTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 }
@@ -56,13 +69,18 @@ class PopOverViewController: UIViewController {
 extension PopOverViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = popOverTableView.dequeueReusableCell(withIdentifier: PopOverTableCell.reuseID, for: indexPath) as! PopOverTableCell
-        cell.titleLabel.text = "Строка \(indexPath.row)"
-        cell.iconImage.image = UIImage(systemName: "person.fill")
+        cell.titleLabel.text = textForRow[indexPath.row]
+        cell.iconImage.image = UIImage(systemName: imageForRow[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let heightRow: CGFloat = 35
+        return heightRow
     }
 }
