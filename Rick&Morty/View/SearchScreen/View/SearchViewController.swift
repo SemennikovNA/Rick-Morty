@@ -31,7 +31,7 @@ class SearchViewController: ParentViewController {
         view.clipsToBounds = true
         return view
     }()
-    private let dropMenuTitle: UILabel = {
+    private let dropMenuLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = .white
@@ -40,6 +40,8 @@ class SearchViewController: ParentViewController {
     }()
     private let dropViewGestureRecognize = UITapGestureRecognizer()
 
+    private let cells = SearchCollectionViewCell()
+    
     //MARK: - Life cycle
 
     override func viewDidLoad() {
@@ -51,8 +53,10 @@ class SearchViewController: ParentViewController {
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        searchTextField.layer.cornerRadius = searchTextField.frame.width / 20
+        
+        searchTextField.layer.cornerRadius = searchTextField.frame.width / 30
         searchTextField.clipsToBounds = true
+        cells.layoutIfNeeded()
     }
 
     //MARK: - Method
@@ -62,18 +66,18 @@ class SearchViewController: ParentViewController {
 
         // Screen settings
         view.backgroundColor = .backBlue
-        view.addSubviews(searchTextField)
+        view.addSubviews(searchTextField, cells)
         
         // Text field settings
         searchTextField.leftViewMode = .always
         searchTextField.leftView = dropMenuView
         
         // Drop menu view
-        dropMenuView.addSubviews(dropMenuTitle)
+        dropMenuView.addSubviews(dropMenuLabel)
         dropMenuView.addGestureRecognizer(dropViewGestureRecognize)
         
         // Drop menu title
-        dropMenuTitle.text = titleText
+        dropMenuLabel.text = titleText
         
         // Drop view gesture recognize
         dropViewGestureRecognize.view?.frame = dropMenuView.bounds
@@ -115,10 +119,15 @@ class SearchViewController: ParentViewController {
             dropMenuView.widthAnchor.constraint(equalToConstant: 100),
             
             // Drop menu title
-            dropMenuTitle.topAnchor.constraint(equalTo: dropMenuView.topAnchor),
-            dropMenuTitle.leadingAnchor.constraint(equalTo: dropMenuView.leadingAnchor),
-            dropMenuTitle.trailingAnchor.constraint(equalTo: dropMenuView.trailingAnchor),
-            dropMenuTitle.bottomAnchor.constraint(equalTo: dropMenuView.bottomAnchor)
+            dropMenuLabel.topAnchor.constraint(equalTo: dropMenuView.topAnchor),
+            dropMenuLabel.leadingAnchor.constraint(equalTo: dropMenuView.leadingAnchor),
+            dropMenuLabel.trailingAnchor.constraint(equalTo: dropMenuView.trailingAnchor),
+            dropMenuLabel.bottomAnchor.constraint(equalTo: dropMenuView.bottomAnchor),
+            
+            cells.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 50),
+            cells.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            cells.heightAnchor.constraint(equalToConstant: 100),
+            cells.widthAnchor.constraint(equalToConstant: 360),
         ])
     }
     
@@ -129,7 +138,7 @@ class SearchViewController: ParentViewController {
     }
     
     func setTitleForChoiseButton(title: String) {
-        self.dropMenuTitle.text = title
+        self.dropMenuLabel.text = title
         self.dismiss(animated: true, completion: nil)
     }
 
