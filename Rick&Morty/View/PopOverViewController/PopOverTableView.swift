@@ -18,11 +18,4 @@ class PopOverTableView: UITableView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func layoutIfNeeded() {
-        super.layoutIfNeeded()
-        
-        self.layer.cornerRadius = self.frame.size.width / 15
-        self.clipsToBounds = true
-    }
 }

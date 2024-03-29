@@ -13,7 +13,6 @@
 		1E4A7BCD2BB44CF9005B11C6 /* SearchViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A7BCC2BB44CF9005B11C6 /* SearchViewProtocol.swift */; };
 		1E4A7BD32BB550A4005B11C6 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A7BD22BB550A4005B11C6 /* CustomTabBar.swift */; };
 		1E4A7BD52BB5E4FA005B11C6 /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A7BD42BB5E4FA005B11C6 /* ParentViewController.swift */; };
-		1E4A7BD72BB5ED86005B11C6 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A7BD62BB5ED86005B11C6 /* CustomTextField.swift */; };
 		1E4A7BD92BB5EE9C005B11C6 /* ParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A7BD82BB5EE9C005B11C6 /* ParentView.swift */; };
 		1E4A7BDC2BB5FD21005B11C6 /* ParentCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A7BDB2BB5FD21005B11C6 /* ParentCollectionCell.swift */; };
 		1E4A7BDF2BB687C2005B11C6 /* PopOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A7BDE2BB687C2005B11C6 /* PopOverViewController.swift */; };
@@ -56,7 +55,6 @@
 		1E4A7BCC2BB44CF9005B11C6 /* SearchViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewProtocol.swift; sourceTree = "<group>"; };
 		1E4A7BD22BB550A4005B11C6 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		1E4A7BD42BB5E4FA005B11C6 /* ParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
-		1E4A7BD62BB5ED86005B11C6 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		1E4A7BD82BB5EE9C005B11C6 /* ParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentView.swift; sourceTree = "<group>"; };
 		1E4A7BDB2BB5FD21005B11C6 /* ParentCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentCollectionCell.swift; sourceTree = "<group>"; };
 		1E4A7BDE2BB687C2005B11C6 /* PopOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverViewController.swift; sourceTree = "<group>"; };
@@ -140,15 +138,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		1E4A7BDA2BB5FCA6005B11C6 /* CustomUserElements */ = {
+		1E4A7BDA2BB5FCA6005B11C6 /* ParentViews */ = {
 			isa = PBXGroup;
 			children = (
-				1E4A7BD62BB5ED86005B11C6 /* CustomTextField.swift */,
 				1E4A7BDB2BB5FD21005B11C6 /* ParentCollectionCell.swift */,
 				1E4A7BD82BB5EE9C005B11C6 /* ParentView.swift */,
 				1E4A7BD42BB5E4FA005B11C6 /* ParentViewController.swift */,
 			);
-			path = CustomUserElements;
+			path = ParentViews;
 			sourceTree = "<group>";
 		};
 		1E4A7BDD2BB687A0005B11C6 /* PopOverViewController */ = {
@@ -301,7 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				1E4A7BDD2BB687A0005B11C6 /* PopOverViewController */,
-				1E4A7BDA2BB5FCA6005B11C6 /* CustomUserElements */,
+				1E4A7BDA2BB5FCA6005B11C6 /* ParentViews */,
 				1E8BB03E2B94C15500091EDF /* CollectionCells */,
 				1EFEBDD52B936B2E0067FCF7 /* DetailScreen */,
 				1EFEBDC12B9078B30067FCF7 /* MainScreen */,
@@ -455,7 +452,6 @@
 				1E4A7BE32BB68B72005B11C6 /* PopOverTableCell.swift in Sources */,
 				1E4A7BD92BB5EE9C005B11C6 /* ParentView.swift in Sources */,
 				1E8BB04E2B95D26D00091EDF /* Builder.swift in Sources */,
-				1E4A7BD72BB5ED86005B11C6 /* CustomTextField.swift in Sources */,
 				1EFEBDC92B90A91D0067FCF7 /* CharactersCollectionViewCell.swift in Sources */,
 				1E8BB03B2B94BC4B00091EDF /* InfoCollectionViewCell.swift in Sources */,
 				1E4A7BC42BB43403005B11C6 /* CustomTabBarController.swift in Sources */,

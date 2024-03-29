@@ -21,7 +21,7 @@ class PopOverTableCell: UITableViewCell {
         image.tintColor = .white
         return image
     }()
-    let titleLabel = UILabel(font: UIFont(name: "gilroy-regular", size: 15), textAlignment: .left, textColor: .white)
+    let titleLabel = UILabel(font: UIFont(name: "gilroy-bold", size: 15), textAlignment: .left, textColor: .white)
     
     //MARK: - Initialize
 

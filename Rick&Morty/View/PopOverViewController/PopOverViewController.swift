@@ -17,20 +17,16 @@ class PopOverViewController: ParentViewController {
     //MARK: - User interface elements
     
     let popOverTableView = PopOverTableView()
+    var didSelectOption: ((String) -> Void)?
     
     //MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .viewBackGray
         
         // Call method's
         signatureDelegates()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        popOverTableView.layoutIfNeeded()
     }
     
     //MARK: - Method
@@ -58,10 +54,10 @@ class PopOverViewController: ParentViewController {
         
         NSLayoutConstraint.activate([
             // Pop over table
-            popOverTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200),
-            popOverTableView.widthAnchor.constraint(equalToConstant: 200),
-            popOverTableView.heightAnchor.constraint(equalToConstant: 110),
-            popOverTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            popOverTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 15),
+            popOverTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            popOverTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            popOverTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }
@@ -69,7 +65,7 @@ class PopOverViewController: ParentViewController {
 extension PopOverViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return textForRow.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -82,5 +78,14 @@ extension PopOverViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let heightRow: CGFloat = 35
         return heightRow
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? PopOverTableCell else { return }
+        guard let labelText = cell.titleLabel.text else {
+            print("Label text equal nil")
+            return
+        }
+        didSelectOption?(labelText)
     }
 }
