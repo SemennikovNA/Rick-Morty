@@ -12,7 +12,7 @@ class PopOverViewController: ParentViewController {
     //MARK: - Properties
     
     let imageForRow = ["person.fill", "film", "globe"]
-    let textForRow = ["Characters", "Episodes", "Origins"]
+    let textForRow = ["Character", "Episode", "Location"]
     
     //MARK: - User interface elements
     

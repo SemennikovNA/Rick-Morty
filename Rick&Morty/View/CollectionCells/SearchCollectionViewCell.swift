@@ -80,18 +80,18 @@ class SearchCollectionViewCell: ParentCollectionCell {
             
             // Character name label
             characterNameLabel.topAnchor.constraint(equalTo: contentCellView.topAnchor, constant: 10),
-            characterNameLabel.leadingAnchor.constraint(equalTo: characterImage.trailingAnchor, constant: 10),
+            characterNameLabel.leadingAnchor.constraint(equalTo: characterImage.trailingAnchor, constant: 15),
             characterNameLabel.trailingAnchor.constraint(equalTo: contentCellView.trailingAnchor, constant: -10),
             characterNameLabel.heightAnchor.constraint(equalToConstant: 20),
             
             // Race label
             raceLabel.topAnchor.constraint(equalTo: characterNameLabel.bottomAnchor, constant: 15),
-            raceLabel.leadingAnchor.constraint(equalTo: characterImage.trailingAnchor, constant: 10),
+            raceLabel.leadingAnchor.constraint(equalTo: characterImage.trailingAnchor, constant: 15),
             raceLabel.heightAnchor.constraint(equalToConstant: 15),
             
             // Gender label
             genderLabel.topAnchor.constraint(equalTo: raceLabel.bottomAnchor, constant: 15),
-            genderLabel.leadingAnchor.constraint(equalTo: characterImage.trailingAnchor, constant: 10),
+            genderLabel.leadingAnchor.constraint(equalTo: characterImage.trailingAnchor, constant: 15),
             genderLabel.heightAnchor.constraint(equalToConstant: 15),
 
             // Character status label

@@ -9,7 +9,10 @@ import Foundation
 
 enum URLBuilder {
     
-    case baseRequest
+    case character
+    case searchCharacter
+    case episode
+    case location
     case pageRequest
     
     private var baseURL: String {
@@ -18,10 +21,11 @@ enum URLBuilder {
     
     private var path: String {
         switch self {
-        case .baseRequest:
-            return "character"
-        case .pageRequest:
-            return "character?page="
+        case .character: return "character/"
+        case .searchCharacter: return "character/?name="
+        case .episode: return "episode/?name="
+        case .location: return "location/?name="
+        case .pageRequest: return "character?page="
         }
     }
     

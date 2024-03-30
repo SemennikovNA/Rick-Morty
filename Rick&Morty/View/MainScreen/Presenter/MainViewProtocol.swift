@@ -31,7 +31,7 @@ final class MainPresenter: MainPresenterProtocol {
     }
     
     func fetchData() {
-        networkManager.fetchData(url: URLBuilder.baseRequest.request)
+        networkManager.fetchData(url: URLBuilder.character.request)
     }
 
     func updateData() {

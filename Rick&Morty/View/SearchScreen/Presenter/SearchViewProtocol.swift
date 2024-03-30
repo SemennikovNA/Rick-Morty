@@ -15,6 +15,8 @@ protocol SearchViewProtocol: AnyObject {
 protocol SearchPresenterProtocol: AnyObject {
     
     init(view: SearchViewProtocol)
+    var networkManager: NetworkManager { get }
+    func searchData(_ text: String, flag: String)
     func updateData()
 }
 
@@ -23,6 +25,7 @@ final class SearchPresenter: SearchPresenterProtocol {
     //MARK: - Properties
     
     weak var view: SearchViewProtocol?
+    var networkManager = NetworkManager.shared
     
     //MARK: - Initialization
     
@@ -31,6 +34,32 @@ final class SearchPresenter: SearchPresenterProtocol {
     }
     
     //MARK: - Methods
+    
+    func searchData(_ text: String, flag: String) {
+        var url: URLRequest
+        switch flag {
+        case "Character":
+            url = URLBuilder.searchCharacter.request
+            guard let urlString = url.url?.relativeString else { return }
+            print("\(urlString)\(text)")
+            return
+        case "Episode":
+            url = URLBuilder.episode.request
+            guard let urlString = url.url?.relativeString else { return }
+            print("\(urlString)\(text)")
+            return
+        case "Location":
+            url = URLBuilder.location.request
+            guard let urlString = url.url?.relativeString else { return }
+            print("\(urlString)\(text)")
+            return
+        default:
+            break
+        }
+        
+        print(text)
+        
+    }
     
     func updateData() {
         

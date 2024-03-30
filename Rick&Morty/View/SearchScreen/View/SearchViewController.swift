@@ -7,13 +7,13 @@
 
 import UIKit
 
-class SearchViewController: ParentViewController {
+final class SearchViewController: ParentViewController {
 
     //MARK: - Properties
 
     let popOverVC = PopOverViewController()
     var presenter: SearchPresenter!
-    var titleText = "Characters"
+    var titleText = "Character"
 
     //MARK: - User interface elements
     
@@ -138,8 +138,10 @@ class SearchViewController: ParentViewController {
     }
     
     func setTitleForChoiseButton(title: String) {
+        self.titleText = title
         self.dropMenuLabel.text = title
         self.dismiss(animated: true, completion: nil)
+        print(titleText)
     }
 
     //MARK: - Objective - C method
@@ -165,22 +167,26 @@ class SearchViewController: ParentViewController {
     }
 }
 
-//MARK: - UIPopoverPresentationControllerDelegate
-
-extension SearchViewController: UIPopoverPresentationControllerDelegate {
-    
-    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        .none
-    }
-}
-
 //MARK: - UITextFieldDelegate
 
 extension SearchViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
+        if let text = textField.text {
+            presenter.searchData(text, flag: self.titleText)
+        }
+        textField.text = ""
         return true
+    }
+}
+
+//MARK: - UIPopoverPresentationControllerDelegate
+
+extension SearchViewController: UIPopoverPresentationControllerDelegate {
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        .none
     }
 }
 
