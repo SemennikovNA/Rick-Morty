@@ -126,7 +126,7 @@ class SearchViewController: ParentViewController {
             
             cells.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 50),
             cells.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            cells.heightAnchor.constraint(equalToConstant: 100),
+            cells.heightAnchor.constraint(equalToConstant: 130),
             cells.widthAnchor.constraint(equalToConstant: 360),
         ])
     }

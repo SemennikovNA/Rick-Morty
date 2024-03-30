@@ -30,6 +30,7 @@ class SearchCollectionViewCell: ParentCollectionCell {
         return image
     }()
     private let characterNameLabel = UILabel(text: "Rick Sanchez", font: UIFont(name: "gilroy-black", size: 20), textAlignment: .left, textColor: .white)
+    private let genderLabel = UILabel(text: "Male", font: UIFont(name: "gilroy-regular", size: 15), textAlignment: .left, textColor: .white)
     private let characterStatusLabel = UILabel(text: "Alive", font: UIFont(name: "gilroy-regular", size: 15), textAlignment: .left, textColor: .green)
     
     //MARK: - Initialize
@@ -88,4 +89,8 @@ class SearchCollectionViewCell: ParentCollectionCell {
             characterStatusLabel.heightAnchor.constraint(equalToConstant: 10),
         ])
     }
+}
+
+#Preview() {
+    SearchViewController()
 }
