@@ -30,7 +30,8 @@ class SearchCollectionViewCell: ParentCollectionCell {
         return image
     }()
     private let characterNameLabel = UILabel(text: "Rick Sanchez", font: UIFont(name: "gilroy-black", size: 20), textAlignment: .left, textColor: .white)
-    private let genderLabel = UILabel(text: "Male", font: UIFont(name: "gilroy-regular", size: 15), textAlignment: .left, textColor: .white)
+    private let raceLabel = UILabel(text: "Human", font: UIFont(name: "gilroy-black", size: 17), textAlignment: .left, textColor: .white)
+    private let genderLabel = UILabel(text: "Male", font: UIFont(name: "gilroy-regular", size: 17), textAlignment: .left, textColor: .white)
     private let characterStatusLabel = UILabel(text: "Alive", font: UIFont(name: "gilroy-regular", size: 15), textAlignment: .left, textColor: .green)
     
     //MARK: - Initialize
@@ -57,7 +58,7 @@ class SearchCollectionViewCell: ParentCollectionCell {
     override func setupCellUI() {
         super.setupCellUI()
         self.addSubviews(contentCellView)
-        contentCellView.addSubviews(characterImage, characterNameLabel, characterStatusLabel)
+        contentCellView.addSubviews(characterImage, characterNameLabel, raceLabel, genderLabel, characterStatusLabel)
         self.backgroundColor = .cellBackBlue
     }
     
@@ -81,16 +82,22 @@ class SearchCollectionViewCell: ParentCollectionCell {
             characterNameLabel.topAnchor.constraint(equalTo: contentCellView.topAnchor, constant: 10),
             characterNameLabel.leadingAnchor.constraint(equalTo: characterImage.trailingAnchor, constant: 10),
             characterNameLabel.trailingAnchor.constraint(equalTo: contentCellView.trailingAnchor, constant: -10),
-            characterNameLabel.heightAnchor.constraint(equalToConstant: 30),
+            characterNameLabel.heightAnchor.constraint(equalToConstant: 20),
             
+            // Race label
+            raceLabel.topAnchor.constraint(equalTo: characterNameLabel.bottomAnchor, constant: 15),
+            raceLabel.leadingAnchor.constraint(equalTo: characterImage.trailingAnchor, constant: 10),
+            raceLabel.heightAnchor.constraint(equalToConstant: 15),
+            
+            // Gender label
+            genderLabel.topAnchor.constraint(equalTo: raceLabel.bottomAnchor, constant: 15),
+            genderLabel.leadingAnchor.constraint(equalTo: characterImage.trailingAnchor, constant: 10),
+            genderLabel.heightAnchor.constraint(equalToConstant: 15),
+
             // Character status label
             characterStatusLabel.bottomAnchor.constraint(equalTo: contentCellView.bottomAnchor, constant: -15),
             characterStatusLabel.trailingAnchor.constraint(equalTo: contentCellView.trailingAnchor, constant: -15),
             characterStatusLabel.heightAnchor.constraint(equalToConstant: 10),
         ])
     }
-}
-
-#Preview() {
-    SearchViewController()
 }
