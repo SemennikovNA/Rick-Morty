@@ -23,33 +23,14 @@ class NetworkManager {
     
     //MARK: - Method
     
-    func fetchData(url: URLRequest, isPage: Bool = false, pageNumber: Int = 0) {
-        guard isPage else {
-            session.dataTask(with: url) { [weak self] data, response, error in
-                guard let data else {
-                    if error != nil {
-                        print(NetworkError.badRequst)
-                    }
-                    return
-                }
-                
-                do {
-                    guard let baseData = try self?.decoder.decode(Characters.self, from: data) else { return }
-                    var characters: [Characters] = []
-                    characters.append(baseData)
-                    self?.delegate?.transitData(self!, data: characters)
-                } catch {
-                    print(NetworkError.badResponse)
-                }
-            }.resume()
+    func fetchData(url: URLRequest, isPage: Bool = false) {
+        guard isPage == true else {
+            loadData(url)
             return
         }
-        
-        let pageUrl = "\(url)\(pageNumber)"
-        print(pageUrl)
-        
+        print(url)
+        loadData(url)
     }
-    
     
     func loadEpisodesData(episodes: [String], completion: @escaping ([Episodes]) -> Void) {
         let dispatchGroup = DispatchGroup()
@@ -85,6 +66,30 @@ class NetworkManager {
         dispatchGroup.notify(queue: .main) {
             completion(episodesArray)
         }
+    }
+    
+    //MARK: - Private method
+    
+    func loadData(_ url: URLRequest) {
+        session.dataTask(with: url) { [weak self] data, response, error in
+            guard let data else {
+                if error != nil {
+                    print(NetworkError.badRequst)
+                }
+                return
+            }
+            
+            
+            do {
+                guard let baseData = try self?.decoder.decode(Characters.self, from: data) else { return }
+                var characters: [Characters] = []
+                characters.append(baseData)
+                self?.delegate?.transitData(self!, data: characters)
+            } catch {
+                
+                print(NetworkError.badResponse)
+            }
+        }.resume()
     }
 }
 

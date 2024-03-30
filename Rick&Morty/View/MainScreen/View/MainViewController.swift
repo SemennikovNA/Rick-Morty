@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: ParentViewController {
     
     //MARK: - User interface elements
     
@@ -18,6 +18,8 @@ class MainViewController: UIViewController {
     private let networkManager = NetworkManager.shared
     private var dataSource: UICollectionViewDiffableDataSource<MainViewSection, Results>?
     var presenter: MainPresenter!
+    var currentPage = 1
+    var characterList = [Results]()
     
     //MARK: - Life cycle
     
@@ -25,9 +27,6 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         // Call method's
-        setupNavigationBar()
-        setupView()
-        setupConstraints()
         presenter.fetchData()
     }
     
@@ -36,9 +35,11 @@ class MainViewController: UIViewController {
         tabBarController?.tabBar.isHidden = false
     }
     
-    //MARK: - Private method
+    //MARK: - Method
     /// Setup view
-    private func setupView() {
+    override func setupView() {
+        super.setupView()
+        
         // Setup view
         view.backgroundColor = .backBlue
         
@@ -47,7 +48,9 @@ class MainViewController: UIViewController {
     }
     
     /// Setup navigation bar
-    private func setupNavigationBar() {
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        
         // Setup navigation item title
         self.navigationItem.title = "Characters"
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -63,6 +66,25 @@ class MainViewController: UIViewController {
         appearance.largeTitleTextAttributes = titleAttributed
         appearance.backgroundColor = .backBlue
         self.navigationController?.navigationBar.standardAppearance = appearance
+    }
+    
+    override func setupConstraints() {
+        super.setupConstraints()
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    //MARK: - Private method
+    
+    private func loadMoreData() {
+        print("work?")
+        currentPage += 1
+        presenter.loadMoreData(pageNumber: self.currentPage)
     }
 }
 
@@ -148,6 +170,7 @@ extension MainViewController: UICollectionViewDelegate {
         snapshot.appendSections([.section])
         
         let characterData = presenter.characters.map({ $0.results }).flatMap({ $0 })
+        self.characterList = characterData
         snapshot.appendItems(characterData, toSection: .section)
         
         DispatchQueue.main.async {
@@ -173,18 +196,11 @@ extension MainViewController: UICollectionViewDelegate {
         let detailView = Builder.createDetailView(character: selectedItem, info: info, origin: origin, episodes: episodes)
         navigationController?.pushViewController(detailView, animated: true)
     }
-}
-
-//MARK: - Private extension
-//MARK: Constraints
-private extension MainViewController {
     
-    func setupConstraints() {
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard indexPath.row == characterList.count - 2 else { return }
+        DispatchQueue.main.async {
+            self.loadMoreData()
+        }
     }
 }

@@ -14,15 +14,20 @@ protocol MainViewProtocol: AnyObject {
 protocol MainPresenterProtocol: AnyObject {
     init(view: MainViewProtocol)
     var characters: [Characters] { get set }
+    func loadMoreData(pageNumber: Int) 
     func fetchData()
     func updateData()
 }
 
 final class MainPresenter: MainPresenterProtocol {
     
+    //MARK: - Properties
+    
     weak var view: MainViewProtocol?
     let networkManager = NetworkManager()
     var characters: [Characters] = []
+    
+    //MARK: - Initialize
 
     init(view: MainViewProtocol) {
         self.view = view
@@ -30,12 +35,21 @@ final class MainPresenter: MainPresenterProtocol {
         self.networkManager.delegate = self
     }
     
+    //MARK: - Method
+    
     func fetchData() {
         networkManager.fetchData(url: URLBuilder.character.request)
     }
 
     func updateData() {
         self.view?.updateData()
+    }
+    
+    func loadMoreData(pageNumber: Int) {
+        guard let url = URL(string: "\(URLBuilder.pageRequest.request)\(pageNumber)") else { return }
+        print(url)
+        let urlForRequest = URLRequest(url: url)
+        networkManager.fetchData(url: urlForRequest, isPage: true)
     }
 }
 
