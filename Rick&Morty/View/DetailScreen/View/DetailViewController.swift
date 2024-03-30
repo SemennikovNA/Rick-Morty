@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: ParentViewController {
     
     //MARK: - User interface element
     
@@ -55,8 +55,6 @@ class DetailViewController: UIViewController {
         tabBarController?.tabBar.isHidden = true
         
         // Call method's
-        setupView()
-        setupConstraints()
         presenter.updateData()
     }
     
@@ -66,9 +64,11 @@ class DetailViewController: UIViewController {
         characterImage.layer.cornerRadius = characterImage.frame.size.width / 9
     }
     
-    //MARK: - Private method
+    //MARK: - Method
     
-    private func setupView() {
+    override func setupView() {
+        super.setupView()
+        
         // Setup view
         view.backgroundColor = .backBlue
         view.addSubviews(characterImage, characterStackView)
@@ -85,6 +85,32 @@ class DetailViewController: UIViewController {
         setupCollectionView()
         setupLabels()
     }
+    
+   override func setupConstraints() {
+       super.setupConstraints()
+       
+        NSLayoutConstraint.activate([
+            // Character image
+            characterImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            characterImage.heightAnchor.constraint(equalToConstant: 148),
+            characterImage.widthAnchor.constraint(equalToConstant: 148),
+            characterImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            // Character stack view
+            characterStackView.topAnchor.constraint(equalTo: characterImage.bottomAnchor, constant: 20),
+            characterStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            characterStackView.widthAnchor.constraint(equalToConstant: 200),
+            characterStackView.heightAnchor.constraint(equalToConstant: 50),
+            
+            // Episodes collection view
+            episodesCollectionView.topAnchor.constraint(equalTo: characterStackView.bottomAnchor, constant: 15),
+            episodesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
+            episodesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
+            episodesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),
+        ])
+    }
+    
+    //MARK: - Private method
     
     private func setupLabels() {
         characterNameLabel.adjustsFontSizeToFitWidth = true
@@ -313,32 +339,5 @@ extension DetailViewController {
         snapShot.appendItems(presenter.episodes.map { Items(episodes: $0) }, toSection: .episodes)
         
         dataSource?.apply(snapShot)
-    }
-}
-
-//MARK: - Private extension
-//MARK: Constraints
-private extension DetailViewController {
-    
-    func setupConstraints() {
-        NSLayoutConstraint.activate([
-            // Character image
-            characterImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            characterImage.heightAnchor.constraint(equalToConstant: 148),
-            characterImage.widthAnchor.constraint(equalToConstant: 148),
-            characterImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            // Character stack view
-            characterStackView.topAnchor.constraint(equalTo: characterImage.bottomAnchor, constant: 20),
-            characterStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            characterStackView.widthAnchor.constraint(equalToConstant: 200),
-            characterStackView.heightAnchor.constraint(equalToConstant: 50),
-            
-            // Episodes collection view
-            episodesCollectionView.topAnchor.constraint(equalTo: characterStackView.bottomAnchor, constant: 15),
-            episodesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
-            episodesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
-            episodesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),
-        ])
     }
 }
