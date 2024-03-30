@@ -13,8 +13,8 @@ protocol MainViewProtocol: AnyObject {
 
 protocol MainPresenterProtocol: AnyObject {
     init(view: MainViewProtocol)
-    var characters: [Characters] { get set }
-    func loadMoreData(pageNumber: Int) 
+    var characters: [Results] { get set }
+    func loadMoreData(pageNumber: Int)
     func fetchData()
     func updateData()
 }
@@ -25,7 +25,7 @@ final class MainPresenter: MainPresenterProtocol {
     
     weak var view: MainViewProtocol?
     let networkManager = NetworkManager()
-    var characters: [Characters] = []
+    var characters: [Results] = []
     
     //MARK: - Initialize
 
@@ -49,13 +49,13 @@ final class MainPresenter: MainPresenterProtocol {
         guard let url = URL(string: "\(URLBuilder.pageRequest.request)\(pageNumber)") else { return }
         print(url)
         let urlForRequest = URLRequest(url: url)
-        networkManager.fetchData(url: urlForRequest, isPage: true)
+        networkManager.loadMoreData(url: urlForRequest)
     }
 }
 
 extension MainPresenter: LoadedInformation {
     
-    func transitData(_ networkManager: NetworkManager, data: [Characters]) {
+    func transitData(_ networkManager: NetworkManager, data: [Results]) {
         DispatchQueue.main.async {
             self.characters.append(contentsOf: data)
             self.updateData()

@@ -15,6 +15,22 @@ struct Characters: Codable, Hashable {
     let results: [Results]
 }
 
+// MARK: - Info
+struct Info: Codable, Hashable {
+    
+    let info: InfoClass
+    let results: [Results]
+}
+
+// MARK: - InfoClass
+struct InfoClass: Codable, Hashable {
+    
+    let count: Int
+    let pages: Int
+    let next: String
+    let prev: String
+}
+
 // MARK: - Result
 
 struct Results: Codable, Hashable {
@@ -73,4 +89,3 @@ enum Status: String, Codable, Hashable {
     case dead = "Dead"
     case unknown = "unknown"
 }
-

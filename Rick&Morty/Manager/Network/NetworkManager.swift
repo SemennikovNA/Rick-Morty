@@ -9,7 +9,7 @@ import Foundation
 
 protocol LoadedInformation {
     
-    func transitData(_ networkManager: NetworkManager, data: [Characters])
+    func transitData(_ networkManager: NetworkManager, data: [Results])
 }
 
 class NetworkManager {
@@ -23,13 +23,48 @@ class NetworkManager {
     
     //MARK: - Method
     
-    func fetchData(url: URLRequest, isPage: Bool = false) {
-        guard isPage == true else {
-            loadData(url)
-            return
-        }
-        print(url)
-        loadData(url)
+    func fetchData(url: URLRequest) {
+            session.dataTask(with: url) { [weak self] data, response, error in
+                guard let data else {
+                    if error != nil {
+                        print(NetworkError.badRequst)
+                    }
+                    return
+                }
+                
+                do {
+                    guard let baseData = try self?.decoder.decode(Characters.self, from: data) else { return }
+                    let resultData = baseData.results
+                    var characters: [Results] = []
+                    characters.append(contentsOf: resultData)
+                    self?.delegate?.transitData(self!, data: characters)
+                } catch {
+                    print(NetworkError.badResponse)
+                }
+            }.resume()
+    }
+    
+    func loadMoreData(url: URLRequest) {
+        session.dataTask(with: url) { [weak self] data, response, error in
+            guard let data else {
+                if error != nil {
+                    print(NetworkError.badRequst)
+                }
+                return
+            }
+            
+            print(String(decoding: data, as: UTF8.self))
+            
+            do {
+                guard let baseData = try self?.decoder.decode(Info.self, from: data) else { return }
+                let resultData = baseData.results
+                var characters: [Results] = []
+                characters.append(contentsOf: resultData)
+                self?.delegate?.transitData(self!, data: characters)
+            } catch {
+                print(NetworkError.badResponse)
+            }
+        }.resume()
     }
     
     func loadEpisodesData(episodes: [String], completion: @escaping ([Episodes]) -> Void) {
@@ -66,30 +101,6 @@ class NetworkManager {
         dispatchGroup.notify(queue: .main) {
             completion(episodesArray)
         }
-    }
-    
-    //MARK: - Private method
-    
-    func loadData(_ url: URLRequest) {
-        session.dataTask(with: url) { [weak self] data, response, error in
-            guard let data else {
-                if error != nil {
-                    print(NetworkError.badRequst)
-                }
-                return
-            }
-            
-            
-            do {
-                guard let baseData = try self?.decoder.decode(Characters.self, from: data) else { return }
-                var characters: [Characters] = []
-                characters.append(baseData)
-                self?.delegate?.transitData(self!, data: characters)
-            } catch {
-                
-                print(NetworkError.badResponse)
-            }
-        }.resume()
     }
 }
 

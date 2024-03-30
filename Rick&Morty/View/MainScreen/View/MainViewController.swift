@@ -82,7 +82,6 @@ class MainViewController: ParentViewController {
     //MARK: - Private method
     
     private func loadMoreData() {
-        print("work?")
         currentPage += 1
         presenter.loadMoreData(pageNumber: self.currentPage)
     }
@@ -169,7 +168,7 @@ extension MainViewController: UICollectionViewDelegate {
         var snapshot = NSDiffableDataSourceSnapshot<MainViewSection, Results>()
         snapshot.appendSections([.section])
         
-        let characterData = presenter.characters.map({ $0.results }).flatMap({ $0 })
+        let characterData = presenter.characters
         self.characterList = characterData
         snapshot.appendItems(characterData, toSection: .section)
         
