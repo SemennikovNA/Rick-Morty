@@ -181,7 +181,7 @@ extension MainViewController: UICollectionViewDelegate {
     // Setup did select item at
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let selectedItem = self.dataSource?.itemIdentifier(for: indexPath) else {
-            print("Ошибка: данные для selectedItem отсутствуют")
+            print("selectedItem equals nil")
             return
         }
         let type = selectedItem.type
@@ -198,7 +198,7 @@ extension MainViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard indexPath.row == characterList.count - 4 else { return }
+        guard indexPath.row == characterList.count - 6 else { return }
         DispatchQueue.main.async {
             self.loadMoreData()
         }

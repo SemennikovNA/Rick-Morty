@@ -50,11 +50,7 @@ class NetworkManager {
                 }
                 return
             }
-            
-            print(String(decoding: data, as: UTF8.self))
-            
             do {
-                print("mistake?")
                 guard let baseData = try self?.decoder.decode(Info.self, from: data) else { return }
                 let characters = baseData.results.map({ $0 })
                 self?.delegate?.transitData(self!, data: characters)

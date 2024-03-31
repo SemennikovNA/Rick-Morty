@@ -83,7 +83,7 @@ extension PopOverViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? PopOverTableCell else { return }
         guard let labelText = cell.titleLabel.text else {
-            print("Label text equal nil")
+            print("Key text equals nil")
             return
         }
         didSelectOption?(labelText)
