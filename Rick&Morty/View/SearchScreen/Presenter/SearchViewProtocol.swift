@@ -17,13 +17,17 @@ protocol SearchPresenterProtocol: AnyObject {
     init(view: SearchViewProtocol)
     var networkManager: NetworkManager { get }
     var character: [InfoModel] { get set }
+    var charac: [Results] { get set }
     var location: [OriginModel] { get set }
     var episode: [Episodes] { get set }
     func searchData(_ text: String, flag: String)
+    func searchCharacter(_ requestUrl: URL)
+    func searchEpisode(_ requestUrl: URL)
+    func searchLocation(_ requestUrl: URL)
     func updateData()
 }
 
-final class SearchPresenter: SearchPresenterProtocol {
+final class SearchPresenter: SearchPresenterProtocol, LoadedInformation {
     
     //MARK: - Properties
     
@@ -33,41 +37,75 @@ final class SearchPresenter: SearchPresenterProtocol {
     var location: [OriginModel] = []
     var episode: [Episodes] = []
     
+    // Проверочная переменная
+    var charac: [Results] = []
+    
     //MARK: - Initialization
     
     init(view: SearchViewProtocol) {
         self.view = view
+        self.networkManager.delegate = self
     }
     
     //MARK: - Methods
     
     func searchData(_ text: String, flag: String) {
-        var url: URLRequest
+        var mainPathUrl: URLRequest
         switch flag {
         case "Character":
-            url = URLBuilder.searchCharacter.request
-            guard let urlString = url.url?.relativeString else { return }
-            print("\(urlString)\(text)")
+            mainPathUrl = URLBuilder.searchCharacter.request
+            guard let url = mainPathUrl.url?.relativeString else { return }
+            guard let urlString = URL(string: "\(url)\(text)") else {
+                print(NetworkError.badUrl)
+                return
+            }
+            searchCharacter(urlString)
             return
         case "Episode":
-            url = URLBuilder.episode.request
-            guard let urlString = url.url?.relativeString else { return }
-            print("\(urlString)\(text)")
+            mainPathUrl = URLBuilder.episode.request
+            guard let url = mainPathUrl.url?.relativeString else { return }
+            guard let urlString = URL(string: "\(url)\(text)") else {
+                print(NetworkError.badUrl)
+                return
+            }
+            searchEpisode(urlString)
             return
         case "Location":
-            url = URLBuilder.location.request
-            guard let urlString = url.url?.relativeString else { return }
-            print("\(urlString)\(text)")
+            mainPathUrl = URLBuilder.location.request
+            guard let url = mainPathUrl.url?.relativeString else { return }
+            guard let urlString = URL(string: "\(url)\(text)") else {
+                print(NetworkError.badUrl)
+                return
+            }
+            searchLocation(urlString)
             return
         default:
             break
         }
-        
         print(text)
-        
+    }
+    
+    func searchCharacter(_ requestUrl: URL) {
+        print(requestUrl)
+        networkManager.characterSearchRequest(requestUrl)
+    }
+    
+    func searchEpisode(_ requestUrl: URL) {
+        print(requestUrl)
+    }
+    
+    func searchLocation(_ requestUrl: URL) {
+        print(requestUrl)
+        networkManager.locationSearchRequest(requestUrl)
     }
     
     func updateData() {
-        
+        self.view?.updateData()
+    }
+    
+    func transitData(_ networkManager: NetworkManager, data: [Results]) {
+        print("work?")
+        self.charac = data
+        print(charac)
     }
 }

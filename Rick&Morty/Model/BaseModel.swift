@@ -18,12 +18,12 @@ struct Characters: Codable, Hashable {
 // MARK: - Info
 struct Info: Codable, Hashable {
     
-    let info: Infos
+    let info: InfoClass
     let results: [Results]
 }
 
 // MARK: - InfoClass
-struct Infos: Codable, Hashable {
+struct InfoClass: Codable, Hashable {
     
     let count: Int
     let pages: Int

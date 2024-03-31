@@ -34,7 +34,7 @@
 		1E8BB0552B95EF5500091EDF /* gilroy-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E8BB0532B95EF5500091EDF /* gilroy-regular.ttf */; };
 		1E8BB0562B95EF5500091EDF /* gilroy-black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E8BB0542B95EF5500091EDF /* gilroy-black.ttf */; };
 		1E8BB05B2B96047700091EDF /* DetailViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8BB05A2B96047700091EDF /* DetailViewSection.swift */; };
-		1E8BB05D2B96465700091EDF /* AllModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8BB05C2B96465700091EDF /* AllModel.swift */; };
+		1E8BB05D2B96465700091EDF /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8BB05C2B96465700091EDF /* BaseModel.swift */; };
 		1E9CE0892BAD52DD008C0F8D /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9CE0882BAD52DD008C0F8D /* Items.swift */; };
 		1E9CE08D2BAF14CC008C0F8D /* SDWebImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9CE08C2BAF14CC008C0F8D /* SDWebImageManager.swift */; };
 		1E9CE0902BAF1597008C0F8D /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 1E9CE08F2BAF1597008C0F8D /* SDWebImage */; };
@@ -80,7 +80,7 @@
 		1E8BB0532B95EF5500091EDF /* gilroy-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "gilroy-regular.ttf"; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/MacBook/Development/Fonts/gilroy-regular.ttf"; sourceTree = "<group>"; };
 		1E8BB0542B95EF5500091EDF /* gilroy-black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "gilroy-black.ttf"; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/MacBook/Development/Fonts/gilroy-black.ttf"; sourceTree = "<group>"; };
 		1E8BB05A2B96047700091EDF /* DetailViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailViewSection.swift; path = ../../MainScreen/Sections/DetailViewSection.swift; sourceTree = "<group>"; };
-		1E8BB05C2B96465700091EDF /* AllModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllModel.swift; sourceTree = "<group>"; };
+		1E8BB05C2B96465700091EDF /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		1E9CE0882BAD52DD008C0F8D /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
 		1E9CE08C2BAF14CC008C0F8D /* SDWebImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebImageManager.swift; sourceTree = "<group>"; };
 		1E9CE0932BB05B9A008C0F8D /* URLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilder.swift; sourceTree = "<group>"; };
@@ -334,7 +334,7 @@
 		1EFEBDC52B90A6D60067FCF7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1E8BB05C2B96465700091EDF /* AllModel.swift */,
+				1E8BB05C2B96465700091EDF /* BaseModel.swift */,
 				1E9CE0882BAD52DD008C0F8D /* Items.swift */,
 			);
 			path = Model;
@@ -470,7 +470,7 @@
 				1E8BB03B2B94BC4B00091EDF /* InfoCollectionViewCell.swift in Sources */,
 				1E4A7BC42BB43403005B11C6 /* CustomTabBarController.swift in Sources */,
 				1E8BB0442B95993D00091EDF /* HeaderForSection.swift in Sources */,
-				1E8BB05D2B96465700091EDF /* AllModel.swift in Sources */,
+				1E8BB05D2B96465700091EDF /* BaseModel.swift in Sources */,
 				1E4A7BD52BB5E4FA005B11C6 /* ParentViewController.swift in Sources */,
 				1EFEBDC42B907A4F0067FCF7 /* MainViewSection.swift in Sources */,
 				1EFEBDCF2B9355DA0067FCF7 /* NetworkManager.swift in Sources */,
