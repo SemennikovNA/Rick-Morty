@@ -27,10 +27,3 @@ struct OriginModel: Hashable {
     var planetName: String
     var imageName: String
 }
-
-struct EpisodesModel: Hashable {
-    
-    var episodesName: String
-    var episodesSeasonNumber: String
-    var episodesDate: String
-}

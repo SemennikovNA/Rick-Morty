@@ -113,7 +113,7 @@ extension MainViewController: UICollectionViewDelegate {
         view.addSubviews(collectionView)
     }
     
-    // Method for register cell's
+    // Method for register cell
     private func charactersRegisterCells() -> UICollectionView.CellRegistration<CharactersCollectionViewCell, Results> {
         return UICollectionView.CellRegistration<CharactersCollectionViewCell, Results> { (cell, indexPath, result) in
             cell.layoutIfNeeded()

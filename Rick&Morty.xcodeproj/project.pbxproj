@@ -40,6 +40,7 @@
 		1E9CE0902BAF1597008C0F8D /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 1E9CE08F2BAF1597008C0F8D /* SDWebImage */; };
 		1E9CE0922BAF1597008C0F8D /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1E9CE0912BAF1597008C0F8D /* SDWebImageMapKit */; };
 		1E9CE0942BB05B9A008C0F8D /* URLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9CE0932BB05B9A008C0F8D /* URLBuilder.swift */; };
+		1EF1F9ED2BB9B29D008502BD /* SearchViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF1F9EC2BB9B29D008502BD /* SearchViewSection.swift */; };
 		1EFEBDC42B907A4F0067FCF7 /* MainViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDC32B907A4F0067FCF7 /* MainViewSection.swift */; };
 		1EFEBDC92B90A91D0067FCF7 /* CharactersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDC82B90A91D0067FCF7 /* CharactersCollectionViewCell.swift */; };
 		1EFEBDCC2B90AB700067FCF7 /* UIView - Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEBDCB2B90AB700067FCF7 /* UIView - Extension.swift */; };
@@ -83,6 +84,7 @@
 		1E9CE0882BAD52DD008C0F8D /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
 		1E9CE08C2BAF14CC008C0F8D /* SDWebImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebImageManager.swift; sourceTree = "<group>"; };
 		1E9CE0932BB05B9A008C0F8D /* URLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilder.swift; sourceTree = "<group>"; };
+		1EF1F9EC2BB9B29D008502BD /* SearchViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewSection.swift; sourceTree = "<group>"; };
 		1EFEBDC32B907A4F0067FCF7 /* MainViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainViewSection.swift; path = ../../DetailScreen/Sections/MainViewSection.swift; sourceTree = "<group>"; };
 		1EFEBDC82B90A91D0067FCF7 /* CharactersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersCollectionViewCell.swift; sourceTree = "<group>"; };
 		1EFEBDCB2B90AB700067FCF7 /* UIView - Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView - Extension.swift"; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		1E4A7BC72BB44C81005B11C6 /* SearchScreen */ = {
 			isa = PBXGroup;
 			children = (
+				1EF1F9EB2BB9B28B008502BD /* Sections */,
 				1E4A7BC92BB44CBA005B11C6 /* View */,
 				1E4A7BC82BB44CB0005B11C6 /* Presenter */,
 			);
@@ -297,6 +300,14 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		1EF1F9EB2BB9B28B008502BD /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				1EF1F9EC2BB9B29D008502BD /* SearchViewSection.swift */,
+			);
+			path = Sections;
+			sourceTree = "<group>";
+		};
 		1EFEBDC02B9078AD0067FCF7 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -468,6 +479,7 @@
 				1E9CE08D2BAF14CC008C0F8D /* SDWebImageManager.swift in Sources */,
 				1E4A7BD32BB550A4005B11C6 /* CustomTabBar.swift in Sources */,
 				1EFEBDDB2B9385F60067FCF7 /* UILabel - Extension.swift in Sources */,
+				1EF1F9ED2BB9B29D008502BD /* SearchViewSection.swift in Sources */,
 				1E4A7BCB2BB44CC8005B11C6 /* SearchViewController.swift in Sources */,
 				1EFEBDCC2B90AB700067FCF7 /* UIView - Extension.swift in Sources */,
 				1E77146E2B90652F00ADC5E8 /* SceneDelegate.swift in Sources */,

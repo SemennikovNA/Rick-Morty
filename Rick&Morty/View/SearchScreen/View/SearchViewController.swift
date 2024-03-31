@@ -11,10 +11,11 @@ final class SearchViewController: ParentViewController {
 
     //MARK: - Properties
 
-    let popOverVC = PopOverViewController()
+    private let popOverVC = PopOverViewController()
     var presenter: SearchPresenter!
-    var titleText = "Character"
-
+    private var titleText = "Character"
+    private var dataSource: UICollectionViewDiffableDataSource<SearchViewSection, Items>?
+    
     //MARK: - User interface elements
     
     private let searchTextField: UITextField = {
@@ -39,8 +40,7 @@ final class SearchViewController: ParentViewController {
         return label
     }()
     private let dropViewGestureRecognize = UITapGestureRecognizer()
-
-    private let cells = SearchCollectionViewCell()
+    private var searchCollectionView: UICollectionView!
     
     //MARK: - Life cycle
 
@@ -56,17 +56,17 @@ final class SearchViewController: ParentViewController {
         
         searchTextField.layer.cornerRadius = searchTextField.frame.width / 30
         searchTextField.clipsToBounds = true
-        cells.layoutIfNeeded()
     }
 
     //MARK: - Method
 
     override func setupView() {
         super.setupView()
-
+        setupCollectionView()
+        
         // Screen settings
         view.backgroundColor = .backBlue
-        view.addSubviews(searchTextField, cells)
+        view.addSubviews(searchTextField, searchCollectionView)
         
         // Text field settings
         searchTextField.leftViewMode = .always
@@ -124,10 +124,11 @@ final class SearchViewController: ParentViewController {
             dropMenuLabel.trailingAnchor.constraint(equalTo: dropMenuView.trailingAnchor),
             dropMenuLabel.bottomAnchor.constraint(equalTo: dropMenuView.bottomAnchor),
             
-            cells.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 50),
-            cells.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            cells.heightAnchor.constraint(equalToConstant: 130),
-            cells.widthAnchor.constraint(equalToConstant: 360),
+            // Search collection view
+            searchCollectionView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 10),
+            searchCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            searchCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            searchCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
@@ -135,6 +136,7 @@ final class SearchViewController: ParentViewController {
     
     private func signatureDelegate() {
         searchTextField.delegate = self
+        searchCollectionView.delegate = self
     }
     
     func setTitleForChoiseButton(title: String) {
@@ -164,6 +166,139 @@ final class SearchViewController: ParentViewController {
                 self?.setTitleForChoiseButton(title: title)
             }
         }
+    }
+}
+
+//MARK: - UICollectionViewCompositionalLayout
+
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    /// Setup collection view
+    private func setupCollectionView() {
+        searchCollectionView = UICollectionView(frame: .zero, collectionViewLayout: setupCompositionalLayout())
+        searchCollectionView.backgroundColor = .clear
+        searchCollectionView.showsVerticalScrollIndicator = false
+        configureDataSource()
+    }
+    
+    // Method's for register cell's
+    private func characterRegisterCells() -> UICollectionView.CellRegistration<SearchCollectionViewCell, InfoModel> {
+        return UICollectionView.CellRegistration<SearchCollectionViewCell, InfoModel> { (cell, indexPath, result) in
+            cell.layoutIfNeeded()
+        }
+    }
+    
+    private func episodeRegisterCells() -> UICollectionView.CellRegistration<EpisodesCollectionViewCell, Episodes> {
+        return UICollectionView.CellRegistration<EpisodesCollectionViewCell, Episodes> { (cell, indexPath, episode) in
+            cell.layoutIfNeeded()
+        }
+    }
+    
+    private func originRegisterCells() -> UICollectionView.CellRegistration<OriginCollectionViewCell, OriginModel> {
+        return UICollectionView.CellRegistration<OriginCollectionViewCell, OriginModel> { (cell, indexPath, origin) in
+            cell.layoutIfNeeded()
+        }
+    }
+    
+    /// Setup layout
+    private func setupCompositionalLayout() -> UICollectionViewLayout {
+        UICollectionViewCompositionalLayout { sectionIndex, _ -> NSCollectionLayoutSection? in
+            guard let sectionKind = SearchViewSection(rawValue: sectionIndex) else { return nil }
+            let section: NSCollectionLayoutSection
+            let spacing: CGFloat = 10
+            
+            switch sectionKind {
+            case .character:
+                let itemSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .fractionalHeight(1.0))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                
+                let groupSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(0.515),
+                    heightDimension: .absolute(160))
+                let group = NSCollectionLayoutGroup.horizontal(
+                    layoutSize: groupSize,
+                    repeatingSubitem: item,
+                    count: 1)
+                group.interItemSpacing = .fixed(spacing)
+                section = NSCollectionLayoutSection(group: group)
+                section.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+                section.interGroupSpacing = spacing
+                section.contentInsetsReference = .layoutMargins
+                return section
+            case .location:
+                let itemSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .fractionalHeight(1.0))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                
+                let groupSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(0.515),
+                    heightDimension: .absolute(160))
+                let group = NSCollectionLayoutGroup.horizontal(
+                    layoutSize: groupSize,
+                    repeatingSubitem: item,
+                    count: 1)
+                group.interItemSpacing = .fixed(spacing)
+                section = NSCollectionLayoutSection(group: group)
+                section.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+                section.interGroupSpacing = spacing
+                section.contentInsetsReference = .layoutMargins
+                return section
+            case .episode:
+                let itemSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .fractionalHeight(1.0))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                
+                let groupSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(0.515),
+                    heightDimension: .absolute(160))
+                let group = NSCollectionLayoutGroup.horizontal(
+                    layoutSize: groupSize,
+                    repeatingSubitem: item,
+                    count: 1)
+                group.interItemSpacing = .fixed(spacing)
+                section = NSCollectionLayoutSection(group: group)
+                section.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+                section.interGroupSpacing = spacing
+                section.contentInsetsReference = .layoutMargins
+                return section
+            }
+        }
+    }
+    
+    private func configureDataSource() {
+        
+        let characterCell = characterRegisterCells()
+        let episodeCell = episodeRegisterCells()
+        let originCell = originRegisterCells()
+        
+        dataSource = UICollectionViewDiffableDataSource<SearchViewSection, Items>(collectionView: searchCollectionView) { [weak self] (collectionView, indexPath, item) -> UICollectionViewCell? in
+            
+            switch SearchViewSection(rawValue: indexPath.section)! {
+            
+            case .character:
+                return self?.searchCollectionView.dequeueConfiguredReusableCell(using: characterCell, for: indexPath, item: item.info)
+            case .episode:
+                return self?.searchCollectionView.dequeueConfiguredReusableCell(using: episodeCell, for: indexPath, item: item.episodes)
+            case .location:
+                return self?.searchCollectionView.dequeueConfiguredReusableCell(using: originCell, for: indexPath, item: item.origin)
+            }
+        }
+    }
+    
+    // Snapshot for collection
+    private func applySnapshot() {
+        var snapShot = NSDiffableDataSourceSnapshot<SearchViewSection, Items>()
+        snapShot.appendSections([.character, .location, .episode])
+        
+        snapShot.appendItems(presenter.character.map { Items(info: $0) }, toSection: .character)
+        snapShot.appendItems(presenter.location.map { Items(origin: $0) }, toSection: .location)
+        snapShot.appendItems(presenter.episode.map { Items(episodes: $0) }, toSection: .episode)
+        
+        dataSource?.apply(snapShot)
     }
 }
 

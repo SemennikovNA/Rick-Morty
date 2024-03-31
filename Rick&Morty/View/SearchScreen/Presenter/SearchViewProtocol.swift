@@ -16,6 +16,9 @@ protocol SearchPresenterProtocol: AnyObject {
     
     init(view: SearchViewProtocol)
     var networkManager: NetworkManager { get }
+    var character: [InfoModel] { get set }
+    var location: [OriginModel] { get set }
+    var episode: [Episodes] { get set }
     func searchData(_ text: String, flag: String)
     func updateData()
 }
@@ -26,6 +29,9 @@ final class SearchPresenter: SearchPresenterProtocol {
     
     weak var view: SearchViewProtocol?
     var networkManager = NetworkManager.shared
+    var character: [InfoModel] = []
+    var location: [OriginModel] = []
+    var episode: [Episodes] = []
     
     //MARK: - Initialization
     
