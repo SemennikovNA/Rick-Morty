@@ -34,9 +34,7 @@ class NetworkManager {
                 
                 do {
                     guard let baseData = try self?.decoder.decode(Characters.self, from: data) else { return }
-                    let resultData = baseData.results
-                    var characters: [Results] = []
-                    characters.append(contentsOf: resultData)
+                    let characters = baseData.results.map({ $0 })
                     self?.delegate?.transitData(self!, data: characters)
                 } catch {
                     print(NetworkError.badResponse)
@@ -56,12 +54,12 @@ class NetworkManager {
             print(String(decoding: data, as: UTF8.self))
             
             do {
+                print("mistake?")
                 guard let baseData = try self?.decoder.decode(Info.self, from: data) else { return }
-                let resultData = baseData.results
-                var characters: [Results] = []
-                characters.append(contentsOf: resultData)
+                let characters = baseData.results.map({ $0 })
                 self?.delegate?.transitData(self!, data: characters)
             } catch {
+                print(error.localizedDescription)
                 print(NetworkError.badResponse)
             }
         }.resume()

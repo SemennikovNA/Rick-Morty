@@ -96,6 +96,7 @@ extension MainViewController: MainViewProtocol {
     
     func updateData() {
         applySnapshot()
+        collectionView.reloadData()
     }
 }
 
@@ -184,7 +185,7 @@ extension MainViewController: UICollectionViewDelegate {
             return
         }
         let type = selectedItem.type
-        let species = selectedItem.species.rawValue
+        let species = selectedItem.species
         let gender = selectedItem.gender.rawValue
         let info = InfoModel(species: species, type: type, gender: gender)
         let originName = selectedItem.origin.name
@@ -197,7 +198,7 @@ extension MainViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard indexPath.row == characterList.count - 2 else { return }
+        guard indexPath.row == characterList.count - 4 else { return }
         DispatchQueue.main.async {
             self.loadMoreData()
         }

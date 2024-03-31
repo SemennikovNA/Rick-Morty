@@ -18,12 +18,12 @@ struct Characters: Codable, Hashable {
 // MARK: - Info
 struct Info: Codable, Hashable {
     
-    let info: InfoClass
+    let info: Infos
     let results: [Results]
 }
 
 // MARK: - InfoClass
-struct InfoClass: Codable, Hashable {
+struct Infos: Codable, Hashable {
     
     let count: Int
     let pages: Int
@@ -38,7 +38,7 @@ struct Results: Codable, Hashable {
     let id: Int
     let name: String
     let status: Status
-    let species: Species
+    let species: String
     let type: String
     let gender: Gender
     let origin: Location
@@ -71,14 +71,6 @@ enum Gender: String, Codable, Hashable {
     case female = "Female"
     case male = "Male"
     case unknown = "unknown"
-}
-
-// MARK: - Species
-
-enum Species: String, Codable, Hashable {
-    
-    case alien = "Alien"
-    case human = "Human"
 }
 
 // MARK: - Status
