@@ -86,16 +86,14 @@ final class SearchPresenter: SearchPresenterProtocol, LoadedInformation {
     }
     
     func searchCharacter(_ requestUrl: URL) {
-        print(requestUrl)
         networkManager.characterSearchRequest(requestUrl)
     }
     
     func searchEpisode(_ requestUrl: URL) {
-        print(requestUrl)
+        networkManager.episodeSearchRequest(requestUrl)
     }
     
     func searchLocation(_ requestUrl: URL) {
-        print(requestUrl)
         networkManager.locationSearchRequest(requestUrl)
     }
     

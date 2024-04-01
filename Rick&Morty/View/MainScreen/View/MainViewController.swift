@@ -198,7 +198,7 @@ extension MainViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard indexPath.row == characterList.count - 6 else { return }
+        guard indexPath.row == characterList.count - 8 else { return }
         DispatchQueue.main.async {
             self.loadMoreData()
         }

@@ -37,7 +37,7 @@ class NetworkManager {
                     let characters = baseData.results.map({ $0 })
                     self?.delegate?.transitData(self!, data: characters)
                 } catch {
-                    print(NetworkError.badResponse)
+                    print(error.localizedDescription)
                 }
             }.resume()
     }
@@ -98,41 +98,15 @@ class NetworkManager {
     }
     
     func characterSearchRequest(_ url: URL) {
-        session.dataTask(with: url) { [weak self] data, response, error in
-            guard let data = data else {
-                if error != nil {
-                    print(String(describing: error?.localizedDescription))
-                }
-                return
-            }
-            print(String(decoding: data, as: UTF8.self))
-            do {
-                guard let searchCharacter = try self?.decoder.decode(Info.self, from: data) else { return }
-                let character = searchCharacter.results.map({ $0 })
-                self?.delegate?.transitData(self!, data: character)
-            } catch {
-                print(String(describing: error.localizedDescription))
-            }
-        }.resume()
+        print(url)
+    }
+    
+    func episodeSearchRequest(_ url: URL) {
+        print(url)
     }
     
     func locationSearchRequest(_ url: URL) {
-        session.dataTask(with: url) { [weak self] data, response, error in
-            guard let data = data else {
-                if error != nil {
-                    print(String(describing: error?.localizedDescription))
-                }
-                return
-            }
-            print(String(decoding: data, as: UTF8.self))
-            do {
-                guard let searchLocation = try self?.decoder.decode(Characters.self, from: data) else { return }
-                let location = searchLocation.results
-                self?.delegate?.transitData(self!, data: location)
-            } catch {
-                print(String(describing: error.localizedDescription))
-            }
-        }.resume()
+        print(url)
     }
 }
 
