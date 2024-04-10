@@ -52,6 +52,8 @@ final class MainPresenter: MainPresenterProtocol {
     }
 }
 
+//MARK: - LoadedInformation method
+
 extension MainPresenter: LoadedInformation {
     
     func transferData(_ networkManager: NetworkManager, data: [CharacterResult]) {
@@ -61,15 +63,6 @@ extension MainPresenter: LoadedInformation {
          }
     }
     
-//    func searchCharacterData(_ networkManager: NetworkManager, data: [CharacterResult]) {
-//        
-//    }
-    
-    func searchEpisodeData(_ networkManager: NetworkManager, data: [EpisodeSearch]) {
-        
-    }
-    
-    func searchLocationData(_ networkManager: NetworkManager, data: [LocationSearch]) {
-        
-    }
+    func searchEpisodeData(_ networkManager: NetworkManager, data: [EpisodeResult]) { }
+    func searchLocationData(_ networkManager: NetworkManager, data: [Location]) { }
 }

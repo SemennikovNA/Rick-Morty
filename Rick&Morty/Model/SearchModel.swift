@@ -28,5 +28,5 @@ struct EpisodeSearch: Codable {
 struct LocationSearch: Codable {
     
     let info: Info
-    let results: [LocationResult]
+    let results: [Location]
 }

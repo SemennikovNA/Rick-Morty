@@ -12,6 +12,7 @@ class SearchCollectionViewCell: ParentCollectionCell {
     //MARK: - Properties
     
     static let reuseID = "SearchCell"
+    private let imageManager = SDWebImageManager.shared
     
     //MARK: - User interface elements
     
@@ -26,13 +27,12 @@ class SearchCollectionViewCell: ParentCollectionCell {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
-        image.image = UIImage(named: "rick")
         return image
     }()
-    private let characterNameLabel = UILabel(text: "Rick Sanchez", font: UIFont(name: "gilroy-black", size: 20), textAlignment: .left, textColor: .white)
-    private let raceLabel = UILabel(text: "Human", font: UIFont(name: "gilroy-black", size: 17), textAlignment: .left, textColor: .white)
-    private let genderLabel = UILabel(text: "Male", font: UIFont(name: "gilroy-regular", size: 17), textAlignment: .left, textColor: .white)
-    private let characterStatusLabel = UILabel(text: "Alive", font: UIFont(name: "gilroy-regular", size: 15), textAlignment: .left, textColor: .green)
+    private let characterNameLabel = UILabel(font: UIFont(name: "gilroy-black", size: 20), textAlignment: .left, textColor: .white)
+    private let raceLabel = UILabel(font: UIFont(name: "gilroy-black", size: 17), textAlignment: .left, textColor: .white)
+    private let genderLabel = UILabel(font: UIFont(name: "gilroy-regular", size: 17), textAlignment: .left, textColor: .white)
+    private let characterStatusLabel = UILabel(font: UIFont(name: "gilroy-regular", size: 15), textAlignment: .left, textColor: .green)
     
     //MARK: - Initialize
     
@@ -54,6 +54,26 @@ class SearchCollectionViewCell: ParentCollectionCell {
     }
     
     //MARK: - Method
+    
+    func setupDataForCell(with model: CharacterResult) {
+        let statusValue = model.status
+        switch statusValue {
+        case .alive:
+            characterStatusLabel.textColor = .green
+            characterStatusLabel.text = statusValue.rawValue
+        case .dead:
+            characterStatusLabel.textColor = .red
+            characterStatusLabel.text = statusValue.rawValue
+        case .unknown:
+            characterStatusLabel.textColor = .yellow
+            characterStatusLabel.text = statusValue.rawValue
+        }
+        self.characterNameLabel.text = model.name
+        self.raceLabel.text = model.species
+        self.genderLabel.text = model.gender.rawValue
+        guard let urlImage = URL(string: model.image) else { return }
+        imageManager.setImageFromUrl(image: self.characterImage, url: urlImage)
+    }
     
     override func setupCellUI() {
         super.setupCellUI()

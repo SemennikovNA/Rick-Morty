@@ -23,6 +23,7 @@ protocol SearchPresenterProtocol: AnyObject {
     func characterSearchRequest(_ requestUrl: URL)
     func episodeSearchRequest(_ requestUrl: URL)
     func locationSearchRequest(_ requestUrl: URL)
+    func removeData()
     func updateData()
 }
 
@@ -35,9 +36,6 @@ final class SearchPresenter: SearchPresenterProtocol {
     var character: [CharacterResult] = []
     var location: [Location] = []
     var episode: [EpisodeResult] = []
-    
-    // Проверочная переменная
-    var charac: [CharacterResult] = []
     
     //MARK: - Initialization
     
@@ -81,19 +79,27 @@ final class SearchPresenter: SearchPresenterProtocol {
         default:
             break
         }
-        print(text)
     }
     
     func characterSearchRequest(_ requestUrl: URL) {
+        removeData()
         networkManager.characterSearchRequest(requestUrl)
     }
     
     func episodeSearchRequest(_ requestUrl: URL) {
+        removeData()
         networkManager.episodeSearchRequest(requestUrl)
     }
     
     func locationSearchRequest(_ requestUrl: URL) {
+        removeData()
         networkManager.locationSearchRequest(requestUrl)
+    }
+    
+    func removeData() {
+        self.character.removeAll()
+        self.episode.removeAll()
+        self.location.removeAll()
     }
     
     func updateData() {
@@ -101,23 +107,22 @@ final class SearchPresenter: SearchPresenterProtocol {
     }
 }
 
+//MARK: - LoadedInformation method
+
 extension SearchPresenter: LoadedInformation {
     
     func transferData(_ networkManager: NetworkManager, data: [CharacterResult]) {
-        print("work?")
-        self.charac = data
-        print(charac)
+        self.character = data
+        self.updateData()
     }
     
-//    func searchCharacterData(_ networkManager: NetworkManager, data: [CharacterSearch]) {
-//
-//    }
-    
-    func searchEpisodeData(_ networkManager: NetworkManager, data: [EpisodeSearch]) {
-        
+    func searchEpisodeData(_ networkManager: NetworkManager, data: [EpisodeResult]) {
+        self.episode = data
+        self.updateData()
     }
     
-    func searchLocationData(_ networkManager: NetworkManager, data: [LocationSearch]) {
-        
+    func searchLocationData(_ networkManager: NetworkManager, data: [Location]) {
+        self.location = data
+        self.updateData()
     }
 }

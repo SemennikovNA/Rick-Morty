@@ -143,7 +143,6 @@ final class SearchViewController: ParentViewController {
         self.titleText = title
         self.dropMenuLabel.text = title
         self.dismiss(animated: true, completion: nil)
-        print(titleText)
     }
 
     //MARK: - Objective - C method
@@ -169,6 +168,18 @@ final class SearchViewController: ParentViewController {
     }
 }
 
+//MARK: - SearchViewProtocol
+
+extension SearchViewController: SearchViewProtocol {
+
+    func updateData() {
+        DispatchQueue.main.async {
+            self.applySnapshot()
+            self.presenter.updateData()
+        }
+    }
+}
+
 //MARK: - UICollectionViewCompositionalLayout
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -185,18 +196,21 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
     private func characterRegisterCells() -> UICollectionView.CellRegistration<SearchCollectionViewCell, CharacterResult> {
         return UICollectionView.CellRegistration<SearchCollectionViewCell, CharacterResult> { (cell, indexPath, result) in
             cell.layoutIfNeeded()
+            cell.setupDataForCell(with: result)
         }
     }
     
     private func episodeRegisterCells() -> UICollectionView.CellRegistration<EpisodesCollectionViewCell, EpisodeResult> {
         return UICollectionView.CellRegistration<EpisodesCollectionViewCell, EpisodeResult> { (cell, indexPath, episode) in
             cell.layoutIfNeeded()
+            cell.setupDataForCell(with: episode)
         }
     }
     
     private func originRegisterCells() -> UICollectionView.CellRegistration<OriginCollectionViewCell, Location> {
         return UICollectionView.CellRegistration<OriginCollectionViewCell, Location> { (cell, indexPath, origin) in
             cell.layoutIfNeeded()
+            cell.setupDataForCell(with: origin)
         }
     }
     
@@ -215,7 +229,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
                 let groupSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(0.515),
+                    widthDimension: .fractionalWidth(1.0),
                     heightDimension: .absolute(160))
                 let group = NSCollectionLayoutGroup.horizontal(
                     layoutSize: groupSize,
@@ -234,8 +248,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
                 let groupSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(0.515),
-                    heightDimension: .absolute(160))
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .absolute(90))
                 let group = NSCollectionLayoutGroup.horizontal(
                     layoutSize: groupSize,
                     repeatingSubitem: item,
@@ -253,8 +267,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
                 let groupSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(0.515),
-                    heightDimension: .absolute(160))
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .absolute(110))
                 let group = NSCollectionLayoutGroup.horizontal(
                     layoutSize: groupSize,
                     repeatingSubitem: item,
@@ -275,16 +289,16 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
         let episodeCell = episodeRegisterCells()
         let originCell = originRegisterCells()
         
-        dataSource = UICollectionViewDiffableDataSource<SearchViewSection, Items>(collectionView: searchCollectionView) { [weak self] (collectionView, indexPath, item) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<SearchViewSection, Items>(collectionView: searchCollectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
             
             switch SearchViewSection(rawValue: indexPath.section)! {
             
             case .character:
-                return self?.searchCollectionView.dequeueConfiguredReusableCell(using: characterCell, for: indexPath, item: item.info)
+                return self.searchCollectionView.dequeueConfiguredReusableCell(using: characterCell, for: indexPath, item: item.info)
             case .episode:
-                return self?.searchCollectionView.dequeueConfiguredReusableCell(using: episodeCell, for: indexPath, item: item.episodes)
+                return self.searchCollectionView.dequeueConfiguredReusableCell(using: episodeCell, for: indexPath, item: item.episodes)
             case .location:
-                return self?.searchCollectionView.dequeueConfiguredReusableCell(using: originCell, for: indexPath, item: item.origin)
+                return self.searchCollectionView.dequeueConfiguredReusableCell(using: originCell, for: indexPath, item: item.origin)
             }
         }
     }
@@ -298,7 +312,9 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
         snapShot.appendItems(presenter.location.map { Items(origin: $0) }, toSection: .location)
         snapShot.appendItems(presenter.episode.map { Items(episodes: $0) }, toSection: .episode)
         
-        dataSource?.apply(snapShot)
+        DispatchQueue.main.async {
+            self.dataSource?.apply(snapShot)
+        }
     }
 }
 
@@ -322,14 +338,5 @@ extension SearchViewController: UIPopoverPresentationControllerDelegate {
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         .none
-    }
-}
-
-//MARK: - SearchViewProtocol
-
-extension SearchViewController: SearchViewProtocol {
-
-    func updateData() {
-        print("update data")
     }
 }
