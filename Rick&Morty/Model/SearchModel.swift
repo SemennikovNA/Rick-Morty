@@ -23,7 +23,7 @@ struct EpisodeSearch: Codable {
     let results: [EpisodeResult]
 }
 
-// MARK: - Locations earch
+// MARK: - Location search
 
 struct LocationSearch: Codable {
     

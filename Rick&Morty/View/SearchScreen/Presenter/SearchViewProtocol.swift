@@ -16,9 +16,8 @@ protocol SearchPresenterProtocol: AnyObject {
     
     init(view: SearchViewProtocol)
     var networkManager: NetworkManager { get }
-    var character: [InfoModel] { get set }
-    var charac: [CharacterResult] { get set }
-    var location: [OriginModel] { get set }
+    var character: [CharacterResult] { get set }
+    var location: [Location] { get set }
     var episode: [EpisodeResult] { get set }
     func searchData(_ text: String, flag: String)
     func characterSearchRequest(_ requestUrl: URL)
@@ -27,14 +26,14 @@ protocol SearchPresenterProtocol: AnyObject {
     func updateData()
 }
 
-final class SearchPresenter: SearchPresenterProtocol, LoadedInformation {
+final class SearchPresenter: SearchPresenterProtocol {
     
     //MARK: - Properties
     
     weak var view: SearchViewProtocol?
     var networkManager = NetworkManager.shared
-    var character: [InfoModel] = []
-    var location: [OriginModel] = []
+    var character: [CharacterResult] = []
+    var location: [Location] = []
     var episode: [EpisodeResult] = []
     
     // Проверочная переменная
@@ -100,10 +99,25 @@ final class SearchPresenter: SearchPresenterProtocol, LoadedInformation {
     func updateData() {
         self.view?.updateData()
     }
+}
+
+extension SearchPresenter: LoadedInformation {
     
-    func transitData(_ networkManager: NetworkManager, data: [CharacterResult]) {
+    func transferData(_ networkManager: NetworkManager, data: [CharacterResult]) {
         print("work?")
         self.charac = data
         print(charac)
+    }
+    
+//    func searchCharacterData(_ networkManager: NetworkManager, data: [CharacterSearch]) {
+//
+//    }
+    
+    func searchEpisodeData(_ networkManager: NetworkManager, data: [EpisodeSearch]) {
+        
+    }
+    
+    func searchLocationData(_ networkManager: NetworkManager, data: [LocationSearch]) {
+        
     }
 }

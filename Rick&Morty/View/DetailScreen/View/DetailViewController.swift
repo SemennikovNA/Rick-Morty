@@ -194,14 +194,14 @@ extension DetailViewController {
     }
     
     // Methods for register cell's
-    private func infoRegisterCells() -> UICollectionView.CellRegistration<InfoCollectionViewCell, InfoModel> {
+    private func infoRegisterCells() -> UICollectionView.CellRegistration<InfoCollectionViewCell, CharacterResult> {
         return UICollectionView.CellRegistration { (cell, indexPath, item) in
             cell.layoutIfNeeded()
             cell.setupDataForCell(with: item)
         }
     }
     
-    private func originRegisterCells() -> UICollectionView.CellRegistration<OriginCollectionViewCell, OriginModel> {
+    private func originRegisterCells() -> UICollectionView.CellRegistration<OriginCollectionViewCell, Location> {
         return UICollectionView.CellRegistration { (cell, indexPath, item) in
             cell.layoutIfNeeded()
             cell.setupDataForCell(with: item)

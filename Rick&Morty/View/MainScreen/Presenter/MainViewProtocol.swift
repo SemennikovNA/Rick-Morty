@@ -54,10 +54,22 @@ final class MainPresenter: MainPresenterProtocol {
 
 extension MainPresenter: LoadedInformation {
     
-    func transitData(_ networkManager: NetworkManager, data: [CharacterResult]) {
+    func transferData(_ networkManager: NetworkManager, data: [CharacterResult]) {
         DispatchQueue.main.async {
             self.characters.append(contentsOf: data)
             self.updateData()
          }
+    }
+    
+//    func searchCharacterData(_ networkManager: NetworkManager, data: [CharacterResult]) {
+//        
+//    }
+    
+    func searchEpisodeData(_ networkManager: NetworkManager, data: [EpisodeSearch]) {
+        
+    }
+    
+    func searchLocationData(_ networkManager: NetworkManager, data: [LocationSearch]) {
+        
     }
 }

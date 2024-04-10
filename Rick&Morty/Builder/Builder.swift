@@ -30,9 +30,9 @@ final class Builder {
         return view
     }
     
-    static func createDetailView(character: CharacterResult, info: InfoModel, origin: OriginModel, episodes: [String]) -> UIViewController {
+    static func createDetailView(character: CharacterResult) -> UIViewController {
         let view = DetailViewController()
-        let presenter = DetailPresenter(view: view, character: character, info: info, origin: origin, episodes: episodes)
+        let presenter = DetailPresenter(view: view, character: character)
         view.presenter = presenter
         return view
     }

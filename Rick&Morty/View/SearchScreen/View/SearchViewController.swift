@@ -182,8 +182,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
     }
     
     // Method's for register cell's
-    private func characterRegisterCells() -> UICollectionView.CellRegistration<SearchCollectionViewCell, InfoModel> {
-        return UICollectionView.CellRegistration<SearchCollectionViewCell, InfoModel> { (cell, indexPath, result) in
+    private func characterRegisterCells() -> UICollectionView.CellRegistration<SearchCollectionViewCell, CharacterResult> {
+        return UICollectionView.CellRegistration<SearchCollectionViewCell, CharacterResult> { (cell, indexPath, result) in
             cell.layoutIfNeeded()
         }
     }
@@ -194,8 +194,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
         }
     }
     
-    private func originRegisterCells() -> UICollectionView.CellRegistration<OriginCollectionViewCell, OriginModel> {
-        return UICollectionView.CellRegistration<OriginCollectionViewCell, OriginModel> { (cell, indexPath, origin) in
+    private func originRegisterCells() -> UICollectionView.CellRegistration<OriginCollectionViewCell, Location> {
+        return UICollectionView.CellRegistration<OriginCollectionViewCell, Location> { (cell, indexPath, origin) in
             cell.layoutIfNeeded()
         }
     }

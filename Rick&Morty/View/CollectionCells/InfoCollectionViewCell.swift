@@ -36,9 +36,9 @@ class InfoCollectionViewCell: ParentCollectionCell {
     
     //MARK: - Method
     
-    func setupDataForCell(with model: InfoModel) {
+    func setupDataForCell(with model: CharacterResult) {
         speciesValueLabel.text = model.species
-        genderValueLabel.text = model.gender
+        genderValueLabel.text = model.gender.rawValue
         let typeText = model.type
         guard typeText == "" else {
             typeValueLabel.text = typeText

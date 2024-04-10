@@ -47,8 +47,8 @@ class OriginCollectionViewCell: ParentCollectionCell {
     
     //MARK: - Method
     
-    func setupDataForCell(with model: OriginModel) {
-        planetNameLabel.text = model.planetName
+    func setupDataForCell(with model: Location) {
+        planetNameLabel.text = model.name
     }
     
     //MARK: - Method
