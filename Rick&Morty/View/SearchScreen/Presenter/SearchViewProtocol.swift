@@ -94,7 +94,7 @@ final class SearchPresenter: SearchPresenterProtocol, LoadedInformation {
     }
     
     func locationSearchRequest(_ requestUrl: URL) {
-        
+        networkManager.locationSearchRequest(requestUrl)
     }
     
     func updateData() {

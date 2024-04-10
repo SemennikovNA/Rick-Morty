@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - CharacterSearch
+// MARK: - Character search
 
 struct CharacterSearch: Codable {
     
@@ -15,10 +15,18 @@ struct CharacterSearch: Codable {
     let results: [CharacterResult]
 }
 
-// MARK: - EpisodeSearch
+// MARK: - Episode search
 
 struct EpisodeSearch: Codable {
     
     let info: Info
     let results: [EpisodeResult]
+}
+
+// MARK: - Locations earch
+
+struct LocationSearch: Codable {
+    
+    let info: Info
+    let results: [LocationResult]
 }

@@ -42,25 +42,6 @@ class NetworkManager {
             }.resume()
     }
     
-    func loadMoreData(url: URLRequest) {
-        session.dataTask(with: url) { [weak self] data, response, error in
-            guard let data else {
-                if error != nil {
-                    print(NetworkError.badRequst)
-                }
-                return
-            }
-            do {
-                guard let baseData = try self?.decoder.decode(Character.self, from: data) else { return }
-                let characters = baseData.results.map({ $0 })
-                self?.delegate?.transitData(self!, data: characters)
-            } catch {
-                print(error.localizedDescription)
-                print(NetworkError.badResponse)
-            }
-        }.resume()
-    }
-    
     func loadEpisodesData(episodes: [String], completion: @escaping ([EpisodeResult]) -> Void) {
         let dispatchGroup = DispatchGroup()
         var episodesArray = [EpisodeResult]()
@@ -106,10 +87,7 @@ class NetworkManager {
                 }
                 return
             }
-            
-//            let datas = String(decoding: data, as: UTF8.self)
-//            print(datas)
-            
+
             do {
                 guard let baseData = try self?.decoder.decode(CharacterSearch.self, from: data) else { return }
                 let characters = baseData.results.map({ $0 })
@@ -130,11 +108,28 @@ class NetworkManager {
                 return
             }
             
-//            let datas = String(decoding: data, as: UTF8.self)
-//            print(datas)
-            
             do {
                 guard let baseData = try self?.decoder.decode(EpisodeSearch.self, from: data) else { return }
+                let characters = baseData.results.map({ $0 })
+                print(characters)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }.resume()
+    }
+    
+    func locationSearchRequest(_ url: URL) {
+        session.dataTask(with: url) { [weak self] data, response, error in
+            guard let data else {
+                guard error != nil else {
+                    print(NetworkError.badResponse)
+                    return
+                }
+                return
+            }
+            
+            do {
+                guard let baseData = try self?.decoder.decode(LocationSearch.self, from: data) else { return }
                 let characters = baseData.results.map({ $0 })
                 print(characters)
             } catch {

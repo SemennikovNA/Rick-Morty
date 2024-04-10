@@ -48,7 +48,7 @@ final class MainPresenter: MainPresenterProtocol {
     func loadMoreData(pageNumber: Int) {
         guard let url = URL(string: "\(URLBuilder.pageRequest.request)\(pageNumber)") else { return }
         let urlForRequest = URLRequest(url: url)
-        networkManager.loadMoreData(url: urlForRequest)
+        networkManager.fetchData(url: urlForRequest)
     }
 }
 
