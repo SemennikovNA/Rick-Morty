@@ -13,7 +13,7 @@ import Foundation
 struct Character: Codable, Hashable {
     
     let info: Info
-    let results: [Results]
+    let results: [CharacterResult]
 }
 
 // MARK: - Info
@@ -28,7 +28,7 @@ struct Info: Codable, Hashable {
 
 // MARK: - Result
 
-struct Results: Codable, Hashable {
+struct CharacterResult: Codable, Hashable {
     
     let id: Int
     let name: String
@@ -36,7 +36,7 @@ struct Results: Codable, Hashable {
     let species: String
     let type: String
     let gender: Gender
-    let origin: Location
+    let origin, location: Location
     let image: String
     let episode: [String]
     let url: String
@@ -57,14 +57,6 @@ struct EpisodeResult: Codable, Hashable {
         case episode, characters, url, created
     }
 }
-
-//struct Episodes: Codable, Hashable {
-//    
-//    let id: Int
-//    let name: String
-//    let air_date: String
-//    let episode: String
-//}
 
 // MARK: - Location
 

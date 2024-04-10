@@ -17,7 +17,7 @@ protocol SearchPresenterProtocol: AnyObject {
     init(view: SearchViewProtocol)
     var networkManager: NetworkManager { get }
     var character: [InfoModel] { get set }
-    var charac: [Results] { get set }
+    var charac: [CharacterResult] { get set }
     var location: [OriginModel] { get set }
     var episode: [EpisodeResult] { get set }
     func searchData(_ text: String, flag: String)
@@ -38,7 +38,7 @@ final class SearchPresenter: SearchPresenterProtocol, LoadedInformation {
     var episode: [EpisodeResult] = []
     
     // Проверочная переменная
-    var charac: [Results] = []
+    var charac: [CharacterResult] = []
     
     //MARK: - Initialization
     
@@ -101,7 +101,7 @@ final class SearchPresenter: SearchPresenterProtocol, LoadedInformation {
         self.view?.updateData()
     }
     
-    func transitData(_ networkManager: NetworkManager, data: [Results]) {
+    func transitData(_ networkManager: NetworkManager, data: [CharacterResult]) {
         print("work?")
         self.charac = data
         print(charac)

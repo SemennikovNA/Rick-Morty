@@ -9,7 +9,7 @@ import Foundation
 
 protocol LoadedInformation {
     
-    func transitData(_ networkManager: NetworkManager, data: [Results])
+    func transitData(_ networkManager: NetworkManager, data: [CharacterResult])
 }
 
 class NetworkManager {
@@ -107,8 +107,8 @@ class NetworkManager {
                 return
             }
             
-            let datas = String(decoding: data, as: UTF8.self)
-            print(datas)
+//            let datas = String(decoding: data, as: UTF8.self)
+//            print(datas)
             
             do {
                 guard let baseData = try self?.decoder.decode(CharacterSearch.self, from: data) else { return }
@@ -130,8 +130,8 @@ class NetworkManager {
                 return
             }
             
-            let datas = String(decoding: data, as: UTF8.self)
-            print(datas)
+//            let datas = String(decoding: data, as: UTF8.self)
+//            print(datas)
             
             do {
                 guard let baseData = try self?.decoder.decode(EpisodeSearch.self, from: data) else { return }

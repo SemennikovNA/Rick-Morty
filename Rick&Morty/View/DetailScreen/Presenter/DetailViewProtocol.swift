@@ -14,8 +14,8 @@ protocol DetailViewProtocol: AnyObject {
 
 protocol DetailPresenterProtocol: AnyObject {
     
-    init(view: DetailViewProtocol, character: Results, info: InfoModel, origin: OriginModel, episodes: [String])
-    var character: Results { get set }
+    init(view: DetailViewProtocol, character: CharacterResult, info: InfoModel, origin: OriginModel, episodes: [String])
+    var character: CharacterResult { get set }
     var info: [InfoModel] { get set }
     var origin: [OriginModel] { get set }
     var episodes: [EpisodeResult] { get set }
@@ -29,7 +29,7 @@ final class DetailPresenter: DetailPresenterProtocol {
     
     weak var view: DetailViewProtocol?
     let networkManager = NetworkManager()
-    var character: Results
+    var character: CharacterResult
     var info: [InfoModel] = []
     var origin: [OriginModel] = []
     var episodes: [EpisodeResult] = []
@@ -37,7 +37,7 @@ final class DetailPresenter: DetailPresenterProtocol {
     
     //MARK: - Initialization
     
-    init(view: DetailViewProtocol, character: Results, info: InfoModel, origin: OriginModel, episodes: [String]) {
+    init(view: DetailViewProtocol, character: CharacterResult, info: InfoModel, origin: OriginModel, episodes: [String]) {
         self.view = view
         
         self.info = [info]

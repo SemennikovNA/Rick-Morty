@@ -60,7 +60,7 @@ class CharactersCollectionViewCell: ParentCollectionCell {
     
     //MARK: - Method
     
-    func setupDataForCell(with model: Results) {
+    func setupDataForCell(with model: CharacterResult) {
         characterNameTitle.text = model.name
         let image = URL(string: model.image)!
         imageManager.setImageFromUrl(image: characterImage, url: image)

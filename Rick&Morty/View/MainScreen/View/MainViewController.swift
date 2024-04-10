@@ -16,10 +16,10 @@ class MainViewController: ParentViewController {
     //MARK: - Properties
     
     private let networkManager = NetworkManager.shared
-    private var dataSource: UICollectionViewDiffableDataSource<MainViewSection, Results>?
+    private var dataSource: UICollectionViewDiffableDataSource<MainViewSection, CharacterResult>?
     var presenter: MainPresenter!
     var currentPage = 1
-    var characterList = [Results]()
+    var characterList = [CharacterResult]()
     
     //MARK: - Life cycle
     
@@ -114,8 +114,8 @@ extension MainViewController: UICollectionViewDelegate {
     }
     
     // Method for register cell
-    private func charactersRegisterCells() -> UICollectionView.CellRegistration<CharactersCollectionViewCell, Results> {
-        return UICollectionView.CellRegistration<CharactersCollectionViewCell, Results> { (cell, indexPath, result) in
+    private func charactersRegisterCells() -> UICollectionView.CellRegistration<CharactersCollectionViewCell, CharacterResult> {
+        return UICollectionView.CellRegistration<CharactersCollectionViewCell, CharacterResult> { (cell, indexPath, result) in
             cell.layoutIfNeeded()
             let dataForCell = result
             cell.setupDataForCell(with: dataForCell)
@@ -155,7 +155,7 @@ extension MainViewController: UICollectionViewDelegate {
         // Cell
         let characterCell = charactersRegisterCells()
         
-        dataSource = UICollectionViewDiffableDataSource<MainViewSection, Results>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<MainViewSection, CharacterResult>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
             
             switch MainViewSection(rawValue: indexPath.section)! {
             case .section:
@@ -166,7 +166,7 @@ extension MainViewController: UICollectionViewDelegate {
     
     // Snapshot for collection
     private func applySnapshot() {
-        var snapshot = NSDiffableDataSourceSnapshot<MainViewSection, Results>()
+        var snapshot = NSDiffableDataSourceSnapshot<MainViewSection, CharacterResult>()
         snapshot.appendSections([.section])
         
         let characterData = presenter.characters

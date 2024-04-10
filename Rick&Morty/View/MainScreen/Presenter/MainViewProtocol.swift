@@ -13,7 +13,7 @@ protocol MainViewProtocol: AnyObject {
 
 protocol MainPresenterProtocol: AnyObject {
     init(view: MainViewProtocol)
-    var characters: [Results] { get set }
+    var characters: [CharacterResult] { get set }
     func loadMoreData(pageNumber: Int)
     func fetchData()
     func updateData()
@@ -25,7 +25,7 @@ final class MainPresenter: MainPresenterProtocol {
     
     weak var view: MainViewProtocol?
     let networkManager = NetworkManager()
-    var characters: [Results] = []
+    var characters: [CharacterResult] = []
     
     //MARK: - Initialize
 
@@ -54,7 +54,7 @@ final class MainPresenter: MainPresenterProtocol {
 
 extension MainPresenter: LoadedInformation {
     
-    func transitData(_ networkManager: NetworkManager, data: [Results]) {
+    func transitData(_ networkManager: NetworkManager, data: [CharacterResult]) {
         DispatchQueue.main.async {
             self.characters.append(contentsOf: data)
             self.updateData()
