@@ -226,11 +226,11 @@ extension DetailViewController {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(327), heightDimension: .absolute(124))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(UIScreen.main.bounds.width - 45), heightDimension: .absolute(124))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 
                 section = NSCollectionLayoutSection(group: group)
-                section.contentInsets = .init(top: spacing, leading: 18, bottom: spacing, trailing: spacing)
+                section.contentInsets = .init(top: 20, leading: spacing, bottom: spacing, trailing: -spacing)
                 section.interGroupSpacing = 5
                 section.contentInsetsReference = .layoutMargins
                 
@@ -246,11 +246,11 @@ extension DetailViewController {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(327), heightDimension: .absolute(80))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(UIScreen.main.bounds.width - 45), heightDimension: .absolute(80))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 
                 section = NSCollectionLayoutSection(group: group)
-                section.contentInsets = .init(top: spacing, leading: 18, bottom: spacing, trailing: spacing)
+                section.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: -spacing)
                 section.interGroupSpacing = 5
                 section.contentInsetsReference = .layoutMargins
                 
@@ -267,12 +267,12 @@ extension DetailViewController {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(327), heightDimension: .absolute(86))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(UIScreen.main.bounds.width - 45), heightDimension: .absolute(86))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 1)
                 group.interItemSpacing = .fixed(spacing)
                 
                 section = NSCollectionLayoutSection(group: group)
-                section.contentInsets = .init(top: spacing, leading: 18, bottom: spacing, trailing: spacing)
+                section.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: -spacing)
                 section.interGroupSpacing = 5
                 section.contentInsetsReference = .layoutMargins
                 
