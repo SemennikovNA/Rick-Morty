@@ -18,7 +18,7 @@ protocol DetailPresenterProtocol: AnyObject {
     var character: Results { get set }
     var info: [InfoModel] { get set }
     var origin: [OriginModel] { get set }
-    var episodes: [Episodes] { get set }
+    var episodes: [EpisodeResult] { get set }
     func fetchEpisodesData()
     func updateData()
 }
@@ -32,7 +32,7 @@ final class DetailPresenter: DetailPresenterProtocol {
     var character: Results
     var info: [InfoModel] = []
     var origin: [OriginModel] = []
-    var episodes: [Episodes] = []
+    var episodes: [EpisodeResult] = []
     var urlForEpisodes: [String]
     
     //MARK: - Initialization

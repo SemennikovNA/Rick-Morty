@@ -10,25 +10,20 @@ import Foundation
 
 // MARK: - Characters
 
-struct Characters: Codable, Hashable {
+struct Character: Codable, Hashable {
     
+    let info: Info
     let results: [Results]
 }
 
 // MARK: - Info
-struct Info: Codable, Hashable {
-    
-    let info: InfoClass
-    let results: [Results]
-}
 
-// MARK: - InfoClass
-struct InfoClass: Codable, Hashable {
+struct Info: Codable, Hashable {
     
     let count: Int
     let pages: Int
-    let next: String
-    let prev: String
+    let next: String?
+    let prev: String?
 }
 
 // MARK: - Result
@@ -49,12 +44,27 @@ struct Results: Codable, Hashable {
 
 // MARK: - Episodes
 
-struct Episodes: Codable, Hashable {
-    
-    let name: String
-    let air_date: String
-    let episode: String
+struct EpisodeResult: Codable, Hashable {
+    let id: Int
+    let name, airDate, episode: String
+    let characters: [String]
+    let url: String
+    let created: String
+
+    enum CodingKeys: String, CodingKey {
+        case id, name
+        case airDate = "air_date"
+        case episode, characters, url, created
+    }
 }
+
+//struct Episodes: Codable, Hashable {
+//    
+//    let id: Int
+//    let name: String
+//    let air_date: String
+//    let episode: String
+//}
 
 // MARK: - Location
 

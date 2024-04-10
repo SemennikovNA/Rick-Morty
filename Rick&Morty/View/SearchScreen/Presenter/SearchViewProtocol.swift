@@ -19,11 +19,11 @@ protocol SearchPresenterProtocol: AnyObject {
     var character: [InfoModel] { get set }
     var charac: [Results] { get set }
     var location: [OriginModel] { get set }
-    var episode: [Episodes] { get set }
+    var episode: [EpisodeResult] { get set }
     func searchData(_ text: String, flag: String)
-    func searchCharacter(_ requestUrl: URL)
-    func searchEpisode(_ requestUrl: URL)
-    func searchLocation(_ requestUrl: URL)
+    func characterSearchRequest(_ requestUrl: URL)
+    func episodeSearchRequest(_ requestUrl: URL)
+    func locationSearchRequest(_ requestUrl: URL)
     func updateData()
 }
 
@@ -35,7 +35,7 @@ final class SearchPresenter: SearchPresenterProtocol, LoadedInformation {
     var networkManager = NetworkManager.shared
     var character: [InfoModel] = []
     var location: [OriginModel] = []
-    var episode: [Episodes] = []
+    var episode: [EpisodeResult] = []
     
     // Проверочная переменная
     var charac: [Results] = []
@@ -59,7 +59,7 @@ final class SearchPresenter: SearchPresenterProtocol, LoadedInformation {
                 print(NetworkError.badUrl)
                 return
             }
-            searchCharacter(urlString)
+            characterSearchRequest(urlString)
             return
         case "Episode":
             mainPathUrl = URLBuilder.episode.request
@@ -68,7 +68,7 @@ final class SearchPresenter: SearchPresenterProtocol, LoadedInformation {
                 print(NetworkError.badUrl)
                 return
             }
-            searchEpisode(urlString)
+            episodeSearchRequest(urlString)
             return
         case "Location":
             mainPathUrl = URLBuilder.location.request
@@ -77,7 +77,7 @@ final class SearchPresenter: SearchPresenterProtocol, LoadedInformation {
                 print(NetworkError.badUrl)
                 return
             }
-            searchLocation(urlString)
+            locationSearchRequest(urlString)
             return
         default:
             break
@@ -85,16 +85,16 @@ final class SearchPresenter: SearchPresenterProtocol, LoadedInformation {
         print(text)
     }
     
-    func searchCharacter(_ requestUrl: URL) {
+    func characterSearchRequest(_ requestUrl: URL) {
         networkManager.characterSearchRequest(requestUrl)
     }
     
-    func searchEpisode(_ requestUrl: URL) {
+    func episodeSearchRequest(_ requestUrl: URL) {
         networkManager.episodeSearchRequest(requestUrl)
     }
     
-    func searchLocation(_ requestUrl: URL) {
-        networkManager.locationSearchRequest(requestUrl)
+    func locationSearchRequest(_ requestUrl: URL) {
+        
     }
     
     func updateData() {

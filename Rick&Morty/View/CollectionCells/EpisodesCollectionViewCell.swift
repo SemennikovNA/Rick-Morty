@@ -42,10 +42,10 @@ class EpisodesCollectionViewCell: ParentCollectionCell {
     
     //MARK: - Method
     
-    func setupDataForEpisodesCell(with model: Episodes) {
+    func setupDataForEpisodesCell(with model: EpisodeResult) {
         episodeName.text = model.name
         episodeNumber.text = model.episode
-        episodeDate.text = model.air_date
+        episodeDate.text = model.airDate
     }
     
     //MARK: - Method

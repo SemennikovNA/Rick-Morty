@@ -8,10 +8,10 @@
 import Foundation
 
 struct Items: Hashable {
-    
+
     var info: InfoModel?
     var origin: OriginModel?
-    var episodes: Episodes?
+    var episodes: EpisodeResult?
 }
 
 

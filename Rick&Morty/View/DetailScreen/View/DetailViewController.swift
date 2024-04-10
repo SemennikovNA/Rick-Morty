@@ -208,7 +208,7 @@ extension DetailViewController {
         }
     }
     
-    private func episodesRegisterCell() -> UICollectionView.CellRegistration<EpisodesCollectionViewCell, Episodes> {
+    private func episodesRegisterCell() -> UICollectionView.CellRegistration<EpisodesCollectionViewCell, EpisodeResult> {
         return UICollectionView.CellRegistration { (cell, indexPath, item) in
             cell.layoutIfNeeded()
             cell.setupDataForEpisodesCell(with: item)

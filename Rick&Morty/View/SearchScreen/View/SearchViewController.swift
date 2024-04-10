@@ -188,8 +188,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
         }
     }
     
-    private func episodeRegisterCells() -> UICollectionView.CellRegistration<EpisodesCollectionViewCell, Episodes> {
-        return UICollectionView.CellRegistration<EpisodesCollectionViewCell, Episodes> { (cell, indexPath, episode) in
+    private func episodeRegisterCells() -> UICollectionView.CellRegistration<EpisodesCollectionViewCell, EpisodeResult> {
+        return UICollectionView.CellRegistration<EpisodesCollectionViewCell, EpisodeResult> { (cell, indexPath, episode) in
             cell.layoutIfNeeded()
         }
     }
