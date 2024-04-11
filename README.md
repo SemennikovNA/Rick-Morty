@@ -37,6 +37,7 @@
 
 ## Screencast:
 
+![](https://github.com/SemennikovNA/Rick-Morty/blob/main/Media/movie.mp4)
 
 --------
 
