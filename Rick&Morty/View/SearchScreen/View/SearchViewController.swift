@@ -29,6 +29,7 @@ final class SearchViewController: ParentViewController {
     }()
     private let dropMenuView: UIView = {
         let view = UIView()
+        view.backgroundColor = .clear
         view.clipsToBounds = true
         return view
     }()
@@ -40,6 +41,17 @@ final class SearchViewController: ParentViewController {
         return label
     }()
     private let dropViewGestureRecognize = UITapGestureRecognizer()
+    private let activityIndicatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.style = .medium
+        activityIndicator.color = .white
+        return activityIndicator
+    }()
     private var searchCollectionView: UICollectionView!
     
     //MARK: - Life cycle
@@ -68,9 +80,14 @@ final class SearchViewController: ParentViewController {
         view.backgroundColor = .backBlue
         view.addSubviews(searchTextField, searchCollectionView)
         
+        // Activity indicator view
+        activityIndicatorView.addSubviews(activityIndicator)
+        
         // Text field settings
         searchTextField.leftViewMode = .always
         searchTextField.leftView = dropMenuView
+        searchTextField.rightViewMode = .always
+        searchTextField.rightView = activityIndicatorView
         
         // Drop menu view
         dropMenuView.addSubviews(dropMenuLabel)
@@ -111,6 +128,16 @@ final class SearchViewController: ParentViewController {
             searchTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             searchTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             searchTextField.heightAnchor.constraint(equalToConstant: 50),
+            
+            // Activity indicator view
+            activityIndicatorView.topAnchor.constraint(equalTo: searchTextField.rightView!.topAnchor),
+            activityIndicatorView.trailingAnchor.constraint(equalTo: searchTextField.rightView!.trailingAnchor),
+            activityIndicatorView.bottomAnchor.constraint(equalTo: searchTextField.rightView!.bottomAnchor),
+            activityIndicatorView.widthAnchor.constraint(equalToConstant: 50),
+            
+            // Activity indicator
+            activityIndicator.centerXAnchor.constraint(equalTo: activityIndicatorView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorView.centerYAnchor),
             
             // Drop menu view
             dropMenuView.topAnchor.constraint(equalTo: searchTextField.leftView!.topAnchor),
@@ -197,6 +224,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
         return UICollectionView.CellRegistration<SearchCollectionViewCell, CharacterResult> { (cell, indexPath, result) in
             cell.layoutIfNeeded()
             cell.setupDataForCell(with: result)
+            self.activityIndicator.stopAnimating()
         }
     }
     
@@ -204,6 +232,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
         return UICollectionView.CellRegistration<EpisodesCollectionViewCell, EpisodeResult> { (cell, indexPath, episode) in
             cell.layoutIfNeeded()
             cell.setupDataForCell(with: episode)
+            self.activityIndicator.stopAnimating()
         }
     }
     
@@ -211,6 +240,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
         return UICollectionView.CellRegistration<OriginCollectionViewCell, Location> { (cell, indexPath, origin) in
             cell.layoutIfNeeded()
             cell.setupDataForCell(with: origin)
+            self.activityIndicator.stopAnimating()
         }
     }
     
@@ -229,8 +259,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
                 let groupSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .absolute(160))
+                    widthDimension: .absolute(UIScreen.main.bounds.width - 30),
+                    heightDimension: .absolute(150))
                 let group = NSCollectionLayoutGroup.horizontal(
                     layoutSize: groupSize,
                     repeatingSubitem: item,
@@ -248,7 +278,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
                 let groupSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1.0),
+                    widthDimension: .absolute(UIScreen.main.bounds.width - 30),
                     heightDimension: .absolute(90))
                 let group = NSCollectionLayoutGroup.horizontal(
                     layoutSize: groupSize,
@@ -267,7 +297,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
                 let groupSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1.0),
+                    widthDimension: .absolute(UIScreen.main.bounds.width - 30),
                     heightDimension: .absolute(110))
                 let group = NSCollectionLayoutGroup.horizontal(
                     layoutSize: groupSize,
@@ -325,6 +355,7 @@ extension SearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
         if let text = textField.text {
+            self.activityIndicator.startAnimating()
             presenter.searchData(text, flag: self.titleText)
         }
         textField.text = ""
