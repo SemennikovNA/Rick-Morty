@@ -35,10 +35,6 @@
   <img src="https://github.com/SemennikovNA/Rick-Morty/blob/main/Media/7.png" width="220" height=400 />
 </p>
 
-## Screencast:
-
-![](https://github.com/SemennikovNA/Rick-Morty/blob/main/Media/movie.mp4)
-
 --------
 
 ## Contact me
